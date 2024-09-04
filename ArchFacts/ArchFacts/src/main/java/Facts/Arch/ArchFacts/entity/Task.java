@@ -20,6 +20,7 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "fkTicket")
     Ticket ticket;
+    // FK PAGAMENTO
     List<Pagamento> pagamentoList = new ArrayList<>();
 
     public Task() {
