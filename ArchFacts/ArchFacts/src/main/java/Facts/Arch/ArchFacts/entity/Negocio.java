@@ -1,33 +1,41 @@
 package Facts.Arch.ArchFacts.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Entity
 public class Negocio {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
     private String codigoNegocio;
     private String cep;
     private String cpf;
     private String cnpj;
+    private Double avaliacao;
     private Boolean ativado;
-    List<Usuario> usuarioList = new ArrayList<>();
-    List<Projeto> projetoList = new ArrayList<>();
-    List<Mensagem> mensagemList = new ArrayList<>();
+//    List<Usuario> usuarioList = new ArrayList<>();
+//    List<Projeto> projetoList = new ArrayList<>();
+//    List<Mensagem> mensagemList = new ArrayList<>();
 
     public Negocio() {
     }
 
-    public Negocio(UUID id, String nome, String codigoNegocio, String cep, String cpf, String cnpj, Boolean ativado) {
+    public Negocio(UUID id, String nome, String codigoNegocio, String cep, String cpf, String cnpj, Double avaliacao,
+                   Boolean ativado) {
         this.id = id;
         this.nome = nome;
         this.codigoNegocio = codigoNegocio;
         this.cep = cep;
         this.cpf = cpf;
         this.cnpj = cnpj;
+        this.avaliacao = avaliacao;
         this.ativado = ativado;
     }
 
@@ -79,6 +87,14 @@ public class Negocio {
         this.cnpj = cnpj;
     }
 
+    public Double getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Double avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
     public Boolean getAtivado() {
         return ativado;
     }
@@ -87,17 +103,17 @@ public class Negocio {
         this.ativado = ativado;
     }
 
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
+//    public List<Usuario> getUsuarioList() {
+//        return usuarioList;
+//    }
+//
+//    public List<Projeto> getProjetoList() {
+//        return projetoList;
+//    }
 
-    public List<Projeto> getProjetoList() {
-        return projetoList;
-    }
-
-    public List<Mensagem> getMensagemList() {
-        return mensagemList;
-    }
+//    public List<Mensagem> getMensagemList() {
+//        return mensagemList;
+//    }
 
     @Override
     public String toString() {
@@ -108,10 +124,11 @@ public class Negocio {
                 ", cep='" + cep + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", cnpj='" + cnpj + '\'' +
+                ", avaliacao=" + avaliacao +
                 ", ativado=" + ativado +
-                ", usuarioList=" + usuarioList +
-                ", projetoList=" + projetoList +
-                ", mensagemList=" + mensagemList +
+//                ", usuarioList=" + usuarioList +
+//                ", projetoList=" + projetoList +
+//                ", mensagemList=" + mensagemList +
                 '}';
     }
 }

@@ -2,13 +2,14 @@ package Facts.Arch.ArchFacts.entity;
 
 import Facts.Arch.ArchFacts.enums.MetodoPagamento;
 import Facts.Arch.ArchFacts.enums.Status;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
-
+@Entity
 public class Pagamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private LocalDate data;
     private Double valorTotal;

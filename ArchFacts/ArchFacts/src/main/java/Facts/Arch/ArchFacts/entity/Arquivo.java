@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import java.util.UUID;
 @Entity
 public class Arquivo {
+    @Id
+    @GeneratedValue (strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
     private Tipo tipo;
@@ -15,14 +17,16 @@ public class Arquivo {
     @OneToOne
     @JoinColumn (name = "fkUsuario")
     private Usuario usuario;
+
     public Arquivo() {
     }
 
-    public Arquivo(UUID id, String nome, Tipo tipo, Projeto projeto) {
+    public Arquivo(UUID id, String nome, Tipo tipo, Projeto projeto, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.projeto = projeto;
+        this.usuario = usuario;
     }
 
     public UUID getId() {
@@ -57,6 +61,14 @@ public class Arquivo {
         this.projeto = projeto;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Arquivo{" +
@@ -64,6 +76,7 @@ public class Arquivo {
                 ", nome='" + nome + '\'' +
                 ", tipo=" + tipo +
                 ", projeto=" + projeto +
+                ", usuario=" + usuario +
                 '}';
     }
 }

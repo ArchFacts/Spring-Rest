@@ -1,13 +1,13 @@
 package Facts.Arch.ArchFacts.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
 @Entity
 public class Mensagem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String conteudo;
     private LocalDate dataEnvio;
