@@ -1,10 +1,8 @@
 package Facts.Arch.ArchFacts.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,16 +16,22 @@ public class Negocio {
     private String cep;
     private String cpf;
     private String cnpj;
+    private LocalDate dataRegistro;
     private Double avaliacao;
     private Boolean ativado;
-//    List<Usuario> usuarioList = new ArrayList<>();
-//    List<Projeto> projetoList = new ArrayList<>();
-//    List<Mensagem> mensagemList = new ArrayList<>();
+    @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
+    List<Usuario> usuarioList = new ArrayList<>();
+    @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
+    List<Projeto> projetoList = new ArrayList<>();
+    @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
+    List<Mensagem> mensagemList = new ArrayList<>();
 
     public Negocio() {
     }
 
-    public Negocio(UUID id, String nome, String codigoNegocio, String cep, String cpf, String cnpj, Double avaliacao,
+    public Negocio(UUID id, String nome, String codigoNegocio, String cep, String cpf, String cnpj,
+                   LocalDate dataRegistro,
+                   Double avaliacao,
                    Boolean ativado) {
         this.id = id;
         this.nome = nome;
@@ -35,6 +39,7 @@ public class Negocio {
         this.cep = cep;
         this.cpf = cpf;
         this.cnpj = cnpj;
+        this.dataRegistro = dataRegistro;
         this.avaliacao = avaliacao;
         this.ativado = ativado;
     }
@@ -87,6 +92,14 @@ public class Negocio {
         this.cnpj = cnpj;
     }
 
+    public LocalDate getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(LocalDate dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
     public Double getAvaliacao() {
         return avaliacao;
     }
@@ -103,17 +116,17 @@ public class Negocio {
         this.ativado = ativado;
     }
 
-//    public List<Usuario> getUsuarioList() {
-//        return usuarioList;
-//    }
-//
-//    public List<Projeto> getProjetoList() {
-//        return projetoList;
-//    }
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
+    }
 
-//    public List<Mensagem> getMensagemList() {
-//        return mensagemList;
-//    }
+    public List<Projeto> getProjetoList() {
+        return projetoList;
+    }
+
+    public List<Mensagem> getMensagemList() {
+        return mensagemList;
+    }
 
     @Override
     public String toString() {
@@ -124,11 +137,12 @@ public class Negocio {
                 ", cep='" + cep + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", cnpj='" + cnpj + '\'' +
+                ", dataRegistro=" + dataRegistro +
                 ", avaliacao=" + avaliacao +
                 ", ativado=" + ativado +
-//                ", usuarioList=" + usuarioList +
-//                ", projetoList=" + projetoList +
-//                ", mensagemList=" + mensagemList +
+                ", usuarioList=" + usuarioList +
+                ", projetoList=" + projetoList +
+                ", mensagemList=" + mensagemList +
                 '}';
     }
 }

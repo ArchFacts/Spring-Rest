@@ -23,8 +23,6 @@ public class Ticket {
     @ManyToOne
     @JoinColumn (name = "fkUsuario")
     Usuario usuario;
-    // FK AQUI
-//    private List<Task> taskList = new ArrayList<>();
 
     public Ticket(UUID id, String descricao, LocalDate abertura, LocalDate fechamento, Status status, Projeto projeto,
                   Usuario usuario) {

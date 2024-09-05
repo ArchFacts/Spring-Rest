@@ -3,6 +3,7 @@ package Facts.Arch.ArchFacts.entity;
 import Facts.Arch.ArchFacts.enums.Role;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 @Entity
 public class Usuario {
@@ -13,6 +14,7 @@ public class Usuario {
     private String email;
     private String senha;
     private String telefone;
+    private LocalDate dataRegistro;
     private Boolean ativado;
     private Role role;
     @ManyToOne
@@ -22,7 +24,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(UUID id, String nome, String email, String senha, String telefone, Boolean ativado,
+    public Usuario(UUID id, String nome, String email, String senha, String telefone, LocalDate dataRegistro,
+                   Boolean ativado,
                    Role role,
                    Negocio negocio) {
         this.id = id;
@@ -30,6 +33,7 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
+        this.dataRegistro = dataRegistro;
         this.ativado = ativado;
         this.role = role;
         this.negocio = negocio;
@@ -75,6 +79,14 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    public LocalDate getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(LocalDate dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
     public Boolean getAtivado() {
         return ativado;
     }
@@ -102,11 +114,12 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "idUsuario=" + id +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", telefone='" + telefone + '\'' +
+                ", dataRegistro=" + dataRegistro +
                 ", ativado=" + ativado +
                 ", role=" + role +
                 ", negocio=" + negocio +

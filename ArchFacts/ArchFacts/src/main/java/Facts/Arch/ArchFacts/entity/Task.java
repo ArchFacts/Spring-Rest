@@ -24,8 +24,8 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "fkTicket")
     Ticket ticket;
-    // FK PAGAMENTO
-//    List<Pagamento> pagamentoList = new ArrayList<>();
+    @OneToMany (mappedBy = "task", cascade = CascadeType.ALL)
+    List<Pagamento> pagamentoList = new ArrayList<>();
 
     public Task() {
     }

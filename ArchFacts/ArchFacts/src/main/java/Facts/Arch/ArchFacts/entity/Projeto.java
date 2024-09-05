@@ -24,9 +24,12 @@ public class Projeto {
     @ManyToOne
     @JoinColumn (name = "fkDestinatario")
     Usuario destinatario;
-//    List<Task> taskList = new ArrayList<>();
-//    List<Arquivo> arquivoList = new ArrayList<>();
-//    List<Ticket> ticketList = new ArrayList<>();
+    @OneToMany (mappedBy = "projeto", cascade = CascadeType.ALL)
+    List<Task> taskList = new ArrayList<>();
+    @OneToMany (mappedBy = "projeto", cascade = CascadeType.ALL)
+    List<Arquivo> arquivoList = new ArrayList<>();
+    @OneToMany (mappedBy = "projeto", cascade = CascadeType.ALL)
+    List<Ticket> ticketList = new ArrayList<>();
 
     public Projeto() {
     }
