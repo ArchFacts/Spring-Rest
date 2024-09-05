@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.repository;
 
+import Facts.Arch.ArchFacts.entity.Negocio;
 import Facts.Arch.ArchFacts.entity.Projeto;
 import org.springframework.data.jpa.repository.JpaRepository;
 

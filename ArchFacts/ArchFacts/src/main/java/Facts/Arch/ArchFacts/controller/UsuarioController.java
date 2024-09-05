@@ -4,6 +4,7 @@ import Facts.Arch.ArchFacts.entity.Usuario;
 import Facts.Arch.ArchFacts.enums.Role;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    private ResponseEntity<ResponseStatus> verificarEstadoUsuario (Usuario usuarioSolicitado) {
+    private ResponseEntity<HttpStatus> verificarEstadoUsuario (Usuario usuarioSolicitado) {
         Boolean usuarioExistente = this.usuarioRepository.existsByEmail(usuarioSolicitado.getEmail());
 
         if (usuarioExistente) {
@@ -36,9 +37,9 @@ public class UsuarioController {
     public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuarioSolicitado) {
         usuarioSolicitado.setId(null);
 
-        if (verificarEstadoUsuario(usuarioSolicitado).equals(ResponseEntity.status(404).build())) {
+        if (verificarEstadoUsuario(usuarioSolicitado).equals(HttpStatus.NOT_FOUND)) {
             usuarioSolicitado.setRole(Role.USER);
-            usuarioSolicitado.setAtivado(true);
+            usuarioSolicitado.setAtivado(Boolean.TRUE);
             return ResponseEntity.status(201).body(usuarioRepository.save(usuarioSolicitado));
         }
         return verificarEstadoUsuario(usuarioSolicitado);
