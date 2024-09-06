@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -12,19 +13,23 @@ public class Endereco {
     private String cep;
     private String estado;
     private String bairro;
+    private String cidade;
     private String rua;
+
     @OneToOne
     @JoinColumn(name = "fkNegocio")
-    Negocio negocio;
-
+    @JsonBackReference
+    private Negocio negocio;
     public Endereco() {
     }
 
-    public Endereco(UUID id, String cep, String estado, String bairro, String rua, Negocio negocio) {
+    public Endereco(UUID id, String cep, String estado, String bairro,
+                    String cidade, String rua, Negocio negocio) {
         this.id = id;
         this.cep = cep;
         this.estado = estado;
         this.bairro = bairro;
+        this.cidade = cidade;
         this.rua = rua;
         this.negocio = negocio;
     }
@@ -77,6 +82,14 @@ public class Endereco {
         this.negocio = negocio;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
     @Override
     public String toString() {
         return "Endereco{" +
@@ -84,6 +97,7 @@ public class Endereco {
                 ", cep='" + cep + '\'' +
                 ", estado='" + estado + '\'' +
                 ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
                 ", rua='" + rua + '\'' +
                 ", negocio=" + negocio +
                 '}';

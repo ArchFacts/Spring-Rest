@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,6 +21,10 @@ import java.util.UUID;
         private LocalDate dataRegistro;
         private Double avaliacao;
         private Boolean ativado;
+        @OneToOne(mappedBy = "negocio", cascade = CascadeType.ALL)
+        @JsonManagedReference
+        private Endereco endereco;
+
         @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
         @JsonIgnore
         List<Usuario> usuarioList = new ArrayList<>();
@@ -34,21 +39,24 @@ import java.util.UUID;
     }
 
     public Negocio(UUID id, String nome, String codigoNegocio, String cep, String cpf, String cnpj,
-                   LocalDate dataRegistro,
-                   Double avaliacao,
-                   Boolean ativado) {
-        this.id = id;
-        this.nome = nome;
-        this.codigoNegocio = codigoNegocio;
-        this.cep = cep;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.dataRegistro = dataRegistro;
-        this.avaliacao = avaliacao;
-        this.ativado = ativado;
-    }
+                   LocalDate dataRegistro, Double avaliacao, Boolean ativado, Endereco endereco,
+                   List<Usuario> usuarioList, List<Projeto> projetoList, List<Mensagem> mensagemList) {
+            this.id = id;
+            this.nome = nome;
+            this.codigoNegocio = codigoNegocio;
+            this.cep = cep;
+            this.cpf = cpf;
+            this.cnpj = cnpj;
+            this.dataRegistro = dataRegistro;
+            this.avaliacao = avaliacao;
+            this.ativado = ativado;
+            this.endereco = endereco;
+            this.usuarioList = usuarioList;
+            this.projetoList = projetoList;
+            this.mensagemList = mensagemList;
+        }
 
-    public UUID getId() {
+        public UUID getId() {
         return id;
     }
 
@@ -132,21 +140,30 @@ import java.util.UUID;
         return mensagemList;
     }
 
-    @Override
-    public String toString() {
-        return "Negocio{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", codigoNegocio='" + codigoNegocio + '\'' +
-                ", cep='" + cep + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", cnpj='" + cnpj + '\'' +
-                ", dataRegistro=" + dataRegistro +
-                ", avaliacao=" + avaliacao +
-                ", ativado=" + ativado +
-                ", usuarioList=" + usuarioList +
-                ", projetoList=" + projetoList +
-                ", mensagemList=" + mensagemList +
-                '}';
+        public Endereco getEndereco() {
+            return endereco;
+        }
+
+        public void setEndereco(Endereco endereco) {
+            this.endereco = endereco;
+        }
+
+        @Override
+        public String toString() {
+            return "Negocio{" +
+                    "id=" + id +
+                    ", nome='" + nome + '\'' +
+                    ", codigoNegocio='" + codigoNegocio + '\'' +
+                    ", cep='" + cep + '\'' +
+                    ", cpf='" + cpf + '\'' +
+                    ", cnpj='" + cnpj + '\'' +
+                    ", dataRegistro=" + dataRegistro +
+                    ", avaliacao=" + avaliacao +
+                    ", ativado=" + ativado +
+                    ", endereco=" + endereco +
+                    ", usuarioList=" + usuarioList +
+                    ", projetoList=" + projetoList +
+                    ", mensagemList=" + mensagemList +
+                    '}';
+        }
     }
-}

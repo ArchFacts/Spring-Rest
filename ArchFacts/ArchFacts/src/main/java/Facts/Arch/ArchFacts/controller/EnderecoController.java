@@ -4,10 +4,7 @@ import Facts.Arch.ArchFacts.entity.Endereco;
 import Facts.Arch.ArchFacts.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -27,4 +24,12 @@ public class EnderecoController {
 
         return ResponseEntity.ok(resposta.getBody());
     }
+
+//    @GetMapping("/ordenados")
+//    public ResponseEntity<Endereco[]> enderecosOrdenados(){
+//        Endereco[] enderecos = enderecoRepository.findAll().toArray(new Endereco[0]);
+//        if(enderecos.length == 0){
+//            return ResponseEntity.status(204).build();
+//        } return ResponseEntity.status(200).body(enderecos);
+//    }
 }
