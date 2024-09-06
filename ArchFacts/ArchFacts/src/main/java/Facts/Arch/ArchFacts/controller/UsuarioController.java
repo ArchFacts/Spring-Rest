@@ -17,7 +17,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    private ResponseEntity<HttpStatus> verificarEstadoUsuario (Usuario usuarioSolicitado) {
+    private ResponseEntity<ResponseStatus> verificarEstadoUsuario (Usuario usuarioSolicitado) {
         Boolean usuarioExistente = this.usuarioRepository.existsByEmail(usuarioSolicitado.getEmail());
 
         if (usuarioExistente) {
@@ -37,7 +37,7 @@ public class UsuarioController {
     public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuarioSolicitado) {
         usuarioSolicitado.setId(null);
 
-        if (verificarEstadoUsuario(usuarioSolicitado).equals(HttpStatus.NOT_FOUND)) {
+        if (verificarEstadoUsuario(usuarioSolicitado).equals(ResponseEntity.status(404).build())) {
             usuarioSolicitado.setRole(Role.USER);
             usuarioSolicitado.setAtivado(Boolean.TRUE);
             return ResponseEntity.status(201).body(usuarioRepository.save(usuarioSolicitado));
@@ -60,7 +60,7 @@ public class UsuarioController {
         if (this.usuarioRepository.existsById(id)) {
             usuarioSolicitado.setId(id);
             Usuario usuarioAtualizado = this.usuarioRepository.save(usuarioSolicitado);
-            return ResponseEntity.status(204).body(usuarioAtualizado);
+            return ResponseEntity.status(200).body(usuarioAtualizado);
         }
         return ResponseEntity.status(404).build();
     }

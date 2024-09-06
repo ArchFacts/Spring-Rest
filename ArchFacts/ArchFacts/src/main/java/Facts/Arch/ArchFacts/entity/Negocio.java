@@ -1,30 +1,34 @@
 package Facts.Arch.ArchFacts.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-@Entity
-public class Negocio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    private String nome;
-    private String codigoNegocio;
-    private String cep;
-    private String cpf;
-    private String cnpj;
-    private LocalDate dataRegistro;
-    private Double avaliacao;
-    private Boolean ativado;
-    @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
-    List<Usuario> usuarioList = new ArrayList<>();
-    @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
-    List<Projeto> projetoList = new ArrayList<>();
-    @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
-    List<Mensagem> mensagemList = new ArrayList<>();
+    @Entity
+    public class Negocio {
+        @Id
+        @GeneratedValue(strategy = GenerationType.UUID)
+        private UUID id;
+        private String nome;
+        private String codigoNegocio;
+        private String cep;
+        private String cpf;
+        private String cnpj;
+        private LocalDate dataRegistro;
+        private Double avaliacao;
+        private Boolean ativado;
+        @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
+        @JsonIgnore
+        List<Usuario> usuarioList = new ArrayList<>();
+        @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
+        @JsonIgnore
+        List<Projeto> projetoList = new ArrayList<>();
+        @OneToMany(mappedBy = "negocio", cascade = CascadeType.ALL)
+        @JsonIgnore
+        List<Mensagem> mensagemList = new ArrayList<>();
 
     public Negocio() {
     }

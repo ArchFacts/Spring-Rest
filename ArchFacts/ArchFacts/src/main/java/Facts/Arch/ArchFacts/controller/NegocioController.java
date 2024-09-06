@@ -1,12 +1,16 @@
 package Facts.Arch.ArchFacts.controller;
 
 import Facts.Arch.ArchFacts.entity.Negocio;
+import Facts.Arch.ArchFacts.entity.Usuario;
+import Facts.Arch.ArchFacts.enums.Role;
 import Facts.Arch.ArchFacts.repository.NegocioRepository;
+import Facts.Arch.ArchFacts.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -14,6 +18,10 @@ import java.util.UUID;
 public class NegocioController {
     @Autowired
     private NegocioRepository negocioRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     private ResponseEntity<ResponseStatus> verificarEstadoNegocio (Negocio negocioSolicitado) {
         Boolean negocioExistente = this.negocioRepository.existsByCpfOrCnpj(negocioSolicitado.getCpf(),
                 negocioSolicitado.getCnpj());
@@ -32,14 +40,29 @@ public class NegocioController {
         return ResponseEntity.status(404).build();
     }
 
-    @PostMapping
-    public ResponseEntity<Negocio> cadastrarNegocio(@RequestBody Negocio negocioSolicitado) {
-        negocioSolicitado.setId(null);
+    @PostMapping ("/{id}")
+    public ResponseEntity<Negocio> cadastrarNegocio(@PathVariable UUID id,
+                                                    @RequestBody Negocio negocioSolicitado) {
+        Optional<Usuario> possivelAdministrador = this.usuarioRepository.findById(id);
+
+        if (possivelAdministrador.isEmpty()) {
+            return ResponseEntity.status(404).build();
+        }
 
         if (verificarEstadoNegocio(negocioSolicitado).equals(ResponseEntity.status(404).build())) {
+            Usuario administrador = possivelAdministrador.get();
+
+            negocioSolicitado.setId(null);
             negocioSolicitado.setAtivado(Boolean.TRUE);
             negocioSolicitado.setCodigoNegocio(UUID.randomUUID().toString());
-            return ResponseEntity.status(201).body(this.negocioRepository.save(negocioSolicitado));
+
+            Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
+            administrador.setNegocio(negocioCadastrado);
+            administrador.setRole(Role.ADMINISTRADOR);
+
+            this.usuarioRepository.save(administrador);
+
+            return ResponseEntity.status(201).body(negocioCadastrado);
         }
         return ResponseEntity.status(404).build();
     }
@@ -59,7 +82,7 @@ public class NegocioController {
         if (this.negocioRepository.existsById(id)) {
             negocioSolicitado.setId(id);
             Negocio negocioAtualizado = this.negocioRepository.save(negocioSolicitado);
-            return ResponseEntity.status(204).body(negocioAtualizado);
+            return ResponseEntity.status(200).body(negocioAtualizado);
         }
         return ResponseEntity.status(404).build();
     }

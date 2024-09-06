@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.entity;
 
 import Facts.Arch.ArchFacts.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
