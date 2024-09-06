@@ -5,6 +5,9 @@ import Facts.Arch.ArchFacts.entity.Usuario;
 import Facts.Arch.ArchFacts.enums.Role;
 import Facts.Arch.ArchFacts.repository.NegocioRepository;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
+import Facts.Arch.ArchFacts.strategy.ConfiguradorDeCampos;
+import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
+import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,10 +56,14 @@ public class NegocioController {
         if (verificarEstadoNegocio(negocioSolicitado).equals(ResponseEntity.status(404).build())) {
             Usuario administrador = possivelAdministrador.get();
 
-            negocioSolicitado.setId(null);
-            negocioSolicitado.setAtivado(Boolean.TRUE);
-            negocioSolicitado.setCodigoNegocio(UUID.randomUUID().toString());
-            negocioSolicitado.setDataRegistro(LocalDate.now());
+            EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
+            ConfiguradorDeCampos configuradorDeCampos = new ConfiguradorDeCampos(estrategiaNegocio);
+            configuradorDeCampos.configurarCampos(negocioSolicitado);
+
+//            negocioSolicitado.setId(null);
+//            negocioSolicitado.setAtivado(Boolean.TRUE);
+//            negocioSolicitado.setCodigoNegocio(UUID.randomUUID().toString());
+//            negocioSolicitado.setDataRegistro(LocalDate.now());
 
             Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
             administrador.setNegocio(negocioCadastrado);

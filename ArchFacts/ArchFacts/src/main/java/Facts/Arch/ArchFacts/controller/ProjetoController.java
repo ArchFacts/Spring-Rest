@@ -7,6 +7,9 @@ import Facts.Arch.ArchFacts.enums.Status;
 import Facts.Arch.ArchFacts.repository.NegocioRepository;
 import Facts.Arch.ArchFacts.repository.ProjetoRepository;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
+import Facts.Arch.ArchFacts.strategy.ConfiguradorDeCampos;
+import Facts.Arch.ArchFacts.strategy.EstrategiaProjeto;
+import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,11 +44,15 @@ public class ProjetoController {
         Usuario destinatario = possivelDestinatario.get();
         Negocio negocio = possivelNegocio.get();
 
-        projetoSolicitado.setId(null);
-        projetoSolicitado.setStatus(Status.ABERTO);
-        projetoSolicitado.setDestinatario(destinatario);
-        projetoSolicitado.setDataInicio(LocalDate.now());
-        projetoSolicitado.setNegocio(negocio);
+        EstrategiaProjeto estrategiaProjeto = new EstrategiaProjeto(destinatario, negocio);
+        ConfiguradorDeCampos configuradorDeCampos = new ConfiguradorDeCampos(estrategiaProjeto);
+        configuradorDeCampos.configurarCampos(projetoSolicitado);
+
+//        projetoSolicitado.setId(null);
+//        projetoSolicitado.setStatus(Status.ABERTO);
+//        projetoSolicitado.setDestinatario(destinatario);
+//        projetoSolicitado.setDataInicio(LocalDate.now());
+//        projetoSolicitado.setNegocio(negocio);
 
         return ResponseEntity.status(201).body(projetoRepository.save(projetoSolicitado));
     }

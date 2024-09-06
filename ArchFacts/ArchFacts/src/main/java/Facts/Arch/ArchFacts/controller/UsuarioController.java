@@ -3,6 +3,9 @@ package Facts.Arch.ArchFacts.controller;
 import Facts.Arch.ArchFacts.entity.Usuario;
 import Facts.Arch.ArchFacts.enums.Role;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
+import Facts.Arch.ArchFacts.strategy.ConfiguradorDeCampos;
+import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
+import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +18,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     private ResponseEntity<ResponseStatus> verificarEstadoUsuario (Usuario usuarioSolicitado) {
+
         Boolean usuarioExistente = this.usuarioRepository.existsByEmail(usuarioSolicitado.getEmail());
 
         if (usuarioExistente) {
@@ -37,11 +42,14 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuarioSolicitado) {
         usuarioSolicitado.setId(null);
-
         if (verificarEstadoUsuario(usuarioSolicitado).equals(ResponseEntity.status(404).build())) {
-            usuarioSolicitado.setRole(Role.USER);
-            usuarioSolicitado.setAtivado(Boolean.TRUE);
-            usuarioSolicitado.setDataRegistro(LocalDate.now());
+            EstrategiaUsuario estrategiaUsuario = new EstrategiaUsuario();
+            ConfiguradorDeCampos configuradorDeCampos = new ConfiguradorDeCampos(estrategiaUsuario);
+            configuradorDeCampos.configurarCampos(usuarioSolicitado);
+
+//            usuarioSolicitado.setRole(Role.USER);
+//            usuarioSolicitado.setAtivado(Boolean.TRUE);
+//            usuarioSolicitado.setDataRegistro(LocalDate.now());
             return ResponseEntity.status(201).body(usuarioRepository.save(usuarioSolicitado));
         }
         return verificarEstadoUsuario(usuarioSolicitado);

@@ -1,0 +1,41 @@
+package Facts.Arch.ArchFacts.strategy;
+
+import Facts.Arch.ArchFacts.entity.Negocio;
+import Facts.Arch.ArchFacts.entity.Projeto;
+import Facts.Arch.ArchFacts.entity.Usuario;
+import Facts.Arch.ArchFacts.enums.Status;
+
+import java.time.LocalDate;
+
+public class EstrategiaProjeto implements EstrategiaConfiguracao {
+    private Usuario destinatario;
+    private Negocio negocio;
+
+    public EstrategiaProjeto(Usuario destinatario, Negocio negocio) {
+        this.destinatario = destinatario;
+        this.negocio = negocio;
+    }
+
+    public EstrategiaProjeto() {
+    }
+
+    @Override
+    public void configurarCampos(Negocio negocio) {
+
+    }
+
+    @Override
+    public void configurarCampos(Projeto projetoSolicitado) {
+        projetoSolicitado.setId(null);
+        projetoSolicitado.setStatus(Status.ABERTO);
+        projetoSolicitado.setDestinatario(destinatario);
+        projetoSolicitado.setDataInicio(LocalDate.now());
+        projetoSolicitado.setNegocio(negocio);
+
+    }
+
+    @Override
+    public void configurarCampos(Usuario usuario) {
+
+    }
+}
