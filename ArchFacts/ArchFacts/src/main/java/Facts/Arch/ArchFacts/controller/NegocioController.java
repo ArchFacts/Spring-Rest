@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -55,6 +56,7 @@ public class NegocioController {
             negocioSolicitado.setId(null);
             negocioSolicitado.setAtivado(Boolean.TRUE);
             negocioSolicitado.setCodigoNegocio(UUID.randomUUID().toString());
+            negocioSolicitado.setDataRegistro(LocalDate.now());
 
             Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
             administrador.setNegocio(negocioCadastrado);
@@ -87,10 +89,21 @@ public class NegocioController {
         return ResponseEntity.status(404).build();
     }
 
-    @DeleteMapping ("/{id}")
-    public ResponseEntity<Void> deletarNegocio(@PathVariable UUID id){
-        if (this.negocioRepository.existsById(id)){
-            this.negocioRepository.deleteById(id);
+    @DeleteMapping ("/{idNegocio}/{idUsuario}")
+    public ResponseEntity<Void> deletarNegocio(@PathVariable UUID idNegocio, @PathVariable UUID idUsuario){
+        Optional<Usuario> possivelUsuario = this.usuarioRepository.findById(idUsuario);
+        if (possivelUsuario.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        if (this.negocioRepository.existsById(idNegocio)){
+            Usuario usuario = possivelUsuario.get();
+
+            if (!usuario.getRole().equals(Role.ADMINISTRADOR)) { // Não permitir excluir se ele não for adm
+                return ResponseEntity.status(401).build(); // Não Autorizado
+            }
+
+            this.negocioRepository.deleteById(idNegocio);
             return ResponseEntity.status(204).build();
         }
         return ResponseEntity.status(404).build();

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +41,7 @@ public class UsuarioController {
         if (verificarEstadoUsuario(usuarioSolicitado).equals(ResponseEntity.status(404).build())) {
             usuarioSolicitado.setRole(Role.USER);
             usuarioSolicitado.setAtivado(Boolean.TRUE);
+            usuarioSolicitado.setDataRegistro(LocalDate.now());
             return ResponseEntity.status(201).body(usuarioRepository.save(usuarioSolicitado));
         }
         return verificarEstadoUsuario(usuarioSolicitado);
