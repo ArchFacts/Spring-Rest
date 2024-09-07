@@ -25,11 +25,25 @@ public class EnderecoController {
         return ResponseEntity.ok(resposta.getBody());
     }
 
-//    @GetMapping("/ordenados")
-//    public ResponseEntity<Endereco[]> enderecosOrdenados(){
-//        Endereco[] enderecos = enderecoRepository.findAll().toArray(new Endereco[0]);
-//        if(enderecos.length == 0){
-//            return ResponseEntity.status(204).build();
-//        } return ResponseEntity.status(200).body(enderecos);
-//    }
+    @GetMapping("/ordenados")
+    public ResponseEntity<Endereco[]> enderecosOrdenados(){
+        Endereco[] enderecos = enderecoRepository.findAll().toArray(new Endereco[0]);
+        if(enderecos.length == 0){
+            return ResponseEntity.status(204).build();
+        }
+
+        for(int i = 0; i < enderecos.length-1; i++){
+            int minimo = i;
+            for(int j = i+1; j < enderecos.length;j++){
+                if(enderecos[j].getCidade().compareToIgnoreCase(enderecos[minimo].getCidade()) < 0){
+                    minimo=j;
+                }
+            }
+            Endereco aux = enderecos[minimo];
+            enderecos[minimo] = enderecos[i];
+            enderecos[i] = aux;
+        }
+
+        return ResponseEntity.status(200).body(enderecos);
+    }
 }

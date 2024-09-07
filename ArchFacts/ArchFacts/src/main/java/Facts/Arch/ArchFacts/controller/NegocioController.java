@@ -59,7 +59,10 @@ public class NegocioController {
             return ResponseEntity.status(404).build();
         }
 
-        if (verificarEstadoNegocio(negocioSolicitado).equals(ResponseEntity.status(404).build())) {
+        if (!estadoNegocioValido(negocioSolicitado)) {
+            return ResponseEntity.status(404).build();
+        }
+
             Usuario administrador = possivelAdministrador.get();
 
             EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
@@ -78,7 +81,6 @@ public class NegocioController {
                 enderecoParaCadastrar.setBairro(enderecoCompleto.getBairro());
                 enderecoParaCadastrar.setCidade(enderecoCompleto.getCidade());
                 enderecoParaCadastrar.setRua(enderecoCompleto.getRua());
-                enderecoParaCadastrar.setId(enderecoCompleto.getId());
 
                 Endereco enderecoSalvo = enderecoRepository.save(enderecoParaCadastrar);
                 negocioSolicitado.setEndereco(enderecoSalvo);
@@ -97,8 +99,13 @@ public class NegocioController {
             this.usuarioRepository.save(administrador);
 
             return ResponseEntity.status(201).body(negocioCadastrado);
+    }
+
+    private boolean estadoNegocioValido(Negocio negocio) {
+        if (negocio.getCep() == null || negocio.getCep().isEmpty()) {
+            return false;
         }
-        return ResponseEntity.status(404).build();
+        return true;
     }
 
     @GetMapping
