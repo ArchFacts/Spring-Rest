@@ -43,7 +43,6 @@ public class EnderecoController {
             enderecos[minimo] = enderecos[i];
             enderecos[i] = aux;
         }
-
         return ResponseEntity.status(200).body(enderecos);
     }
 }
