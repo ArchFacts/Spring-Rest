@@ -14,18 +14,18 @@ public class EnderecoController {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    @GetMapping
-    public ResponseEntity<Endereco> verEndereco(@RequestParam String cep) {
-        String url = "http://localhost:49152/enderecos?cep=" + cep;
+//    @GetMapping
+//    public ResponseEntity<Endereco> verEndereco(@RequestParam String cep) {
+//        String url = "http://localhost:49152/enderecos?cep=" + cep;
+//
+//        RestTemplate restTemplate = new RestTemplate(); // Para facilitar requisições externas
+//        // Pegando a resposta proveniente do método e convertendo para o objeto da API ArchFacts
+//        ResponseEntity<Endereco> resposta = restTemplate.getForEntity(url, Endereco.class);
+//
+//        return ResponseEntity.ok(resposta.getBody());
+//    }
 
-        RestTemplate restTemplate = new RestTemplate(); // Para facilitar requisições externas
-        // Pegando a resposta proveniente do método e convertendo para o objeto da API ArchFacts
-        ResponseEntity<Endereco> resposta = restTemplate.getForEntity(url, Endereco.class);
-
-        return ResponseEntity.ok(resposta.getBody());
-    }
-
-    @GetMapping("/ordenados")
+    @GetMapping("/ordenacao")
     public ResponseEntity<Endereco[]> enderecosOrdenados(){
         Endereco[] enderecos = enderecoRepository.findAll().toArray(new Endereco[0]);
         if(enderecos.length == 0){

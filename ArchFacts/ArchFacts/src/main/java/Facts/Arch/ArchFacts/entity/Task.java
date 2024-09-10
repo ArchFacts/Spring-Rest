@@ -21,19 +21,23 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "fkProjeto")
     Projeto projeto;
+
     @ManyToOne
-    @JoinColumn(name = "fkTicket")
-    Ticket ticket;
+    @JoinColumn(name = "fkPagamento")
+    Pagamento pagamento;
+
+//    @ManyToOne
+//    @JoinColumn(name = "fkTicket")
+//    Ticket ticket;
     @OneToMany (mappedBy = "task", cascade = CascadeType.ALL)
     List<Pagamento> pagamentoList = new ArrayList<>();
 
     public Task() {
     }
 
-    public Task(UUID id, String descricao, LocalDate dataInicio, LocalDate dataTermino, Prioridade prioridade,
-                Status status,
-                Projeto projeto,
-                Ticket ticket) {
+    public Task(UUID id, String descricao, LocalDate dataInicio, LocalDate dataTermino,
+                Prioridade prioridade, Status status, Projeto projeto, Pagamento pagamento,
+                List<Pagamento> pagamentoList) {
         this.id = id;
         this.descricao = descricao;
         this.dataInicio = dataInicio;
@@ -41,7 +45,8 @@ public class Task {
         this.prioridade = prioridade;
         this.status = status;
         this.projeto = projeto;
-        this.ticket = ticket;
+        this.pagamento = pagamento;
+        this.pagamentoList = pagamentoList;
     }
 
     public UUID getId() {
@@ -100,17 +105,26 @@ public class Task {
         this.projeto = projeto;
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
-//    public List<Pagamento> getPagamentoList() {
+    public List<Pagamento> getPagamentoList() {
+        return pagamentoList;
+    }
+
+    public void setPagamentoList(List<Pagamento> pagamentoList) {
+        this.pagamentoList = pagamentoList;
+    }
+
+    //    public List<Pagamento> getPagamentoList() {
 //        return pagamentoList;
 //    }
+
 
     @Override
     public String toString() {
@@ -122,8 +136,8 @@ public class Task {
                 ", prioridade=" + prioridade +
                 ", status=" + status +
                 ", projeto=" + projeto +
-                ", ticket=" + ticket +
-//                ", pagamentoList=" + pagamentoList +
+                ", pagamento=" + pagamento +
+                ", pagamentoList=" + pagamentoList +
                 '}';
     }
 }

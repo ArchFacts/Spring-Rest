@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.entity;
 
+import Facts.Arch.ArchFacts.enums.MetodoPagamento;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
@@ -15,6 +16,10 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String rua;
+
+//   PROFESSOR DIEGO:
+//    @Enumerated(EnumType.STRING)
+//    private MetodoPagamento metodoPagamento;
 
     @OneToOne
     @JoinColumn(name = "fkNegocio")
