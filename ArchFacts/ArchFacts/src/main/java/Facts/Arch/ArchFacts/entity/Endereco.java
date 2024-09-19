@@ -16,6 +16,7 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private String rua;
+    private Integer numero;
 
 //   PROFESSOR DIEGO:
 //    @Enumerated(EnumType.STRING)
@@ -29,13 +30,14 @@ public class Endereco {
     }
 
     public Endereco(UUID id, String cep, String estado, String bairro,
-                    String cidade, String rua, Negocio negocio) {
+                    String cidade, String rua, Integer numero, Negocio negocio) {
         this.id = id;
         this.cep = cep;
         this.estado = estado;
         this.bairro = bairro;
         this.cidade = cidade;
         this.rua = rua;
+        this.numero = numero;
         this.negocio = negocio;
     }
 
@@ -95,6 +97,14 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
     @Override
     public String toString() {
         return "Endereco{" +
@@ -104,6 +114,7 @@ public class Endereco {
                 ", bairro='" + bairro + '\'' +
                 ", cidade='" + cidade + '\'' +
                 ", rua='" + rua + '\'' +
+                ", numero=" + numero +
                 ", negocio=" + negocio +
                 '}';
     }
