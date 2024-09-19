@@ -7,15 +7,13 @@ import Facts.Arch.ArchFacts.enums.Role;
 import Facts.Arch.ArchFacts.repository.EnderecoRepository;
 import Facts.Arch.ArchFacts.repository.NegocioRepository;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
-import Facts.Arch.ArchFacts.strategy.ConfiguradorDeCampos;
+import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
-import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -66,8 +64,8 @@ public class NegocioController {
             Usuario administrador = possivelAdministrador.get();
 
             EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
-            ConfiguradorDeCampos configuradorDeCampos = new ConfiguradorDeCampos(estrategiaNegocio);
-            configuradorDeCampos.configurarCampos(negocioSolicitado);
+            FactoryCampos factoryCampos = new FactoryCampos(estrategiaNegocio);
+            factoryCampos.configurarCampos(negocioSolicitado);
 
             String url = "http://localhost:49152/enderecos?cep=" + negocioSolicitado.getCep();
             RestTemplate restTemplate = new RestTemplate();

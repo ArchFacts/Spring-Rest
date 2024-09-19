@@ -4,14 +4,14 @@
     import Facts.Arch.ArchFacts.entity.Projeto;
     import Facts.Arch.ArchFacts.entity.Usuario;
     
-    public class ConfiguradorDeCampos {
+    public class FactoryCampos {
         private EstrategiaConfiguracao estrategiaConfiguracao;
     
-        public ConfiguradorDeCampos(EstrategiaConfiguracao estrategiaConfiguracao) {
+        public FactoryCampos(EstrategiaConfiguracao estrategiaConfiguracao) {
             this.estrategiaConfiguracao = estrategiaConfiguracao;
         }
     
-        public ConfiguradorDeCampos() {
+        public FactoryCampos() {
         }
     
         public void configurarCampos(Object objetoGenerico) {

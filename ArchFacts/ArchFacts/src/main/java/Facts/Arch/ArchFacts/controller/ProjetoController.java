@@ -3,18 +3,15 @@ package Facts.Arch.ArchFacts.controller;
 import Facts.Arch.ArchFacts.entity.Negocio;
 import Facts.Arch.ArchFacts.entity.Projeto;
 import Facts.Arch.ArchFacts.entity.Usuario;
-import Facts.Arch.ArchFacts.enums.Status;
 import Facts.Arch.ArchFacts.repository.NegocioRepository;
 import Facts.Arch.ArchFacts.repository.ProjetoRepository;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
-import Facts.Arch.ArchFacts.strategy.ConfiguradorDeCampos;
+import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import Facts.Arch.ArchFacts.strategy.EstrategiaProjeto;
-import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,8 +42,8 @@ public class ProjetoController {
         Negocio negocio = possivelNegocio.get();
 
         EstrategiaProjeto estrategiaProjeto = new EstrategiaProjeto(destinatario, negocio);
-        ConfiguradorDeCampos configuradorDeCampos = new ConfiguradorDeCampos(estrategiaProjeto);
-        configuradorDeCampos.configurarCampos(projetoSolicitado);
+        FactoryCampos factoryCampos = new FactoryCampos(estrategiaProjeto);
+        factoryCampos.configurarCampos(projetoSolicitado);
 
 //        projetoSolicitado.setId(null);
 //        projetoSolicitado.setStatus(Status.ABERTO);

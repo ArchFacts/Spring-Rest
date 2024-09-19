@@ -3,6 +3,9 @@ package Facts.Arch.ArchFacts.entity;
 import Facts.Arch.ArchFacts.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,12 +14,17 @@ public class Usuario {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
     private UUID id;
+    @NotBlank
     private String nome;
+    @Email
     private String email;
     private String senha;
+    @Pattern(regexp = "\\(\\d{2}\\) (?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\d{3,4}-?\\d{4}",
+            message = "Número de telefone inválido")
     private String telefone;
     private LocalDate dataRegistro;
     private Boolean ativado;
+    @Enumerated
     private Role role;
     @ManyToOne
     @JoinColumn(name = "fkNegocio")

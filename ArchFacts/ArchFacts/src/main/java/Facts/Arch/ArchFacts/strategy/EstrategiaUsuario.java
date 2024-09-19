@@ -20,8 +20,9 @@ public class EstrategiaUsuario implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Usuario usuarioSolicitado) {
-            usuarioSolicitado.setRole(Role.USER);
-            usuarioSolicitado.setAtivado(Boolean.TRUE);
-            usuarioSolicitado.setDataRegistro(LocalDate.now());
+        usuarioSolicitado.setId(null);
+        usuarioSolicitado.setRole(Role.USER);
+        usuarioSolicitado.setAtivado(Boolean.TRUE);
+        usuarioSolicitado.setDataRegistro(LocalDate.now());
     }
 }
