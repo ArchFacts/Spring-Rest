@@ -3,15 +3,35 @@ package Facts.Arch.ArchFacts.dto;
 import Facts.Arch.ArchFacts.enums.Role;
 
 public class RegistroDTO {
+    private String nome;
+    private String telefone;
     private String email;
     private String senha;
 
     public RegistroDTO() {
     }
 
-    public RegistroDTO(String email, String senha) {
+    public RegistroDTO(String nome, String telefone, String email, String senha) {
+        this.nome = nome;
+        this.telefone = telefone;
         this.email = email;
         this.senha = senha;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {

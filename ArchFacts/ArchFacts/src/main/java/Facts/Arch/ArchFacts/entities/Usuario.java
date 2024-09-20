@@ -20,12 +20,12 @@ public class Usuario implements UserDetails {
     private UUID id;
     @NotBlank
     private String nome;
-    @Email
+//    @Email
     private String email;
     @NotBlank
     private String senha;
-    @Pattern(regexp = "\\(?\\d{2}\\)? ?(?:[14689][1-9]\\d{3}|[2-9][0-9]{3})-?\\d{4}",
-            message = "Número de telefone inválido")
+//    @Pattern(regexp = "(?:(^\\+\\d{2})?)(?:([1-9]{2})|([0-9]{3})?)(\\d{4,5}).?(\\d{4})",
+//            message = "Número de telefone inválido")
     private String telefone;
     private LocalDate dataRegistro;
     private Boolean ativado;
@@ -53,10 +53,11 @@ public class Usuario implements UserDetails {
         this.negocio = negocio;
     }
 
-    public Usuario(String email, String senha) {
+    public Usuario(String nome, String email, String telefone, String senha) {
+        this.nome = nome;
         this.email = email;
+        this.telefone = telefone;
         this.senha = senha;
-        this.role = role;
     }
 
     public UUID getId() {

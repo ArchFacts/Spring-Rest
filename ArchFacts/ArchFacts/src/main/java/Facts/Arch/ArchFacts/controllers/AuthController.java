@@ -46,7 +46,10 @@ public class AuthController {
             return ResponseEntity.status(400).build();
 
         String senhaEncriptografada = new BCryptPasswordEncoder().encode(data.getSenha());
-        Usuario usuarioRegistrado = new Usuario(data.getEmail(), senhaEncriptografada);
+        Usuario usuarioRegistrado = new Usuario(data.getNome(),
+                data.getTelefone(),
+                data.getEmail(),
+                senhaEncriptografada);
         RespostaUsuarioDTO usuarioDTO = UsuarioMapper.toDto(usuarioRegistrado);
 
         this.usuarioService.cadastrar(usuarioRegistrado);
