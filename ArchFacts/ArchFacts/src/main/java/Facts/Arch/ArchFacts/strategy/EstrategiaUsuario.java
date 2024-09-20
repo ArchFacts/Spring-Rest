@@ -19,6 +19,11 @@ public class EstrategiaUsuario implements EstrategiaConfiguracao {
     }
 
     @Override
+    public void configurarCampos(Usuario usuario, Negocio negocioSolicitado) {
+
+    }
+
+    @Override
     public void configurarCampos(Usuario usuarioSolicitado) {
         usuarioSolicitado.setId(null);
         usuarioSolicitado.setRole(Role.USER);

@@ -15,20 +15,15 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
-//    @GetMapping
-//    public ResponseEntity<Endereco> verEndereco(@RequestParam String cep) {
-//        String url = "http://localhost:49152/enderecos?cep=" + cep;
-//
-//        RestTemplate restTemplate = new RestTemplate(); // Para facilitar requisições externas
-//        // Pegando a resposta proveniente do método e convertendo para o objeto da API ArchFacts
-//        ResponseEntity<Endereco> resposta = restTemplate.getForEntity(url, Endereco.class);
-//
-//        return ResponseEntity.ok(resposta.getBody());
-//    }
+    @GetMapping
+    public ResponseEntity<Endereco> consultarEndereco(@RequestParam String cep) {
+        Endereco enderecoEncontrado = this.enderecoService.consultarEndereco(cep);
+        return ResponseEntity.status(200).body(enderecoEncontrado);
+    }
 
 //    @GetMapping("/ordenacao")
 //    public ResponseEntity<Endereco[]> enderecosOrdenados(){
-//        Endereco[] enderecos = enderecoRepository.findAll().toArray(new Endereco[0]);
+//        Endereco[] enderecos = enderecoService.findAll().toArray(new Endereco[0]);
 //        if(enderecos.length == 0){
 //            return ResponseEntity.status(204).build();
 //        }

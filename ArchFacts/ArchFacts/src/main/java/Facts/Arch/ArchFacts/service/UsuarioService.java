@@ -35,11 +35,15 @@ public class UsuarioService {
     }
 
     public Usuario cadastrar (Usuario usuarioSolicitado) {
+        Usuario usuarioCadastro = verificarEstadoUsuario(usuarioSolicitado);
+
         EstrategiaUsuario estrategiaUsuario = new EstrategiaUsuario();
         FactoryCampos factoryCampos = new FactoryCampos(estrategiaUsuario);
-        factoryCampos.configurarCampos(usuarioSolicitado);
+        factoryCampos.configurarCampos(usuarioCadastro);
 
-        return usuarioRepository.save(usuarioSolicitado);
+        estrategiaUsuario.configurarCampos(usuarioSolicitado);
+
+        return usuarioRepository.save(usuarioCadastro);
     }
 
     public List<Usuario> listar() {

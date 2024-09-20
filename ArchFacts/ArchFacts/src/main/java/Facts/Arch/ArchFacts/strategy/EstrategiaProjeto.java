@@ -35,6 +35,11 @@ public class EstrategiaProjeto implements EstrategiaConfiguracao {
     }
 
     @Override
+    public void configurarCampos(Usuario usuario, Negocio negocioSolicitado) {
+
+    }
+
+    @Override
     public void configurarCampos(Usuario usuario) {
 
     }

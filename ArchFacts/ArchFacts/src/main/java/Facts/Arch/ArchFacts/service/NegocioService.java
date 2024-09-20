@@ -44,12 +44,16 @@ public class NegocioService {
         return negocioSolicitado;
     }
 
-    public Negocio cadastrar (Negocio negocioSolicitado) {
+    public Negocio cadastrar (Negocio negocioSolicitado, Usuario usuarioSolicitado) {
+        Negocio negocioCadastro = verificarEstadoNegocio(negocioSolicitado);
+
         EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
         FactoryCampos factoryCampos = new FactoryCampos(estrategiaNegocio);
-        factoryCampos.configurarCampos(negocioSolicitado);
+        factoryCampos.configurarCampos(negocioCadastro);
 
-        return negocioRepository.save(negocioSolicitado);
+        estrategiaNegocio.configurarCampos(usuarioSolicitado, negocioSolicitado);
+
+        return negocioRepository.save(negocioCadastro);
     }
 
     public List<Negocio> listar() {

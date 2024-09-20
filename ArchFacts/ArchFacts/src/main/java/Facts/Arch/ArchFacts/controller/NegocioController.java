@@ -12,6 +12,7 @@ import Facts.Arch.ArchFacts.service.NegocioService;
 import Facts.Arch.ArchFacts.service.UsuarioService;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,50 +36,53 @@ public class NegocioController {
 
 
     @PostMapping ("/{id}")
-    public ResponseEntity<Negocio> cadastrarNegocio(@PathVariable UUID id,
-                                                    @RequestBody Negocio negocioSolicitado) {
-        Optional<Usuario> possivelAdministrador = this.usuarioRepository.findById(id);
+    public ResponseEntity<Negocio> cadastrar (@Valid Usuario usuarioLogado, @RequestBody Negocio negocioSolicitado) {
 
-        if (possivelAdministrador.isEmpty()) {
-            return ResponseEntity.status(404).build();
-        }
-
-        if (!estadoNegocioValido(negocioSolicitado)) {
-            return ResponseEntity.status(404).build();
-        }
-
-            Usuario administrador = possivelAdministrador.get();
-
-            EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
-            FactoryCampos factoryCampos = new FactoryCampos(estrategiaNegocio);
-            factoryCampos.configurarCampos(negocioSolicitado);
-
-            String url = "http://localhost:49152/enderecos?cep=" + negocioSolicitado.getCep();
-            RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<Endereco> resposta = restTemplate.getForEntity(url, Endereco.class);
-
-            Endereco enderecoCompleto = resposta.getBody();
-            if (enderecoCompleto != null) {
-                Endereco enderecoParaCadastrar = new Endereco();
-                enderecoParaCadastrar.setCep(negocioSolicitado.getCep());
-                enderecoParaCadastrar.setEstado(enderecoCompleto.getEstado());
-                enderecoParaCadastrar.setBairro(enderecoCompleto.getBairro());
-                enderecoParaCadastrar.setCidade(enderecoCompleto.getCidade());
-                enderecoParaCadastrar.setRua(enderecoCompleto.getRua());
-
-                Endereco enderecoSalvo = enderecoRepository.save(enderecoParaCadastrar);
-                negocioSolicitado.setEndereco(enderecoSalvo);
-                enderecoSalvo.setNegocio(negocioSolicitado);
-            }
-
-            Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
-            administrador.setNegocio(negocioCadastrado);
-            administrador.setRole(Role.ADMINISTRADOR);
-
-            this.usuarioRepository.save(administrador);
-
-            return ResponseEntity.status(201).body(negocioCadastrado);
     }
+//    public ResponseEntity<Negocio> cadastrarNegocio(@PathVariable UUID id,
+//                                                    @RequestBody Negocio negocioSolicitado) {
+//        Optional<Usuario> possivelAdministrador = this.usuarioRepository.findById(id);
+//
+//        if (possivelAdministrador.isEmpty()) {
+//            return ResponseEntity.status(404).build();
+//        }
+//
+//        if (!estadoNegocioValido(negocioSolicitado)) {
+//            return ResponseEntity.status(404).build();
+//        }
+//
+//            Usuario administrador = possivelAdministrador.get();
+//
+//            EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
+//            FactoryCampos factoryCampos = new FactoryCampos(estrategiaNegocio);
+//            factoryCampos.configurarCampos(negocioSolicitado);
+//
+//            String url = "http://localhost:49152/enderecos?cep=" + negocioSolicitado.getCep();
+//            RestTemplate restTemplate = new RestTemplate();
+//            ResponseEntity<Endereco> resposta = restTemplate.getForEntity(url, Endereco.class);
+//
+//            Endereco enderecoCompleto = resposta.getBody();
+//            if (enderecoCompleto != null) {
+//                Endereco enderecoParaCadastrar = new Endereco();
+//                enderecoParaCadastrar.setCep(negocioSolicitado.getCep());
+//                enderecoParaCadastrar.setEstado(enderecoCompleto.getEstado());
+//                enderecoParaCadastrar.setBairro(enderecoCompleto.getBairro());
+//                enderecoParaCadastrar.setCidade(enderecoCompleto.getCidade());
+//                enderecoParaCadastrar.setRua(enderecoCompleto.getRua());
+//
+//                Endereco enderecoSalvo = enderecoRepository.save(enderecoParaCadastrar);
+//                negocioSolicitado.setEndereco(enderecoSalvo);
+//                enderecoSalvo.setNegocio(negocioSolicitado);
+//            }
+//
+//            Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
+//            administrador.setNegocio(negocioCadastrado);
+//            administrador.setRole(Role.ADMINISTRADOR);
+//
+//            this.usuarioRepository.save(administrador);
+//
+//            return ResponseEntity.status(201).body(negocioCadastrado);
+//    }
 
     private boolean estadoNegocioValido(Negocio negocio) {
         if (negocio.getCep() == null || negocio.getCep().isEmpty()) {
@@ -88,23 +92,19 @@ public class NegocioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Negocio>> listarNegocios() {
-        List<Negocio> todosNegocios = this.negocioRepository.findAll();
+    public ResponseEntity<List<Negocio>> listar() {
+        List<Negocio> negociosEncontrados = this.negocioService.listar();
 
-        if (todosNegocios.isEmpty()) {
-            return ResponseEntity.status(204).build();
+        if (negociosEncontrados.isEmpty()) {
+            return ResponseEntity.status(204).body(negociosEncontrados)
         }
-        return ResponseEntity.status(200).body(todosNegocios);
+
+        return ResponseEntity.status(200).body(negociosEncontrados);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Negocio> atualizarNegocio(@PathVariable UUID id, @RequestBody Negocio negocioSolicitado){
-        if (this.negocioRepository.existsById(id)) {
-            negocioSolicitado.setId(id);
-            Negocio negocioAtualizado = this.negocioRepository.save(negocioSolicitado);
-            return ResponseEntity.status(200).body(negocioAtualizado);
-        }
-        return ResponseEntity.status(404).build();
+        
     }
 
     @DeleteMapping ("/{idNegocio}/{idUsuario}")

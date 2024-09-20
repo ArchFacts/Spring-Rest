@@ -7,5 +7,6 @@ import Facts.Arch.ArchFacts.entity.Usuario;
 public interface EstrategiaConfiguracao {
     void configurarCampos(Negocio negocio);
     void configurarCampos(Projeto projeto);
-    void configurarCampos(Usuario usuario);
+    void configurarCampos(Usuario usuario, Negocio negocioSolicitado);
+    void configurarCampos(Usuario usuarioSolicitado);
 }

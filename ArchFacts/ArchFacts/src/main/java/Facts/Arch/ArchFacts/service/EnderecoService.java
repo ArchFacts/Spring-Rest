@@ -20,7 +20,7 @@ public class EnderecoService {
     @Autowired
     EnderecoRepository enderecoRepository;
 
-    private Endereco consultarEndereco(String cep) {
+    public Endereco consultarEndereco(String cep) {
         String url = "https://viacep.com.br/ws/" + cep + "/json/";
 
         try {
