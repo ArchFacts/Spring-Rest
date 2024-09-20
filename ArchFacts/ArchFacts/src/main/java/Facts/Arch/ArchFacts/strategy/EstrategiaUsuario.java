@@ -1,8 +1,8 @@
 package Facts.Arch.ArchFacts.strategy;
 
-import Facts.Arch.ArchFacts.entity.Negocio;
-import Facts.Arch.ArchFacts.entity.Projeto;
-import Facts.Arch.ArchFacts.entity.Usuario;
+import Facts.Arch.ArchFacts.entities.Negocio;
+import Facts.Arch.ArchFacts.entities.Projeto;
+import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.enums.Role;
 
 import java.time.LocalDate;
