@@ -18,6 +18,7 @@ public class Usuario {
     private String nome;
     @Email
     private String email;
+    @NotBlank
     private String senha;
     @Pattern(regexp = "\\(\\d{2}\\) (?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\d{3,4}-?\\d{4}",
             message = "Número de telefone inválido")

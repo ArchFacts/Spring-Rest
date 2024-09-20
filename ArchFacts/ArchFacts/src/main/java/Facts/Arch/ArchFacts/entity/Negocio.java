@@ -3,6 +3,9 @@ package Facts.Arch.ArchFacts.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,10 +16,13 @@ import java.util.UUID;
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
         private UUID id;
+        @NotBlank
         private String nome;
         private String codigoNegocio;
         private String cep;
+        @CPF
         private String cpf;
+        @CNPJ
         private String cnpj;
         private LocalDate dataRegistro;
         private Double avaliacao;

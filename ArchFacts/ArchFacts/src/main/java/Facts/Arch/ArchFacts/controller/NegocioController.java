@@ -7,6 +7,9 @@ import Facts.Arch.ArchFacts.enums.Role;
 import Facts.Arch.ArchFacts.repository.EnderecoRepository;
 import Facts.Arch.ArchFacts.repository.NegocioRepository;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
+import Facts.Arch.ArchFacts.service.EnderecoService;
+import Facts.Arch.ArchFacts.service.NegocioService;
+import Facts.Arch.ArchFacts.service.UsuarioService;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,31 +25,14 @@ import java.util.UUID;
 @RequestMapping("/negocios")
 public class NegocioController {
     @Autowired
-    private NegocioRepository negocioRepository;
+    private NegocioService negocioService;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private EnderecoService enderecoService;
 
-    private ResponseEntity<ResponseStatus> verificarEstadoNegocio (Negocio negocioSolicitado) {
-        Boolean negocioExistente = this.negocioRepository.existsByCpfOrCnpj(negocioSolicitado.getCpf(),
-                negocioSolicitado.getCnpj());
-
-        if (negocioExistente) {
-            Negocio negocioCadastrado = this.negocioRepository.findByCpfOrCnpj(negocioSolicitado.getCpf(),
-                    negocioSolicitado.getCnpj());
-
-            if (negocioCadastrado.getAtivado()) { // Conta existe e está ativada
-                return ResponseEntity.status(409).build();
-            } else {
-                return ResponseEntity.status(200).build(); // Conta existe e está desativada
-                // Implementar método para recuperação de conta
-            }
-        }
-        return ResponseEntity.status(404).build();
-    }
 
     @PostMapping ("/{id}")
     public ResponseEntity<Negocio> cadastrarNegocio(@PathVariable UUID id,
@@ -84,11 +70,6 @@ public class NegocioController {
                 negocioSolicitado.setEndereco(enderecoSalvo);
                 enderecoSalvo.setNegocio(negocioSolicitado);
             }
-
-//            negocioSolicitado.setId(null);
-//            negocioSolicitado.setAtivado(Boolean.TRUE);
-//            negocioSolicitado.setCodigoNegocio(UUID.randomUUID().toString());
-//            negocioSolicitado.setDataRegistro(LocalDate.now());
 
             Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
             administrador.setNegocio(negocioCadastrado);

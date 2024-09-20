@@ -18,10 +18,6 @@ public class Endereco {
     private String rua;
     private Integer numero;
 
-//   PROFESSOR DIEGO:
-//    @Enumerated(EnumType.STRING)
-//    private MetodoPagamento metodoPagamento;
-
     @OneToOne
     @JoinColumn(name = "fkNegocio")
     @JsonBackReference

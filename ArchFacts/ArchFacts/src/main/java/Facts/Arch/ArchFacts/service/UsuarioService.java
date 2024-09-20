@@ -1,7 +1,7 @@
 package Facts.Arch.ArchFacts.service;
 
 import Facts.Arch.ArchFacts.entity.Usuario;
-import Facts.Arch.ArchFacts.exception.ContaExistenteAtivadaException;
+import Facts.Arch.ArchFacts.exception.EntidadeAtivadaException;
 import Facts.Arch.ArchFacts.exception.EntidadeInexistenteException;
 import Facts.Arch.ArchFacts.repository.UsuarioRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
@@ -25,7 +25,7 @@ public class UsuarioService {
             Usuario usuarioCadastrado = this.usuarioRepository.findByEmail(usuarioSolicitado.getEmail());
 
             if (usuarioCadastrado.getAtivado()) {
-                throw new ContaExistenteAtivadaException("Esta conta já está ativada");
+                throw new EntidadeAtivadaException("Esta conta já está ativada");
             } else {
                 System.out.println("Recuperar conta?"); // Iniciar método de recuperação de conta
                 return usuarioCadastrado;
