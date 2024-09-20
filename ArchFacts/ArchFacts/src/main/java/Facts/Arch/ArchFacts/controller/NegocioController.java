@@ -35,95 +35,45 @@ public class NegocioController {
     private EnderecoService enderecoService;
 
 
-    @PostMapping ("/{id}")
-    public ResponseEntity<Negocio> cadastrar (@Valid Usuario usuarioLogado, @RequestBody Negocio negocioSolicitado) {
-
-    }
-//    public ResponseEntity<Negocio> cadastrarNegocio(@PathVariable UUID id,
-//                                                    @RequestBody Negocio negocioSolicitado) {
-//        Optional<Usuario> possivelAdministrador = this.usuarioRepository.findById(id);
+//    @PostMapping ("/{id}")
+//    public ResponseEntity<Negocio> cadastrar (@Valid Usuario usuarioLogado, @RequestBody Negocio negocioSolicitado) {
 //
-//        if (possivelAdministrador.isEmpty()) {
-//            return ResponseEntity.status(404).build();
-//        }
-//
-//        if (!estadoNegocioValido(negocioSolicitado)) {
-//            return ResponseEntity.status(404).build();
-//        }
-//
-//            Usuario administrador = possivelAdministrador.get();
-//
-//            EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
-//            FactoryCampos factoryCampos = new FactoryCampos(estrategiaNegocio);
-//            factoryCampos.configurarCampos(negocioSolicitado);
-//
-//            String url = "http://localhost:49152/enderecos?cep=" + negocioSolicitado.getCep();
-//            RestTemplate restTemplate = new RestTemplate();
-//            ResponseEntity<Endereco> resposta = restTemplate.getForEntity(url, Endereco.class);
-//
-//            Endereco enderecoCompleto = resposta.getBody();
-//            if (enderecoCompleto != null) {
-//                Endereco enderecoParaCadastrar = new Endereco();
-//                enderecoParaCadastrar.setCep(negocioSolicitado.getCep());
-//                enderecoParaCadastrar.setEstado(enderecoCompleto.getEstado());
-//                enderecoParaCadastrar.setBairro(enderecoCompleto.getBairro());
-//                enderecoParaCadastrar.setCidade(enderecoCompleto.getCidade());
-//                enderecoParaCadastrar.setRua(enderecoCompleto.getRua());
-//
-//                Endereco enderecoSalvo = enderecoRepository.save(enderecoParaCadastrar);
-//                negocioSolicitado.setEndereco(enderecoSalvo);
-//                enderecoSalvo.setNegocio(negocioSolicitado);
-//            }
-//
-//            Negocio negocioCadastrado = this.negocioRepository.save(negocioSolicitado);
-//            administrador.setNegocio(negocioCadastrado);
-//            administrador.setRole(Role.ADMINISTRADOR);
-//
-//            this.usuarioRepository.save(administrador);
-//
-//            return ResponseEntity.status(201).body(negocioCadastrado);
 //    }
 
-    private boolean estadoNegocioValido(Negocio negocio) {
-        if (negocio.getCep() == null || negocio.getCep().isEmpty()) {
-            return false;
-        }
-        return true;
-    }
 
     @GetMapping
     public ResponseEntity<List<Negocio>> listar() {
         List<Negocio> negociosEncontrados = this.negocioService.listar();
 
         if (negociosEncontrados.isEmpty()) {
-            return ResponseEntity.status(204).body(negociosEncontrados)
+            return ResponseEntity.status(204).body(negociosEncontrados);
         }
 
         return ResponseEntity.status(200).body(negociosEncontrados);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Negocio> atualizarNegocio(@PathVariable UUID id, @RequestBody Negocio negocioSolicitado){
-        
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Negocio> atualizarNegocio(@PathVariable UUID id, @RequestBody Negocio negocioSolicitado){
+//
+//    }
 
-    @DeleteMapping ("/{idNegocio}/{idUsuario}")
-    public ResponseEntity<Void> deletarNegocio(@PathVariable UUID idNegocio, @PathVariable UUID idUsuario){
-        Optional<Usuario> possivelUsuario = this.usuarioRepository.findById(idUsuario);
-        if (possivelUsuario.isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-
-        if (this.negocioRepository.existsById(idNegocio)){
-            Usuario usuario = possivelUsuario.get();
-
-            if (!usuario.getRole().equals(Role.ADMINISTRADOR)) { // Não permitir excluir se ele não for adm
-                return ResponseEntity.status(401).build(); // Não Autorizado
-            }
-
-            this.negocioRepository.deleteById(idNegocio);
-            return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(404).build();
-    }
+//    @DeleteMapping ("/{idNegocio}/{idUsuario}")
+//    public ResponseEntity<Void> deletarNegocio(@PathVariable UUID idNegocio, @PathVariable UUID idUsuario){
+//        Optional<Usuario> possivelUsuario = this.usuarioRepository.findById(idUsuario);
+//        if (possivelUsuario.isEmpty()) {
+//            return ResponseEntity.status(204).build();
+//        }
+//
+//        if (this.negocioRepository.existsById(idNegocio)){
+//            Usuario usuario = possivelUsuario.get();
+//
+//            if (!usuario.getRole().equals(Role.ADMINISTRADOR)) { // Não permitir excluir se ele não for adm
+//                return ResponseEntity.status(401).build(); // Não Autorizado
+//            }
+//
+//            this.negocioRepository.deleteById(idNegocio);
+//            return ResponseEntity.status(204).build();
+//        }
+//        return ResponseEntity.status(404).build();
+//    }
 }
