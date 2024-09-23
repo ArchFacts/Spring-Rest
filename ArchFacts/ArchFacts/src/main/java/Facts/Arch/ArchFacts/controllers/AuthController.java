@@ -6,6 +6,7 @@ import Facts.Arch.ArchFacts.dto.RespostaUsuarioDTO;
 import Facts.Arch.ArchFacts.dto.mapper.UsuarioMapper;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
+import Facts.Arch.ArchFacts.security.TokenService;
 import Facts.Arch.ArchFacts.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,16 @@ public class AuthController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login (@Valid @RequestBody AuthDTO data) {
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
                 data.getLogin(), data.getSenha());
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
+
+        String token = this.tokenService.gerarToken((Usuario) auth.getPrincipal());
 
         return ResponseEntity.status(200).build();
     }
