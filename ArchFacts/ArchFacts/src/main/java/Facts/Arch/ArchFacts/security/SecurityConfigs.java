@@ -22,6 +22,7 @@ public class SecurityConfigs {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() //Independe ROle
                         .requestMatchers(HttpMethod.POST,"/auth/registro").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/usuarios").permitAll()
                         .requestMatchers(HttpMethod.POST, "/negocios").hasRole("ADM")
                         .anyRequest().authenticated())
                 .build(); // Sem guardar estado (usar tokens)
