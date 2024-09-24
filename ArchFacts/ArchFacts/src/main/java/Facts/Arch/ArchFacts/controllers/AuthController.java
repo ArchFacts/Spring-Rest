@@ -61,11 +61,11 @@ public class AuthController {
         if (this.usuarioRepository.findByEmail(data.getEmail()) != null)
             return ResponseEntity.status(400).build();
 
-        String senhaEncriptografada = new BCryptPasswordEncoder().encode(data.getSenha());
+        String senhaCriptografada = new BCryptPasswordEncoder().encode(data.getSenha());
         Usuario usuarioRegistrado = new Usuario(data.getNome(),
-                data.getTelefone(),
                 data.getEmail(),
-                senhaEncriptografada);
+                data.getTelefone(),
+                senhaCriptografada);
 
         this.usuarioService.cadastrar(usuarioRegistrado);
         String token = this.tokenService.gerarToken(usuarioRegistrado);
