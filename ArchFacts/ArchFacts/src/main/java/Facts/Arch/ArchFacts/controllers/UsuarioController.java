@@ -1,5 +1,8 @@
 package Facts.Arch.ArchFacts.controllers;
 
+import Facts.Arch.ArchFacts.dto.RegistroDTO;
+import Facts.Arch.ArchFacts.dto.RespostaRegistroDTO;
+import Facts.Arch.ArchFacts.dto.mapper.UsuarioMapper;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -17,11 +20,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-//    @PostMapping
-//    public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody UsuarioDTO usuarioSolicitado) {
-//        Usuario usuarioRegistrado = usuarioService.cadastrar(usuarioSolicitado);
-//        return ResponseEntity.status(201).body(usuarioRegistrado);
-//    }
+    @PostMapping
+    public ResponseEntity<RespostaRegistroDTO> cadastrar(@Valid @RequestBody RegistroDTO usuarioDTO) {
+        Usuario usuarioEntidade = UsuarioMapper.toEntity(usuarioDTO);
+        Usuario usuarioRegistrado = usuarioService.cadastrar(usuarioEntidade);
+        RespostaRegistroDTO respostaRegistroDTO = UsuarioMapper.toDto(usuarioRegistrado);
+        return ResponseEntity.status(201).body(respostaRegistroDTO);
+    }
 
     @GetMapping
     public ResponseEntity<List<Usuario>> listar() {

@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.security;
 
+import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import com.auth0.jwt.interfaces.Header;
 import jakarta.servlet.FilterChain;
@@ -8,39 +9,41 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 @Component
-// Filtro só acontece uma vez
-public class FiltroSeguranca extends OncePerRequestFilter {
+public class FiltroSeguranca extends OncePerRequestFilter { // Filtro só acontece uma vez por request
     @Autowired
     TokenService tokenService;
-
     @Autowired
     UsuarioRepository usuarioRepository;
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         String token = this.recuperarToken(request);
-        if (token != null) {
-            String login = tokenService.validarToken(token);
-        UserDetails usuario = usuarioRepository.findByEmail(login);
-
-        UsernamePasswordAuthenticationToken autenticao =
-                new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(autenticao);
+        String login = tokenService.validarToken(token);
+        if (login != null) {
+            Usuario usuario = usuarioRepository.findByEmail(login);
+            List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(usuario, null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        filterChain.doFilter(request, response); // Pular para o próximo filtro
+        filterChain.doFilter(request, response);
     }
 
     private String recuperarToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null) return null;
-        return authHeader.replace("Bearer ", ""); // Padronização, ao mandar um header com autorização de token devemos nomeá-lo, nesse caso é a classificação e depois o token
+        return authHeader.replace("Bearer ", ""); // Paronidzação, ao mandar um header com autorização de token devemos nomeá-lo, nesse caso é a classificação e depois o token
     }
 }

@@ -39,7 +39,7 @@ public class TokenService {
                     .verify(token) // descriptografa o token
                     .getSubject(); // Pega o subject salvo lá em cima
         } catch (JWTVerificationException exception) {
-            return "";
+            return null;
         }
     }
 

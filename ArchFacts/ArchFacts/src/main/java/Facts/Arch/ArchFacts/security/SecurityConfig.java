@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,9 +16,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity // Habilitar minhas configurações do WebSec aqui
-public class SecurityConfigs {
+public class SecurityConfig {
     @Autowired
     FiltroSeguranca filtroSeguranca;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
     @Bean // Para o Spring instanciar a classe
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(csrf -> csrf.disable())
@@ -28,6 +29,7 @@ public class SecurityConfigs {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() //Independe ROle
                         .requestMatchers(HttpMethod.POST,"/auth/registro").permitAll()
                         .requestMatchers(HttpMethod.GET,"/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
                         .requestMatchers(HttpMethod.POST, "/negocios").hasRole("ADM")
                         .anyRequest().authenticated())
                 .addFilterBefore(filtroSeguranca, UsernamePasswordAuthenticationFilter.class) // Adiciona um filtro antes disso

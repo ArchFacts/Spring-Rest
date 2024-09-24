@@ -1,16 +1,16 @@
 package Facts.Arch.ArchFacts.dto.mapper;
 
 import Facts.Arch.ArchFacts.dto.RegistroDTO;
-import Facts.Arch.ArchFacts.dto.RespostaUsuarioDTO;
+import Facts.Arch.ArchFacts.dto.RespostaRegistroDTO;
 import Facts.Arch.ArchFacts.entities.Usuario;
 
 public class UsuarioMapper {
-    public static RespostaUsuarioDTO toDto(Usuario usuario){
+    public static RespostaRegistroDTO toDto(Usuario usuario){
         if (usuario == null) {
             return null;
         }
 
-        RespostaUsuarioDTO dto = new RespostaUsuarioDTO();
+        RespostaRegistroDTO dto = new RespostaRegistroDTO();
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
         dto.setTelefone(usuario.getTelefone());

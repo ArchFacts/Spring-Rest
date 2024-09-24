@@ -1,15 +1,15 @@
 package Facts.Arch.ArchFacts.dto;
 
-public class RespostaUsuarioDTO {
+public class RespostaRegistroDTO {
     private String nome;
     private String email;
     private String telefone;
-    private RespostaUsuarioDTO respostaUsuarioDTO;
+    private String token;
 
-    public RespostaUsuarioDTO() {
+    public RespostaRegistroDTO() {
     }
 
-    public RespostaUsuarioDTO(String nome, String email, String telefone) {
+    public RespostaRegistroDTO(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -39,12 +39,12 @@ public class RespostaUsuarioDTO {
         this.telefone = telefone;
     }
 
-    public RespostaUsuarioDTO getUsuarioDTO() {
-        return respostaUsuarioDTO;
+    public String getToken() {
+        return token;
     }
 
-    public void setUsuarioDTO(RespostaUsuarioDTO respostaUsuarioDTO) {
-        this.respostaUsuarioDTO = respostaUsuarioDTO;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

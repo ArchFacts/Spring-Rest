@@ -1,13 +1,13 @@
 package Facts.Arch.ArchFacts.dto;
 
-public class AuthDTO {
+public class LoginDTO {
     private String login;
     private String senha;
 
-    public AuthDTO() {
+    public LoginDTO() {
     }
 
-    public AuthDTO(String login, String senha) {
+    public LoginDTO(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }
