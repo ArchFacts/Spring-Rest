@@ -39,8 +39,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity login (@Valid @RequestBody LoginDTO body) {
-        Usuario usuario = this.usuarioRepository.findByEmail(body.getLogin());
-        if (passwordEncoder.matches(usuario.getSenha(), body.getSenha())) {
+            Usuario usuario = this.usuarioRepository.findByEmail(body.getLogin());
+        if (passwordEncoder.matches(body.getSenha(), usuario.getSenha())) {
             String token = this.tokenService.gerarToken(usuario);
             return ResponseEntity.status(200).body(new RespostaLoginDTO(usuario.getNome(), token));
         }
