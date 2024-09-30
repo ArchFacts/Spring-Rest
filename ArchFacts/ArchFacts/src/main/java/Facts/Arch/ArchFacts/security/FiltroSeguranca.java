@@ -12,12 +12,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class FiltroSeguranca extends OncePerRequestFilter { // Filtro só acontece uma vez por request
@@ -32,7 +34,14 @@ public class FiltroSeguranca extends OncePerRequestFilter { // Filtro só aconte
         String token = this.recuperarToken(request);
         String login = tokenService.validarToken(token);
         if (login != null) {
-            Usuario usuario = usuarioRepository.findByEmail(login);
+            Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(login);
+
+            if (usuarioOptional.isEmpty()) {
+                throw new UsernameNotFoundException(String.format("Usuário não encontrado"));
+            }
+
+            Usuario usuario = usuarioOptional.get();
+
             List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(usuario, null, authorities);

@@ -15,5 +15,4 @@ public class ArchFactsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ArchFactsApplication.class, args);
 	}
-
 }

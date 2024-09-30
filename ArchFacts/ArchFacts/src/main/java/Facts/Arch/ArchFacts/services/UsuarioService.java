@@ -7,10 +7,12 @@ import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -22,7 +24,13 @@ public class UsuarioService {
         Boolean usuarioExistente = this.usuarioRepository.existsByEmail(usuarioSolicitado.getEmail());
 
         if (usuarioExistente) {
-            Usuario usuarioCadastrado = this.usuarioRepository.findByEmail(usuarioSolicitado.getEmail());
+            Optional<Usuario> usuarioOptional = this.usuarioRepository.findByEmail(usuarioSolicitado.getEmail());
+
+            if (usuarioOptional.isEmpty()) {
+                throw new UsernameNotFoundException(String.format("Usuário %s não encontrado", usuarioSolicitado.getEmail()));
+            }
+
+            Usuario usuarioCadastrado = usuarioOptional.get();
 
             if (usuarioCadastrado.getAtivado()) {
                 throw new EntidadeAtivadaException("Esta conta já está ativada");

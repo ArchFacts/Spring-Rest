@@ -4,7 +4,7 @@ public class RespostaRegistroDTO {
     private String nome;
     private String email;
     private String telefone;
-    private String token;
+//    private String token;
 
     public RespostaRegistroDTO() {
     }
@@ -39,13 +39,13 @@ public class RespostaRegistroDTO {
         this.telefone = telefone;
     }
 
-    public String getToken() {
-        return token;
-    }
+//    public String getToken() {
+//        return token;
+//    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 
     @Override
     public String toString() {

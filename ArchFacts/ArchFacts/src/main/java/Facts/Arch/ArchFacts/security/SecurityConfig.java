@@ -28,10 +28,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() //Independe ROle
                         .requestMatchers(HttpMethod.POST,"/auth/registro").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
                         .requestMatchers(HttpMethod.POST, "/negocios").hasRole("ADM")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .addFilterBefore(filtroSeguranca, UsernamePasswordAuthenticationFilter.class) // Adiciona um filtro antes disso
                 .build(); // Sem guardar estado (usar tokens)
 
