@@ -20,11 +20,11 @@ import java.util.UUID;
 @RequestMapping("/projetos")
 public class ProjetoController {
     @Autowired
-    private ProjetoRepository projetoRepository;
-    @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
     private NegocioRepository negocioRepository;
+    @Autowired
+    private ProjetoRepository projetoRepository;
 
     @PostMapping ("/{idDestinatario}/{idNegocio}")
     public ResponseEntity<Projeto> cadastrarProjeto(@PathVariable UUID idDestinatario,
@@ -67,7 +67,7 @@ public class ProjetoController {
     @PutMapping("/{id}")
     public ResponseEntity<Projeto> atualizarProjeto(@PathVariable UUID id, @RequestBody Projeto projetoSolicitado) {
         if (this.projetoRepository.existsById(id)) {
-            projetoSolicitado.setId(id);
+            projetoSolicitado.setIdProjeto(id);
             Projeto projetoAtualizado = this.projetoRepository.save(projetoSolicitado);
             return ResponseEntity.status(200).body(projetoAtualizado);
         }

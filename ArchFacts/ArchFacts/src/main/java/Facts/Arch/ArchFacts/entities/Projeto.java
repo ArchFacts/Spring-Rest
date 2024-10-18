@@ -2,43 +2,37 @@ package Facts.Arch.ArchFacts.entities;
 
 import Facts.Arch.ArchFacts.enums.Status;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 @Entity
 public class Projeto {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    private UUID id;
+    @JdbcTypeCode(SqlTypes.CHAR)
+    private UUID idProjeto;
     private String nome;
     private String descricao;
     private Double custo;
-    private LocalDate dataInicio;
+    private LocalDateTime dataInicio;
     private LocalDate dataEntrega;
     private Status status;
     @ManyToOne
     @JoinColumn (name = "fkNegocio")
     Negocio negocio;
-    @ManyToOne
-    @JoinColumn (name = "fkDestinatario")
-    Usuario destinatario;
-    @OneToMany (mappedBy = "projeto", cascade = CascadeType.ALL)
-    List<Task> taskList = new ArrayList<>();
-    @OneToMany (mappedBy = "projeto", cascade = CascadeType.ALL)
-    List<Arquivo> arquivoList = new ArrayList<>();
-    @OneToMany (mappedBy = "projeto", cascade = CascadeType.ALL)
-    List<Ticket> ticketList = new ArrayList<>();
+    @OneToOne
+    @JoinColumn (name = "fkBeneficiario")
+    Usuario usuario;
 
     public Projeto() {
     }
 
-    public Projeto(UUID id, String nome, String descricao, Double custo, LocalDate dataInicio, LocalDate dataEntrega,
-                   Status status,
-                   Negocio negocio,
-                   Usuario destinatario) {
-        this.id = id;
+    public Projeto(UUID idProjeto, String nome, String descricao, Double custo, LocalDateTime dataInicio,
+                   LocalDate dataEntrega, Status status, Negocio negocio, Usuario usuario) {
+        this.idProjeto = idProjeto;
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
@@ -46,15 +40,15 @@ public class Projeto {
         this.dataEntrega = dataEntrega;
         this.status = status;
         this.negocio = negocio;
-        this.destinatario = destinatario;
+        this.usuario = usuario;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getIdProjeto() {
+        return idProjeto;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setIdProjeto(UUID idProjeto) {
+        this.idProjeto = idProjeto;
     }
 
     public String getNome() {
@@ -81,11 +75,11 @@ public class Projeto {
         this.custo = custo;
     }
 
-    public LocalDate getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 
@@ -113,18 +107,18 @@ public class Projeto {
         this.negocio = negocio;
     }
 
-    public Usuario getDestinatario() {
-        return destinatario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setDestinatario(Usuario destinatario) {
-        this.destinatario = destinatario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
     public String toString() {
         return "Projeto{" +
-                "id=" + id +
+                "idProjeto=" + idProjeto +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", custo=" + custo +
@@ -132,10 +126,6 @@ public class Projeto {
                 ", dataEntrega=" + dataEntrega +
                 ", status=" + status +
                 ", negocio=" + negocio +
-                ", destinatario=" + destinatario +
-//                ", taskList=" + taskList +
-//                ", arquivoList=" + arquivoList +
-//                ", ticketList=" + ticketList +
                 '}';
     }
 }

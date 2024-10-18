@@ -6,6 +6,7 @@ import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.enums.Role;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class EstrategiaUsuario implements EstrategiaConfiguracao {
     @Override
@@ -25,9 +26,9 @@ public class EstrategiaUsuario implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Usuario usuarioSolicitado) {
-        usuarioSolicitado.setId(null);
+        usuarioSolicitado.setIdUsuario(null);
         usuarioSolicitado.setRole(Role.USER);
         usuarioSolicitado.setAtivado(Boolean.TRUE);
-        usuarioSolicitado.setDataRegistro(LocalDate.now());
+        usuarioSolicitado.setDataRegistro(LocalDateTime.now());
     }
 }

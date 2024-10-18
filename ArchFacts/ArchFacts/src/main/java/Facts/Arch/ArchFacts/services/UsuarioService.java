@@ -42,7 +42,7 @@ public class UsuarioService {
         return usuarioSolicitado;
     }
 
-    public Usuario cadastrar (Usuario usuarioSolicitado) {
+    public Usuario registrarInfos(Usuario usuarioSolicitado) {
 
         Usuario usuarioCadastro = verificarEstadoUsuario(usuarioSolicitado);
 
@@ -52,7 +52,7 @@ public class UsuarioService {
 
         estrategiaUsuario.configurarCampos(usuarioSolicitado);
 
-        return usuarioRepository.save(usuarioCadastro);
+        return usuarioCadastro;
     }
 
     public List<Usuario> listar() {

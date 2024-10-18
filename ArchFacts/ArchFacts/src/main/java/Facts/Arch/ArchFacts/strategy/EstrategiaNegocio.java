@@ -6,6 +6,7 @@ import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.enums.Role;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class EstrategiaNegocio implements EstrategiaConfiguracao {
@@ -13,10 +14,10 @@ public class EstrategiaNegocio implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Negocio negocioSolicitado) {
-        negocioSolicitado.setId(null);
+        negocioSolicitado.setIdNegocio(null);
         negocioSolicitado.setAtivado(Boolean.TRUE);
-        negocioSolicitado.setCodigoNegocio(UUID.randomUUID().toString());
-        negocioSolicitado.setDataRegistro(LocalDate.now());
+        negocioSolicitado.setCodigo(UUID.randomUUID().toString());
+        negocioSolicitado.setDataRegistro(LocalDateTime.now());
     }
 
     @Override

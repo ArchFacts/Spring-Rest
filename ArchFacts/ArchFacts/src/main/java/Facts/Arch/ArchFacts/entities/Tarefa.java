@@ -3,58 +3,51 @@ package Facts.Arch.ArchFacts.entities;
 import Facts.Arch.ArchFacts.enums.Prioridade;
 import Facts.Arch.ArchFacts.enums.Status;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
+
 @Entity
-public class Task {
+public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(name = "idUsuario", columnDefinition = "varchar(36)")
+    @JdbcTypeCode(SqlTypes.CHAR)
+    private UUID idTarefa;
     private String descricao;
-    private LocalDate dataInicio;
-    private LocalDate dataTermino;
+    private Double despesa;
+    private LocalDateTime dataInicio;
+    private LocalDateTime dataTermino;
+    @Enumerated
     private Prioridade prioridade;
+    @Enumerated
     private Status status;
     @ManyToOne
-    @JoinColumn(name = "fkProjeto")
     Projeto projeto;
 
-    @ManyToOne
-    @JoinColumn(name = "fkPagamento")
-    Pagamento pagamento;
-
-//    @ManyToOne
-//    @JoinColumn(name = "fkTicket")
-//    Ticket ticket;
-    @OneToMany (mappedBy = "task", cascade = CascadeType.ALL)
-    List<Pagamento> pagamentoList = new ArrayList<>();
-
-    public Task() {
+    public Tarefa() {
     }
 
-    public Task(UUID id, String descricao, LocalDate dataInicio, LocalDate dataTermino,
-                Prioridade prioridade, Status status, Projeto projeto, Pagamento pagamento,
-                List<Pagamento> pagamentoList) {
-        this.id = id;
+    public Tarefa(UUID idTarefa, String descricao, Double despesa, LocalDateTime dataInicio,
+                  LocalDateTime dataTermino, Prioridade prioridade, Status status, Projeto projeto) {
+        this.idTarefa = idTarefa;
         this.descricao = descricao;
+        this.despesa = despesa;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.prioridade = prioridade;
         this.status = status;
         this.projeto = projeto;
-        this.pagamento = pagamento;
-        this.pagamentoList = pagamentoList;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getIdTarefa() {
+        return idTarefa;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setIdTarefa(UUID idTarefa) {
+        this.idTarefa = idTarefa;
     }
 
     public String getDescricao() {
@@ -65,19 +58,27 @@ public class Task {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataInicio() {
+    public Double getDespesa() {
+        return despesa;
+    }
+
+    public void setDespesa(Double despesa) {
+        this.despesa = despesa;
+    }
+
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataTermino() {
+    public LocalDateTime getDataTermino() {
         return dataTermino;
     }
 
-    public void setDataTermino(LocalDate dataTermino) {
+    public void setDataTermino(LocalDateTime dataTermino) {
         this.dataTermino = dataTermino;
     }
 
@@ -105,39 +106,17 @@ public class Task {
         this.projeto = projeto;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
-    }
-
-    public List<Pagamento> getPagamentoList() {
-        return pagamentoList;
-    }
-
-    public void setPagamentoList(List<Pagamento> pagamentoList) {
-        this.pagamentoList = pagamentoList;
-    }
-
-    //    public List<Pagamento> getPagamentoList() {
-//        return pagamentoList;
-//    }
-
-
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
+        return "Tarefa{" +
+                "idTarefa=" + idTarefa +
                 ", descricao='" + descricao + '\'' +
+                ", despesa=" + despesa +
                 ", dataInicio=" + dataInicio +
                 ", dataTermino=" + dataTermino +
                 ", prioridade=" + prioridade +
                 ", status=" + status +
                 ", projeto=" + projeto +
-                ", pagamento=" + pagamento +
-                ", pagamentoList=" + pagamentoList +
                 '}';
     }
 }

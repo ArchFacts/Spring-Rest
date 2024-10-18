@@ -1,15 +1,20 @@
 package Facts.Arch.ArchFacts.entities;
 
 import Facts.Arch.ArchFacts.enums.Role;
+import ch.qos.logback.core.pattern.Converter;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +22,9 @@ import java.util.UUID;
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(name = "idUsuario", columnDefinition = "varchar(36)")
+    @JdbcTypeCode(SqlTypes.CHAR)
+    private UUID idUsuario;
     @NotBlank
     private String nome;
 //    @Email
@@ -27,22 +34,21 @@ public class Usuario implements UserDetails {
 //    @Pattern(regexp = "(?:(^\\+\\d{2})?)(?:([1-9]{2})|([0-9]{3})?)(\\d{4,5}).?(\\d{4})",
 //            message = "Número de telefone inválido")
     private String telefone;
-    private LocalDate dataRegistro;
+    private LocalDateTime dataRegistro;
     private Boolean ativado;
     @Enumerated(EnumType.STRING)
     private Role role;
     @ManyToOne
-    @JoinColumn(name = "fkNegocio")
     private Negocio negocio;
 
     public Usuario() {
     }
 
-    public Usuario(UUID id, String nome, String email, String senha, String telefone, LocalDate dataRegistro,
+    public Usuario(UUID id, String nome, String email, String senha, String telefone, LocalDateTime dataRegistro,
                    Boolean ativado,
                    Role role,
                    Negocio negocio) {
-        this.id = id;
+        this.idUsuario = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -60,12 +66,12 @@ public class Usuario implements UserDetails {
         this.senha = senha;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setIdUsuario(UUID idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -100,11 +106,11 @@ public class Usuario implements UserDetails {
         this.telefone = telefone;
     }
 
-    public LocalDate getDataRegistro() {
+    public LocalDateTime getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(LocalDate dataRegistro) {
+    public void setDataRegistro(LocalDateTime dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
@@ -174,7 +180,7 @@ public class Usuario implements UserDetails {
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id +
+                "id=" + idUsuario +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +

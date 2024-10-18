@@ -16,17 +16,16 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping
-    public ResponseEntity<RespostaRegistroDTO> cadastrar(@Valid @RequestBody RegistroDTO usuarioDTO) {
-        Usuario usuarioEntidade = UsuarioMapper.toEntity(usuarioDTO);
-        Usuario usuarioRegistrado = usuarioService.cadastrar(usuarioEntidade);
-        RespostaRegistroDTO respostaRegistroDTO = UsuarioMapper.toDto(usuarioRegistrado);
-        return ResponseEntity.status(201).body(respostaRegistroDTO);
-    }
+//    @PostMapping
+//    public ResponseEntity<RespostaRegistroDTO> cadastrar(@Valid @RequestBody RegistroDTO usuarioDTO) {
+//        Usuario usuarioEntidade = UsuarioMapper.toEntity(usuarioDTO);
+//        Usuario usuarioRegistrado = usuarioService.registrarInfos(usuarioEntidade);
+//        RespostaRegistroDTO respostaRegistroDTO = UsuarioMapper.toDto(usuarioRegistrado);
+//        return ResponseEntity.status(201).body(respostaRegistroDTO);
+//    }
 
     @GetMapping
     public ResponseEntity<List<Usuario>> listar() {

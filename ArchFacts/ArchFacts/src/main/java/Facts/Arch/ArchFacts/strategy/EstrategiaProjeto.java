@@ -6,6 +6,7 @@ import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.enums.Status;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class EstrategiaProjeto implements EstrategiaConfiguracao {
     private Usuario destinatario;
@@ -26,10 +27,10 @@ public class EstrategiaProjeto implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Projeto projetoSolicitado) {
-        projetoSolicitado.setId(null);
+        projetoSolicitado.setIdProjeto(null);
         projetoSolicitado.setStatus(Status.ABERTO);
         projetoSolicitado.setDestinatario(destinatario);
-        projetoSolicitado.setDataInicio(LocalDate.now());
+        projetoSolicitado.setDataInicio(LocalDateTime.now());
         projetoSolicitado.setNegocio(negocio);
 
     }
