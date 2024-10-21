@@ -1,8 +1,5 @@
 package Facts.Arch.ArchFacts.controllers;
 
-import Facts.Arch.ArchFacts.dto.RegistroDTO;
-import Facts.Arch.ArchFacts.dto.RespostaRegistroDTO;
-import Facts.Arch.ArchFacts.dto.mapper.UsuarioMapper;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.services.UsuarioService;
 import jakarta.validation.Valid;

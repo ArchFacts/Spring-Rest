@@ -8,12 +8,14 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 public class Chamado {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "idUsuario", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idChamado;
+    private String titulo;
     private String descricao;
     private LocalDateTime abertura;
     private LocalDateTime fechamento;
@@ -26,9 +28,10 @@ public class Chamado {
     public Chamado() {
     }
 
-    public Chamado(UUID idChamado, String descricao, LocalDateTime abertura, LocalDateTime fechamento,
+    public Chamado(UUID idChamado, String titulo, String descricao, LocalDateTime abertura, LocalDateTime fechamento,
                    Status status, Double lucro, Projeto projeto) {
         this.idChamado = idChamado;
+        this.titulo = titulo;
         this.descricao = descricao;
         this.abertura = abertura;
         this.fechamento = fechamento;
@@ -43,6 +46,14 @@ public class Chamado {
 
     public void setIdChamado(UUID idChamado) {
         this.idChamado = idChamado;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
@@ -91,18 +102,5 @@ public class Chamado {
 
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
-    }
-
-    @Override
-    public String toString() {
-        return "Chamado{" +
-                "idChamado=" + idChamado +
-                ", descricao='" + descricao + '\'' +
-                ", abertura=" + abertura +
-                ", fechamento=" + fechamento +
-                ", status=" + status +
-                ", lucro=" + lucro +
-                ", projeto=" + projeto +
-                '}';
     }
 }

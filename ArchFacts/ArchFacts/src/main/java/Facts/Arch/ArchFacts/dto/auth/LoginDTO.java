@@ -1,4 +1,4 @@
-package Facts.Arch.ArchFacts.dto;
+package Facts.Arch.ArchFacts.dto.auth;
 
 public class LoginDTO {
     private String login;

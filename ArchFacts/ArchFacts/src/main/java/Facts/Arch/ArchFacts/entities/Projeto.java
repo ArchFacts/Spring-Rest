@@ -7,6 +7,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DecimalStyle;
 import java.util.UUID;
 @Entity
 public class Projeto {
@@ -25,7 +26,7 @@ public class Projeto {
     Negocio negocio;
     @OneToOne
     @JoinColumn (name = "fkBeneficiario")
-    Usuario usuario;
+    Usuario destinatario;
 
     public Projeto() {
     }
@@ -40,7 +41,7 @@ public class Projeto {
         this.dataEntrega = dataEntrega;
         this.status = status;
         this.negocio = negocio;
-        this.usuario = usuario;
+        this.destinatario = usuario;
     }
 
     public UUID getIdProjeto() {
@@ -107,12 +108,12 @@ public class Projeto {
         this.negocio = negocio;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getDestinatario() {
+        return destinatario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setDestinatario(Usuario usuario) {
+        this.destinatario = usuario;
     }
 
     @Override

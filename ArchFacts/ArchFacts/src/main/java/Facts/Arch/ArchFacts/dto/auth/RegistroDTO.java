@@ -1,6 +1,4 @@
-package Facts.Arch.ArchFacts.dto;
-
-import Facts.Arch.ArchFacts.enums.Role;
+package Facts.Arch.ArchFacts.dto.auth;
 
 public class RegistroDTO {
     private String nome;

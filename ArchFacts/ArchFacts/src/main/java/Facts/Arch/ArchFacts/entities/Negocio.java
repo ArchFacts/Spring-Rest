@@ -19,6 +19,7 @@ import java.util.UUID;
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
         @JdbcTypeCode(SqlTypes.CHAR)
+        @Column (name = "idNegocio", columnDefinition = "CHAR(36)")
         private UUID idNegocio;
         @NotBlank
         private String nome;

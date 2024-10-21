@@ -16,6 +16,7 @@ public class Tarefa {
     @Column(name = "idUsuario", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idTarefa;
+    private String titulo;
     private String descricao;
     private Double despesa;
     private LocalDateTime dataInicio;
@@ -30,9 +31,11 @@ public class Tarefa {
     public Tarefa() {
     }
 
-    public Tarefa(UUID idTarefa, String descricao, Double despesa, LocalDateTime dataInicio,
-                  LocalDateTime dataTermino, Prioridade prioridade, Status status, Projeto projeto) {
+    public Tarefa(UUID idTarefa, String titulo, String descricao, Double despesa,
+                  LocalDateTime dataInicio, LocalDateTime dataTermino, Prioridade prioridade, Status status,
+                  Projeto projeto) {
         this.idTarefa = idTarefa;
+        this.titulo = titulo;
         this.descricao = descricao;
         this.despesa = despesa;
         this.dataInicio = dataInicio;
@@ -48,6 +51,14 @@ public class Tarefa {
 
     public void setIdTarefa(UUID idTarefa) {
         this.idTarefa = idTarefa;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
@@ -110,6 +121,7 @@ public class Tarefa {
     public String toString() {
         return "Tarefa{" +
                 "idTarefa=" + idTarefa +
+                ", titulo='" + titulo + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", despesa=" + despesa +
                 ", dataInicio=" + dataInicio +

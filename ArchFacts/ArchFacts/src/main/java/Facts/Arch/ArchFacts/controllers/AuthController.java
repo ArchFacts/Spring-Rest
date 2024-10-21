@@ -1,10 +1,10 @@
 package Facts.Arch.ArchFacts.controllers;
 
-import Facts.Arch.ArchFacts.dto.LoginDTO;
-import Facts.Arch.ArchFacts.dto.RegistroDTO;
-import Facts.Arch.ArchFacts.dto.RespostaLoginDTO;
-import Facts.Arch.ArchFacts.dto.RespostaRegistroDTO;
-import Facts.Arch.ArchFacts.dto.mapper.UsuarioMapper;
+import Facts.Arch.ArchFacts.dto.auth.LoginDTO;
+import Facts.Arch.ArchFacts.dto.auth.RegistroDTO;
+import Facts.Arch.ArchFacts.dto.auth.RespostaLoginDTO;
+import Facts.Arch.ArchFacts.dto.auth.RespostaRegistroDTO;
+import Facts.Arch.ArchFacts.dto.mapper.AuthMapper;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.security.CustomUserDetailsService;
@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -72,7 +70,7 @@ public class AuthController {
 
         usuarioRepository.save(this.usuarioService.registrarInfos(usuarioRegistrado));
 //        String token = this.tokenService.gerarToken(usuarioRegistrado);
-        RespostaRegistroDTO respostaRegistroDTO = UsuarioMapper.toDto(usuarioRegistrado);
+        RespostaRegistroDTO respostaRegistroDTO = AuthMapper.toDto(usuarioRegistrado);
 //        respostaRegistroDTO.setToken(token);
 
         return ResponseEntity.status(200).body(respostaRegistroDTO);

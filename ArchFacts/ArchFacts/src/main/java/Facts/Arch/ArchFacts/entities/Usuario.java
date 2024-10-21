@@ -39,6 +39,7 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
     @ManyToOne
+    @JoinColumn (name = "fkNegocio")
     private Negocio negocio;
 
     public Usuario() {
