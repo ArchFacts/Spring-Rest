@@ -15,6 +15,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     Boolean existsByEmail(String email);
     Optional<Usuario> findByEmail(String email);
 
-    @Query("SELECT new UsuarioPerfilResponseDTO(u.nome, u.email, u.telefone, u.dataRegistro, u.ativado, u.role) FROM Usuario u WHERE u.idUsuario = :id")
-    Optional<UsuarioPerfilResponseDTO> findByPerfilId(@Param("id") UUID id);
+//    @Query("SELECT new UsuarioPerfilResponseDTO(u.nome, u.email, u.telefone, u.dataRegistro, u.ativado, u.role, u.negocio.nome) FROM Usuario u WHERE u.email = :email")
+//    Optional<UsuarioPerfilResponseDTO> findPerfilByEmail(@Param("email") String email);
 }
