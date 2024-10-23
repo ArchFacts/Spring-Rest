@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.dto.usuario;
 
+import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.enums.Role;
 import jakarta.persistence.Enumerated;
 
@@ -12,13 +13,13 @@ public class UsuarioPerfilResponseDTO {
     private LocalDateTime dataRegistro;
     private Boolean ativado;
     private Role role;
-    private String negocio;
+    private Negocio negocio;
 
     public UsuarioPerfilResponseDTO() {
     }
 
     public UsuarioPerfilResponseDTO(String nome, String email, String telefone, LocalDateTime dataRegistro,
-                                    Boolean ativado, Role role, String negocio) {
+                                    Boolean ativado, Role role, Negocio negocio) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -76,12 +77,14 @@ public class UsuarioPerfilResponseDTO {
         this.role = role;
     }
 
-    public String getNegocio() {
+    public Negocio getNegocio() {
         return negocio;
     }
 
-    public void setNegocio(String negocio) {
+    public void setNegocio(Negocio negocio) {
         this.negocio = negocio;
+    }
+    public void setNegocio(String s) {
     }
 
     @Override

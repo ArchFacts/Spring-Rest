@@ -1,5 +1,7 @@
 package Facts.Arch.ArchFacts.services;
 
+import Facts.Arch.ArchFacts.dto.mapper.UsuarioMapper;
+import Facts.Arch.ArchFacts.dto.usuario.UsuarioPerfilResponseDTO;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
@@ -14,7 +16,7 @@ public class PerfilUsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
     public Usuario obterDadosPerfil(@PathVariable String email) {
-        Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findPerfilByEmail(email);
         if (usuarioEncontrado.isEmpty()) {
             throw new EntidadeNaoEncontradaException("Não foi encontrado um usuário");
         }
