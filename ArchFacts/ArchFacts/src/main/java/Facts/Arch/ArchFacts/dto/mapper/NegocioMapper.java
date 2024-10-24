@@ -3,25 +3,35 @@ package Facts.Arch.ArchFacts.dto.mapper;
 import Facts.Arch.ArchFacts.dto.negocio.NegocioRequestDTO;
 import Facts.Arch.ArchFacts.dto.negocio.NegocioResponseDTO;
 import Facts.Arch.ArchFacts.entities.Negocio;
+import Facts.Arch.ArchFacts.exceptions.DocumentoInvalidoException;
 import Facts.Arch.ArchFacts.services.NegocioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+@Component
 public class NegocioMapper {
     @Autowired
-    private static NegocioService negocioService;
-    public static Negocio toEntity(NegocioRequestDTO dtoRequest) {
+    private NegocioService negocioService;
+    public Negocio toEntity(NegocioRequestDTO dtoRequest) {
         if (dtoRequest == null) {
             return null;
         }
         Negocio negocio = new Negocio();
         negocio.setNome(dtoRequest.getNome());
 
-        String documento = negocioService.identificarTipoDocumento(dtoRequest.getCpforCnpj());
+        Optional<String> possivelDocumento = negocioService.identificarTipoDocumento(dtoRequest.getCpfOrCnpj()).describeConstable();
 
-        if (documento.equals("CPF")) {
-            negocio.setCpf(documento);
+        if (possivelDocumento.isEmpty()) {
+            throw new DocumentoInvalidoException("Não foi encontrado nenhum documento");
         } else {
-            negocio.setCnpj(documento);
+            String documento = possivelDocumento.get();
+
+            if (documento.equals("CPF")) {
+                negocio.setCpf(documento);
+            } else {
+                negocio.setCnpj(documento);
+            }
         }
 
         negocio.setCep(dtoRequest.getCep());

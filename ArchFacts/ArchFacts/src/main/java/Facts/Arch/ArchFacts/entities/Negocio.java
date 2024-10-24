@@ -25,9 +25,7 @@ import java.util.UUID;
         private String nome;
         private String codigo;
         private String cep;
-        @CPF
         private String cpf;
-        @CNPJ
         private String cnpj;
         private LocalDateTime dataRegistro;
         private Double avaliacao;

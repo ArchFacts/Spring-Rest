@@ -27,6 +27,9 @@ public class NegocioController {
     @Autowired
     private EnderecoService enderecoService;
 
+    @Autowired
+    private NegocioMapper negocioMapper;
+
     @GetMapping
     public ResponseEntity<List<Negocio>> listar() {
         List<Negocio> negociosEncontrados = this.negocioService.listar();
@@ -37,9 +40,9 @@ public class NegocioController {
 
         return ResponseEntity.status(200).body(negociosEncontrados);
     }
-
-    public ResponseEntity<NegocioResponseDTO> cadastrar(@Valid @RequestBody NegocioRequestDTO dto, Usuario usuario) {
-        Negocio negocio = NegocioMapper.toEntity(dto);
+    @PostMapping
+    public ResponseEntity<NegocioResponseDTO> cadastrar (@Valid @RequestBody NegocioRequestDTO dto) {
+        Negocio negocio = negocioMapper.toEntity(dto);
         NegocioResponseDTO resposta = NegocioMapper.toDto(negocioService.criarNegocio(negocio));
         return ResponseEntity.status(200).body(resposta);
     }

@@ -2,16 +2,16 @@ package Facts.Arch.ArchFacts.dto.negocio;
 
 public class NegocioRequestDTO {
     private String nome;
-    private String CpforCnpj;
-    private String Cep;
+    private String cpfOrCnpj;
+    private String cep;
 
     public NegocioRequestDTO() {
     }
 
-    public NegocioRequestDTO(String nome, String cpforCnpj, String cep) {
+    public NegocioRequestDTO(String nome, String cpfOrCnpj, String cep) {
         this.nome = nome;
-        CpforCnpj = cpforCnpj;
-        Cep = cep;
+        this.cpfOrCnpj = cpfOrCnpj;
+        this.cep = cep;
     }
 
     public String getNome() {
@@ -22,20 +22,20 @@ public class NegocioRequestDTO {
         this.nome = nome;
     }
 
-    public String getCpforCnpj() {
-        return CpforCnpj;
+    public String getCpfOrCnpj() {
+        return cpfOrCnpj;
     }
 
-    public void setCpforCnpj(String cpforCnpj) {
-        CpforCnpj = cpforCnpj;
+    public void setCpfOrCnpj(String cpfOrCnpj) {
+        this.cpfOrCnpj = cpfOrCnpj;
     }
 
     public String getCep() {
-        return Cep;
+        return cep;
     }
 
     public void setCep(String cep) {
-        Cep = cep;
+        this.cep = cep;
     }
 }
 
