@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.controllers;
 
 import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
 import Facts.Arch.ArchFacts.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,15 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuariosEncontrados);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarUsuario(@Valid @PathVariable UUID id, @RequestBody Usuario usuarioSolicitado) {
-        Usuario usuarioAtualizado = usuarioService.atualizar(id, usuarioSolicitado);
+    @PutMapping()
+    public ResponseEntity<Usuario> atualizarUsuario(@RequestBody Usuario usuarioSolicitado) {
+        Usuario usuarioAtualizado = usuarioService.atualizar(usuarioSolicitado);
         return ResponseEntity.status(200).body(usuarioAtualizado);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable UUID id) {
-        this.usuarioService.deletar(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deletar() {
+        this.usuarioService.deletar();
         return ResponseEntity.status(204).build();
     }
 }

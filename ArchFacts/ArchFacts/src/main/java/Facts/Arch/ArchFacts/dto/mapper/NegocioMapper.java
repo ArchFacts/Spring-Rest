@@ -47,11 +47,11 @@ public class NegocioMapper {
         dto.setCodigo(negocio.getCodigo());
 
         if (negocio.getCnpj() == null) {
-            dto.setCnpj(negocio.getCnpj());
+            dto.setCpf(negocio.getCpf());
         }
 
         if (negocio.getCpf() == null) {
-            dto .setCpf(negocio.getCpf());
+            dto .setCnpj(negocio.getCnpj());
         }
 
         dto.setDataRegistro(dto.getDataRegistro());

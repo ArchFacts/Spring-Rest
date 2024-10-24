@@ -26,11 +26,13 @@ public class SecurityConfig {
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() //Independe ROle
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/registro").permitAll()
                         .requestMatchers(HttpMethod.GET,"/usuarios").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/usuarios").authenticated()
+                        .requestMatchers(HttpMethod.DELETE,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.POST, "/negocios").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
                         .anyRequest().permitAll())
                 .addFilterBefore(filtroSeguranca, UsernamePasswordAuthenticationFilter.class) // Adiciona um filtro antes disso
                 .build(); // Sem guardar estado (usar tokens)

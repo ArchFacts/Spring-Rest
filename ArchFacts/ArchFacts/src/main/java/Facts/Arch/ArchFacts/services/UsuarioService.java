@@ -3,9 +3,11 @@ package Facts.Arch.ArchFacts.services;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.exceptions.EntidadeAtivadaException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;
+import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaUsuario;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.UUID;
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioLogadoService usuarioLogadoService;
 
     private Usuario verificarEstadoUsuario (Usuario usuarioSolicitado) {
         Boolean usuarioExistente = this.usuarioRepository.existsByEmail(usuarioSolicitado.getEmail());
@@ -60,34 +64,33 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario atualizar (@PathVariable UUID id, Usuario usuarioSolicitado) {
-        Usuario usuarioExistente = this.usuarioRepository.findById(id).orElseThrow(()
+    public Usuario atualizar (Usuario usuarioSolicitado) {
+        Usuario usuarioExistente = this.usuarioRepository.findByEmail(usuarioLogadoService.obterSessao().getEmail()).orElseThrow(()
                 -> new EntidadeInexistenteException("Usuário não encontrado"));
 
-        if (usuarioSolicitado.getNome() != null) {
+        if (usuarioExistente.getNome() != null) {
             usuarioExistente.setNome(usuarioSolicitado.getNome());
         }
 
-        if (usuarioSolicitado.getEmail() != null) {
+        if (usuarioExistente.getEmail() != null) {
             usuarioExistente.setEmail(usuarioSolicitado.getEmail());
         }
 
-        if (usuarioSolicitado.getSenha() != null) {
-            usuarioExistente.setSenha(usuarioSolicitado.getSenha());
-        }
-
-        if (usuarioSolicitado.getTelefone() != null) {
+        if (usuarioExistente.getTelefone() != null) {
             usuarioExistente.setTelefone(usuarioSolicitado.getTelefone());
         }
 
         Usuario usuarioAtualizado = this.usuarioRepository.save(usuarioExistente);
         return usuarioAtualizado;
     }
+@Transactional
+    public void deletar () {
+        Usuario usuarioExistente = this.usuarioLogadoService.obterSessao();
 
-    public void deletar (@PathVariable UUID id) {
-        Usuario usuarioExistente = this.usuarioRepository.findById(id).orElseThrow(()
-                -> new EntidadeInexistenteException("Usuário não encontrado"));
+        if (usuarioExistente.getEmail() == null) {
+            throw new EntidadeNaoEncontradaException("Usuário não encontrado");
+        }
 
-        this.usuarioRepository.deleteById(id);
+        this.usuarioRepository.deleteByEmail(usuarioExistente.getEmail());
     }
 }
