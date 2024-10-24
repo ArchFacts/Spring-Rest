@@ -1,7 +1,7 @@
 package Facts.Arch.ArchFacts.services;
 
 import Facts.Arch.ArchFacts.entities.Negocio;
-import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.exceptions.DocumentoInvalidoException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeAtivadaException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;
 import Facts.Arch.ArchFacts.repositories.EnderecoRepository;
@@ -25,6 +25,9 @@ public class NegocioService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private UsuarioLogadoService usuarioLogadoService;
+
     private Negocio verificarEstadoNegocio (Negocio negocioSolicitado) {
         Boolean negocioExistente = this.negocioRepository.existsByCpfOrCnpj(
                 negocioSolicitado.getCpf(), negocioSolicitado.getCnpj());
@@ -44,15 +47,26 @@ public class NegocioService {
         return negocioSolicitado;
     }
 
-    public Negocio cadastrar (Negocio negocioSolicitado, Usuario usuarioSolicitado) {
-        Negocio negocioCadastro = verificarEstadoNegocio(negocioSolicitado);
+    public String identificarTipoDocumento (String documento) {
+        if (documento.length() == 11) {
+            return "CPF";
+        } else if (documento.length() == 14) {
+            return "CNPJ";
+        } else {
+            throw new DocumentoInvalidoException("Seu documento não tem uma quantidade de caractéres válida");
+        }
+    }
+
+    public Negocio criarNegocio(Negocio negocio) {
+        Negocio negocioCadastro = negocio;
+
+        verificarEstadoNegocio(negocioCadastro);
 
         EstrategiaNegocio estrategiaNegocio = new EstrategiaNegocio();
         FactoryCampos factoryCampos = new FactoryCampos(estrategiaNegocio);
         factoryCampos.configurarCampos(negocioCadastro);
 
-        estrategiaNegocio.configurarCampos(usuarioSolicitado, negocioSolicitado);
-
+        usuarioLogadoService.adicionarNegocioAoUsuario(negocioCadastro);
         return negocioRepository.save(negocioCadastro);
     }
 

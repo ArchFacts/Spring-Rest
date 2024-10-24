@@ -16,6 +16,7 @@ public class EstrategiaNegocio implements EstrategiaConfiguracao {
     public void configurarCampos(Negocio negocioSolicitado) {
         negocioSolicitado.setIdNegocio(null);
         negocioSolicitado.setAtivado(Boolean.TRUE);
+        negocioSolicitado.setAvaliacao(0.0);
         negocioSolicitado.setCodigo(UUID.randomUUID().toString());
         negocioSolicitado.setDataRegistro(LocalDateTime.now());
     }

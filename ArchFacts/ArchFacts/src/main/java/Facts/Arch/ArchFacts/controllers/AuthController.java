@@ -57,7 +57,7 @@ public class AuthController {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity cadastrar(@Valid @RequestBody RegistroDTO data) {
+    public ResponseEntity<RespostaRegistroDTO> cadastrar(@Valid @RequestBody RegistroDTO data) {
 
         if (this.usuarioRepository.findByEmail(data.getEmail()).isPresent())
             return ResponseEntity.status(400).build();

@@ -42,6 +42,7 @@ public class UsuarioService {
         return usuarioSolicitado;
     }
 
+
     public Usuario registrarInfos(Usuario usuarioSolicitado) {
 
         Usuario usuarioCadastro = verificarEstadoUsuario(usuarioSolicitado);

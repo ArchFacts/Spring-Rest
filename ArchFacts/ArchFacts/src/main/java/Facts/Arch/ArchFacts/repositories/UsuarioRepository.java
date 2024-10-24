@@ -18,6 +18,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     Optional<Usuario> findPerfilByEmail(@Param("email") String email);
 
+
 //    @Query("SELECT new Facts.Arch.ArchFacts.dto.usuario.UsuarioPerfilResponseDTO(u.nome, u.email, u.telefone, u.dataRegistro, u.ativado, u.role, COALESCE(u.negocio.nome, 'Sem Negócio')) FROM Usuario u LEFT JOIN u.negocio WHERE u.email = :email")
 //    Optional<UsuarioPerfilResponseDTO> findPerfilByEmail(@Param("email") String email);
 }

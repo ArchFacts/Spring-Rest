@@ -1,9 +1,14 @@
 package Facts.Arch.ArchFacts.controllers;
 
+import Facts.Arch.ArchFacts.dto.mapper.NegocioMapper;
+import Facts.Arch.ArchFacts.dto.negocio.NegocioRequestDTO;
+import Facts.Arch.ArchFacts.dto.negocio.NegocioResponseDTO;
 import Facts.Arch.ArchFacts.entities.Negocio;
+import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.services.EnderecoService;
 import Facts.Arch.ArchFacts.services.NegocioService;
 import Facts.Arch.ArchFacts.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +27,6 @@ public class NegocioController {
     @Autowired
     private EnderecoService enderecoService;
 
-
-//    @PostMapping ("/{id}")
-//    public ResponseEntity<Negocio> cadastrar (@Valid Usuario usuarioLogado, @RequestBody Negocio negocioSolicitado) {
-//
-//    }
-
-
     @GetMapping
     public ResponseEntity<List<Negocio>> listar() {
         List<Negocio> negociosEncontrados = this.negocioService.listar();
@@ -38,6 +36,12 @@ public class NegocioController {
         }
 
         return ResponseEntity.status(200).body(negociosEncontrados);
+    }
+
+    public ResponseEntity<NegocioResponseDTO> cadastrar(@Valid @RequestBody NegocioRequestDTO dto, Usuario usuario) {
+        Negocio negocio = NegocioMapper.toEntity(dto);
+        NegocioResponseDTO resposta = NegocioMapper.toDto(negocioService.criarNegocio(negocio));
+        return ResponseEntity.status(200).body(resposta);
     }
 
 //    @PutMapping("/{id}")
