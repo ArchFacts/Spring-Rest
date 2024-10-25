@@ -46,9 +46,10 @@ public class ListaEstatica<T>{
         }
 
         if (indInicio < j) {
-            quickSortMeio(arquivos);
+            quickSortMeio(arquivos, indInicio, j);
+        }
+        if (i < indFim) {
+            quickSortMeio(arquivos, i, indFim);
         }
     }
-
-
 }
