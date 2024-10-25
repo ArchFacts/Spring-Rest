@@ -9,12 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Formatter;
-import java.util.List;
 
 @Component
-public class filtroLogs extends SystemLog implements Filter {
+public class FiltroLogs extends SystemLog implements Filter {
 
     ListaEstatica<SystemLog> listaLogs = new ListaEstatica<>(10);
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -43,6 +41,7 @@ public class filtroLogs extends SystemLog implements Filter {
 
             listaLogs.adiciona(systemLog);
             gravarArquivoCsv(systemLog, gerarNomeArquivo());
+            listaLogs.quickSortMeio(listaLogs, 0, listaLogs.nElementos);
         }
     }
 

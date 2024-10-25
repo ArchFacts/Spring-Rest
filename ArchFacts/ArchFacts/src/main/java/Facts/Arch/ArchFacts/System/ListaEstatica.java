@@ -1,7 +1,5 @@
 package Facts.Arch.ArchFacts.System;
 
-import java.io.File;
-
 public class ListaEstatica<T>{
     protected SystemLog[] vetor;
     protected int nElementos;
@@ -19,24 +17,24 @@ public class ListaEstatica<T>{
         }
     }
 
-    public static void quickSortMeio(File[] arquivos, int indInicio, int indFim) {
+    public void quickSortMeio(FiltroLogs[] arquivos, int indInicio, int indFim) {
         int i, j;
         i = indInicio;
         j = indFim;
 
-        String pivo = arquivos[(indInicio + indFim / 2)].getName();
+        String pivo = arquivos[(indInicio + indFim / 2)].getTempoResposta();
 
         while (i <= j) {
-            while (arquivos[i].getName().compareTo(pivo) < 0) {
+            while (arquivos[i].getTempoResposta().compareTo(pivo) < 0) {
                 i++;
             }
 
-            while (arquivos[j].getName().compareTo(pivo) > 0) {
+            while (arquivos[j].getTempoResposta().compareTo(pivo) > 0) {
                 j--;
             }
 
             if (i <= j) {
-                File aux = arquivos[j];
+                FiltroLogs aux = arquivos[j];
                 arquivos[i] = arquivos[j];
                 arquivos[j] = aux;
 
@@ -51,5 +49,23 @@ public class ListaEstatica<T>{
         if (i < indFim) {
             quickSortMeio(arquivos, i, indFim);
         }
+    }
+
+    public int pesquisaBinariaTempoReposta(FiltroLogs[] v, String valor) {
+        int inicio, meio, fim;
+        inicio = 0;
+        fim = v.length - 1;
+
+        while (inicio <= fim) {
+            meio = (inicio + fim) / 2;
+            if (v[meio].getTempoResposta().compareTo(valor) == 0) {
+                return  meio;
+            } else if (0 < v[meio].getTempoResposta().compareTo(valor)) {
+                fim = meio - 1;
+            } else {
+                inicio = meio +1;
+            }
+        }
+        return -1;  
     }
 }
