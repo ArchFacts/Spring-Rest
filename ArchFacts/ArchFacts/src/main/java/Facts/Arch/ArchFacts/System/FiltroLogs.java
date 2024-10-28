@@ -3,6 +3,7 @@ package Facts.Arch.ArchFacts.System;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.FileWriter;
@@ -13,13 +14,15 @@ import java.util.Formatter;
 
 @Component
 public class FiltroLogs extends SystemLog implements Filter {
+    @Autowired
+    private ListaEstatica listaLogs;
 
-    ListaEstatica<SystemLog> listaLogs = new ListaEstatica<>(10);
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         Long comeco = System.currentTimeMillis();
+        LocalDateTime horario = LocalDateTime.now();
 
         try {
             chain.doFilter(request, response);
@@ -36,12 +39,12 @@ public class FiltroLogs extends SystemLog implements Filter {
                     httpRequest.getMethod(),
                     httpRequest.getRequestURI(),
                     String.valueOf(httpResponse.getStatus()),
-                    tempoResposta + "ms"
+                    tempoResposta + "ms",
+                    horario
             );
 
             listaLogs.adiciona(systemLog);
             gravarArquivoCsv(systemLog, gerarNomeArquivo());
-            listaLogs.quickSortMeio(listaLogs, 0, listaLogs.nElementos);
         }
     }
 
@@ -51,7 +54,7 @@ public class FiltroLogs extends SystemLog implements Filter {
         return "log_" + dataHoraAtual + ".csv";
     }
 
-    private void gravarArquivoCsv (SystemLog systemLog, String nomeArq) {
+    public void gravarArquivoCsv (SystemLog systemLog, String nomeArq) {
         FileWriter arq = null;
         Formatter builder = null;
 
@@ -59,12 +62,13 @@ public class FiltroLogs extends SystemLog implements Filter {
             arq = new FileWriter(nomeArq, true);
             builder = new Formatter(arq);
 
-            builder.format("Usuário: %s - Método: %s - URI: %s - Status: %s - Tempo de Resposta: %s\n",
+            builder.format("Usuário: %s - Método: %s - URI: %s - Status: %s - Tempo de Resposta: %s - Horário: %s\n",
                     systemLog.getUsuario(),
                     systemLog.getMetodo(),
                     systemLog.getUri(),
                     systemLog.getStatusCode(),
-                    systemLog.getTempoResposta());
+                    systemLog.getTempoResposta(),
+                    systemLog.getHorario());
 
         } catch (IOException error) {
             System.out.println("Erro ao abrir o arquivo");

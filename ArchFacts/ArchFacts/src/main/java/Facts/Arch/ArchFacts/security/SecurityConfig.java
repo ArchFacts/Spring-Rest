@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.DELETE,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.POST, "/negocios").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/logs").permitAll()
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
                         .anyRequest().permitAll())
                 .addFilterBefore(filtroSeguranca, UsernamePasswordAuthenticationFilter.class) // Adiciona um filtro antes disso
