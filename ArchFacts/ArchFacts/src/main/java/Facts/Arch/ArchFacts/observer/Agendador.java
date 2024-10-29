@@ -1,17 +1,19 @@
 package Facts.Arch.ArchFacts.observer;
 
 
+import Facts.Arch.ArchFacts.dto.evento.EventoResponseDTO;
 import Facts.Arch.ArchFacts.entities.Evento;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.enums.Tipo;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class Agendador {
+public class Agendador implements GerenciadorEvento{
     @Autowired
     private EventoRepository eventoRepository;
     @Autowired
@@ -32,11 +34,13 @@ public class Agendador {
                 evento.setStatus(projeto.getStatus());
 
                 eventoRepository.save(evento);
+//                notificador.notificarObservers(evento);
             }
         }
     }
 
-    public static void notificarObservers(List<GerenciadorEvento> eventos) {
+    @Override
+    public void atualizar(EventoResponseDTO eventoResponseDTO) {
 
     }
 }

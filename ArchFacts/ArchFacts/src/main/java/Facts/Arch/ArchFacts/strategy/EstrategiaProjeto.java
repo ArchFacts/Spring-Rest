@@ -32,7 +32,6 @@ public class EstrategiaProjeto implements EstrategiaConfiguracao {
         projetoSolicitado.setStatus(Status.PENDENTE);
         projetoSolicitado.setDestinatario(remetente);
         projetoSolicitado.setNegocio(destinatario);
-
     }
 
     @Override

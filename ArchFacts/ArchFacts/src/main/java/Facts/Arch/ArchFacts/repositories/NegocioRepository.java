@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface NegocioRepository extends JpaRepository<Negocio, UUID> {
     Boolean existsByCpfOrCnpj(String cpf, String cnpj);
     Negocio findByCpfOrCnpj(String cpf, String cnpj);
+    Negocio findByNome(String nome);
 }

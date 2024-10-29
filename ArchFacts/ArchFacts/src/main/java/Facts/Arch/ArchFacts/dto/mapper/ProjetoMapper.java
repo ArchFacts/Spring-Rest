@@ -14,7 +14,6 @@ public class ProjetoMapper {
         dto.setNome(projeto.getNome());
         dto.setDescricao(projeto.getDescricao());
         dto.setCusto(projeto.getCusto());
-        dto.setDataInicio(projeto.getDataInicio());
         dto.setDataEntrega(projeto.getDataEntrega());
         dto.setStatus(projeto.getStatus());
 

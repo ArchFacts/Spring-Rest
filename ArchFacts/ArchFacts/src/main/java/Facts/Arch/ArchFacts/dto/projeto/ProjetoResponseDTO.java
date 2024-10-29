@@ -9,7 +9,6 @@ public class ProjetoResponseDTO {
     private String nome;
     private String descricao;
     private Double custo;
-    private LocalDateTime dataInicio;
     private LocalDateTime dataEntrega;
     @Enumerated
     private Status status;
@@ -17,11 +16,10 @@ public class ProjetoResponseDTO {
     public ProjetoResponseDTO() {
     }
 
-    public ProjetoResponseDTO(String nome, String descricao, Double custo, LocalDateTime dataInicio, LocalDateTime dataEntrega, Status status) {
+    public ProjetoResponseDTO(String nome, String descricao, Double custo, LocalDateTime dataEntrega, Status status) {
         this.nome = nome;
         this.descricao = descricao;
         this.custo = custo;
-        this.dataInicio = dataInicio;
         this.dataEntrega = dataEntrega;
         this.status = status;
     }
@@ -48,14 +46,6 @@ public class ProjetoResponseDTO {
 
     public void setCusto(Double custo) {
         this.custo = custo;
-    }
-
-    public LocalDateTime getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(LocalDateTime dataInicio) {
-        this.dataInicio = dataInicio;
     }
 
     public LocalDateTime getDataEntrega() {

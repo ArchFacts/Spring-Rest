@@ -46,4 +46,12 @@ public class UsuarioLogadoService {
         usuario.setNegocio(negocio);
         usuario.setRole(Role.ADM);
     }
+
+    public Negocio obterNegocio() {
+        if (obterSessao().getNegocio() == null) {
+            throw new EntidadeNaoEncontradaException("Usuário não tem um negócio");
+        }
+
+        return obterSessao().getNegocio();
+    }
 }
