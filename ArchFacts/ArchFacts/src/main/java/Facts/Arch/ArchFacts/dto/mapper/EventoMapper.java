@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventoMapper {
     @Autowired
-    private static Notificador notificador;
-    public static EventoResponseDTO toDto(Evento evento){
+    private Notificador notificador;
+
+    public EventoResponseDTO toDto(Evento evento){
         if (evento == null) {
             return null;
         }

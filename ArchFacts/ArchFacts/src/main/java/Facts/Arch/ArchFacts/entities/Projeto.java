@@ -13,6 +13,7 @@ import java.util.UUID;
 public class Projeto {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
+    @Column(name = "idProjeto", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idProjeto;
     private String nome;
@@ -20,6 +21,7 @@ public class Projeto {
     private Double custo;
     private LocalDateTime dataInicio;
     private LocalDateTime dataEntrega;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne
     @JoinColumn (name = "fkNegocio")

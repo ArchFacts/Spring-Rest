@@ -4,6 +4,7 @@ import Facts.Arch.ArchFacts.dto.evento.EventoResponseDTO;
 import Facts.Arch.ArchFacts.entities.Evento;
 import Facts.Arch.ArchFacts.observer.Notificador;
 import Facts.Arch.ArchFacts.observer.Scheduler;
+import Facts.Arch.ArchFacts.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,11 @@ import java.util.UUID;
 @RequestMapping("/eventos")
 public class EventoController {
     @Autowired
-    private Notificador notificador;
-
-    @Autowired
     private Scheduler scheduler;
+    @Autowired
+    private EventoService eventoService;
 
-    @GetMapping("/eventos/atualizados")
+    @GetMapping("/atualizados")
     public ResponseEntity<List<EventoResponseDTO>> obterEventosAtualizados() {
         List<EventoResponseDTO> dtos = scheduler.buscarEventosAtualizados();
 
@@ -32,8 +32,8 @@ public class EventoController {
 
     @PutMapping("/{idEvento}")
     public ResponseEntity<EventoResponseDTO> atualizarEvento(@PathVariable UUID idEvento
-            ,@RequestBody Evento eventoSolicitado) {
-        EventoResponseDTO eventoAtualizado = notificador.atualizarEvento(idEvento, eventoSolicitado);
+            , @RequestBody Evento eventoSolicitado) {
+        EventoResponseDTO eventoAtualizado = eventoService.atualizarEvento(idEvento, eventoSolicitado);
         return ResponseEntity.status(200).body(eventoAtualizado);
     }
 }

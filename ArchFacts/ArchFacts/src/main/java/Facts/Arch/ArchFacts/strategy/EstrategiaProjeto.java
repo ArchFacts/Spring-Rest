@@ -6,6 +6,7 @@ import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.enums.Status;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class EstrategiaProjeto implements EstrategiaConfiguracao {
     private Usuario remetente;

@@ -13,20 +13,22 @@ import java.util.UUID;
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "idUsuario", columnDefinition = "varchar(36)")
+    @Column(name = "idEvento", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idEvento;
     private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
     private LocalDateTime dataCriacao;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
     private String descricao;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     Status status;
     @ManyToOne
+    @JoinColumn(name = "fkProjeto", nullable = false) // Especificando a coluna
     private Projeto projeto;
     @ManyToOne
+    @JoinColumn(name = "fkNegocio", nullable = false)
     private Negocio negocio;
 
     public Evento() {

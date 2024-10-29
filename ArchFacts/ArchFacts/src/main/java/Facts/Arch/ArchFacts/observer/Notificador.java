@@ -7,18 +7,21 @@ import Facts.Arch.ArchFacts.enums.Prioridade;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Service
+@Component
 public class Notificador implements PublicadorEvento {
     @Autowired
     private EventoRepository eventoRepository;
+
     private final List<GerenciadorEvento> observers = new ArrayList<>();
 
     public Long calcularDiasRestantes(Evento evento) {
@@ -42,35 +45,6 @@ public class Notificador implements PublicadorEvento {
         return definirPrioridade;
     }
 
-    public EventoResponseDTO atualizarEvento(UUID idEvento, Evento eventoAtualizado) {
-        Evento eventoExistente = eventoRepository.findById(idEvento)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Evento não encontrado com ID: " + idEvento));
-
-        if (eventoAtualizado.getDataInicio() != null) {
-            eventoExistente.setDataInicio(eventoAtualizado.getDataInicio());
-        }
-        if (eventoAtualizado.getDataTermino() != null) {
-            eventoExistente.setDataTermino(eventoAtualizado.getDataTermino());
-        }
-        if (eventoAtualizado.getDescricao() != null) {
-            eventoExistente.setDescricao(eventoAtualizado.getDescricao());
-        }
-        if (eventoAtualizado.getTipo() != null) {
-            eventoExistente.setTipo(eventoAtualizado.getTipo());
-        }
-        if (eventoAtualizado.getStatus() != null) {
-            eventoExistente.setStatus(eventoAtualizado.getStatus());
-        }
-
-        eventoRepository.save(eventoExistente);
-
-        Long diasRestantes = calcularDiasRestantes(eventoExistente);
-        EventoResponseDTO eventoResponseDTO = EventoMapper.toDto(eventoExistente);
-        eventoResponseDTO.setDiasRestantes(diasRestantes);
-        notificarObservers(eventoResponseDTO);
-
-        return eventoResponseDTO;
-    }
 
     @Override
     public void registrarObserver(GerenciadorEvento observer) {
