@@ -16,15 +16,6 @@ import java.util.UUID;
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
-
-//    @PostMapping
-//    public ResponseEntity<RespostaRegistroDTO> cadastrar(@Valid @RequestBody RegistroDTO usuarioDTO) {
-//        Usuario usuarioEntidade = UsuarioMapper.toEntity(usuarioDTO);
-//        Usuario usuarioRegistrado = usuarioService.registrarInfos(usuarioEntidade);
-//        RespostaRegistroDTO respostaRegistroDTO = UsuarioMapper.toDto(usuarioRegistrado);
-//        return ResponseEntity.status(201).body(respostaRegistroDTO);
-//    }
-
     @GetMapping
     public ResponseEntity<List<Usuario>> listar() {
         List<Usuario> usuariosEncontrados = this.usuarioService.listar();

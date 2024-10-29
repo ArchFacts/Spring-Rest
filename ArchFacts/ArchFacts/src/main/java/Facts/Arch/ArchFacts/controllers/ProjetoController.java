@@ -26,7 +26,7 @@ public class ProjetoController {
     @Autowired
     private ProjetoRepository projetoRepository;
 
-    @PostMapping ("/{idDestinatario}/{idNegocio}")
+    @PostMapping ("")
     public ResponseEntity<Projeto> cadastrarProjeto(@PathVariable UUID idDestinatario,
                                                     @PathVariable UUID idNegocio,
                                                     @RequestBody Projeto projetoSolicitado) {
@@ -54,32 +54,32 @@ public class ProjetoController {
         return ResponseEntity.status(201).body(projetoRepository.save(projetoSolicitado));
     }
 
-    @GetMapping
-    public ResponseEntity<List<Projeto>> listarProjetos() {
-        List<Projeto> todosProjetos = projetoRepository.findAll();
-
-        if (todosProjetos.isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(200).body(todosProjetos);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Projeto> atualizarProjeto(@PathVariable UUID id, @RequestBody Projeto projetoSolicitado) {
-        if (this.projetoRepository.existsById(id)) {
-            projetoSolicitado.setIdProjeto(id);
-            Projeto projetoAtualizado = this.projetoRepository.save(projetoSolicitado);
-            return ResponseEntity.status(200).body(projetoAtualizado);
-        }
-        return ResponseEntity.status(404).build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProjeto(@PathVariable UUID id) {
-        if (this.projetoRepository.existsById(id)) {
-            this.projetoRepository.deleteById(id);
-            return ResponseEntity.status(204).build();
-        }
-        return ResponseEntity.status(404).build();
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Projeto>> listarProjetos() {
+//        List<Projeto> todosProjetos = projetoRepository.findAll();
+//
+//        if (todosProjetos.isEmpty()) {
+//            return ResponseEntity.status(204).build();
+//        }
+//        return ResponseEntity.status(200).body(todosProjetos);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Projeto> atualizarProjeto(@PathVariable UUID id, @RequestBody Projeto projetoSolicitado) {
+//        if (this.projetoRepository.existsById(id)) {
+//            projetoSolicitado.setIdProjeto(id);
+//            Projeto projetoAtualizado = this.projetoRepository.save(projetoSolicitado);
+//            return ResponseEntity.status(200).body(projetoAtualizado);
+//        }
+//        return ResponseEntity.status(404).build();
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deletarProjeto(@PathVariable UUID id) {
+//        if (this.projetoRepository.existsById(id)) {
+//            this.projetoRepository.deleteById(id);
+//            return ResponseEntity.status(204).build();
+//        }
+//        return ResponseEntity.status(404).build();
+//    }
 }

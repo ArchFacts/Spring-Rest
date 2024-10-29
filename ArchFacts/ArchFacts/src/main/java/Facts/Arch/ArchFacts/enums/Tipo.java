@@ -1,9 +1,9 @@
 package Facts.Arch.ArchFacts.enums;
 
 public enum Tipo {
-    RELATORIO("relatorio"),
-    DOCUMENTO("documento"),
-    CONTRATO("contrato");
+    PROJETO("projeto"),
+    CHAMADO("chamado"),
+    TAREFA("tarefa");
 
     private String tipo;
 

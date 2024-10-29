@@ -19,7 +19,7 @@ public class Projeto {
     private String descricao;
     private Double custo;
     private LocalDateTime dataInicio;
-    private LocalDate dataEntrega;
+    private LocalDateTime dataEntrega;
     private Status status;
     @ManyToOne
     @JoinColumn (name = "fkNegocio")
@@ -32,7 +32,7 @@ public class Projeto {
     }
 
     public Projeto(UUID idProjeto, String nome, String descricao, Double custo, LocalDateTime dataInicio,
-                   LocalDate dataEntrega, Status status, Negocio negocio, Usuario usuario) {
+                   LocalDateTime dataEntrega, Status status, Negocio negocio, Usuario usuario) {
         this.idProjeto = idProjeto;
         this.nome = nome;
         this.descricao = descricao;
@@ -84,11 +84,11 @@ public class Projeto {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataEntrega() {
+    public LocalDateTime getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(LocalDate dataEntrega) {
+    public void setDataEntrega(LocalDateTime dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 
