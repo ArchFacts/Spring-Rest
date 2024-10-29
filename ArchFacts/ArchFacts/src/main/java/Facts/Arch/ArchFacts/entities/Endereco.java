@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -10,11 +11,17 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Schema(description = "Campo que representa o CEP do endereço",example = "06315040")
     private String cep;
+    @Schema(description = "Campo que representa o estado do endereço",example = "São Paulo")
     private String estado;
+    @Schema(description = "Campo que representa o bairro do endereço",example = "Cerqueira César")
     private String bairro;
+    @Schema(description = "Campo que representa a cidade do endereço",example = "São Paulo")
     private String cidade;
+    @Schema(description = "Campo que representa a rua do endereço",example = "Rua Haddock Lobo")
     private String rua;
+    @Schema(description = "Campo que representa o número do endereço",example = "10")
     private Integer numero;
 
     @OneToOne

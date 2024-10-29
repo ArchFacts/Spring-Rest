@@ -2,16 +2,23 @@ package Facts.Arch.ArchFacts.dto.usuario;
 
 import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.enums.Role;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
 
 public class UsuarioPerfilResponseDTO {
+    @Schema(description = "Campo que representa o nome do usuário", example = "Diego")
     private String nome;
+    @Schema(description = "Campo que representa o email do usuário", example = "diego@gmail.com")
     private String email;
+    @Schema(description = "Campo que representa o telefone do usuário", example = "11-990304000")
     private String telefone;
+    @Schema(description = "Campo que representa a data de registro que o usuário usuário", example = "2022-02-02 10:00:00")
     private LocalDateTime dataRegistro;
+    @Schema(description = "Campo que representa se o usuário está ativo no sistema ", example = "true")
     private Boolean ativado;
+    @Schema(description = "Campo que representa o papel do usuário no sistema", example = "user")
     private Role role;
     private Negocio negocio;
 
