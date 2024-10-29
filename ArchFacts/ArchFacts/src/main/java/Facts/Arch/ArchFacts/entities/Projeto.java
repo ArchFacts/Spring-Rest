@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.entities;
 
 import Facts.Arch.ArchFacts.enums.Status;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -16,11 +17,17 @@ public class Projeto {
     @Column(name = "idProjeto", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idProjeto;
+    @Schema(description = "Campo que representa o nome do projeto", example = "Re-Data")
     private String nome;
+    @Schema(description = "Campo que representa a descrição do projeto", example = "Projeto para monitorar computadores que fazem processo ETL")
     private String descricao;
+    @Schema(description = "Campo que representa o custo do projeto", example = "2000.30")
     private Double custo;
+    @Schema(description = "Campo que representa a data de início do projeto", example = "2022-01-20 20:30:00")
     private LocalDateTime dataInicio;
+    @Schema(description = "Campo que representa a data de entrega do projeto", example = "2023-10-02")
     private LocalDateTime dataEntrega;
+    @Schema(description = "Campo que representa o status do projeto", example = "pendente")
     @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne

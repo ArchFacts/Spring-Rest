@@ -2,6 +2,7 @@ package Facts.Arch.ArchFacts.entities;
 
 import Facts.Arch.ArchFacts.enums.Role;
 import ch.qos.logback.core.pattern.Converter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.GenericGenerator;
@@ -26,18 +27,26 @@ public class Usuario implements UserDetails {
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idUsuario;
     @NotBlank
+    @Schema(description = "Campo que representa o nome do usuário", example = "Diego")
     private String nome;
-//    @Email
+    //    @Email
+    @Schema(description = "Campo que representa o email do usuário", example = "diego@gmail.com")
     private String email;
     @NotBlank
+    @Schema(description = "Campo que representa o telefone do usuário", example = "Senha@123")
     private String senha;
-//    @Pattern(regexp = "(?:(^\\+\\d{2})?)(?:([1-9]{2})|([0-9]{3})?)(\\d{4,5}).?(\\d{4})",
+    //    @Pattern(regexp = "(?:(^\\+\\d{2})?)(?:([1-9]{2})|([0-9]{3})?)(\\d{4,5}).?(\\d{4})",
 //            message = "Número de telefone inválido")
+    @Schema(description = "Campo que representa o telefone do usuário", example = "11-990304000")
     private String telefone;
+    @Schema(description = "Campo que representa a data de registro que o usuário usuário", example = "2022-02-02 10:00:00")
     private LocalDateTime dataRegistro;
+    @Schema(description = "Campo que representa se o usuário está ativo no sistema ", example = "true")
     private Boolean ativado;
     @Enumerated(EnumType.STRING)
+    @Schema(description = "Campo que representa o papel do usuário no sistema", example = "user")
     private Role role;
+
     @ManyToOne
     @JoinColumn (name = "fkNegocio")
     private Negocio negocio;
