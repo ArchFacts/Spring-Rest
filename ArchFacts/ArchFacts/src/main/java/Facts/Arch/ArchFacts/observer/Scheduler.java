@@ -6,9 +6,7 @@ import Facts.Arch.ArchFacts.entities.Evento;
 import Facts.Arch.ArchFacts.enums.Prioridade;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
-import org.hibernate.event.internal.EmptyEventManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -40,17 +38,17 @@ public class Scheduler {
         LocalDateTime dataHoje = LocalDateTime.now(); // Obtém a data atual
 
         for (Evento evento : eventos) {
-            Long diasRestantes = notificador.calcularDiasRestantes(evento);
+            String diasRestantes = notificador.calcularTempoRestante(evento);
             Prioridade prioridadeAtual = notificador.calcularPrioridade(evento);
 
             EventoResponseDTO eventoResponseDTO = eventoMapper.toDto(evento);
 
             boolean precisaNotificar = false;
 
-            if (!eventoResponseDTO.getDiasRestantes().equals(diasRestantes)) {
+            if (!eventoResponseDTO.getTempoRestante().equals(diasRestantes)) {
                 precisaNotificar = true;
 
-                eventoResponseDTO.setDiasRestantes(diasRestantes);
+                eventoResponseDTO.setTempoRestante(diasRestantes);
                 eventoResponseDTO.setPrioridade(prioridadeAtual);
                 eventoResponseDTO.setDataInicio(evento.getDataInicio());
                 eventoResponseDTO.setDataTermino(evento.getDataTermino());
@@ -78,6 +76,6 @@ public class Scheduler {
             EventoResponseDTO eventoResponseDTO = eventoMapper.toDto(evento);
             eventoResponseDTOS.add(eventoResponseDTO);
         }
-        return eventoResponseDTOS;
+            return eventoResponseDTOS;
     }
 }

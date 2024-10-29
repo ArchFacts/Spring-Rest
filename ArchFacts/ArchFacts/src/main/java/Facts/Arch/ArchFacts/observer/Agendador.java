@@ -29,21 +29,26 @@ public class Agendador implements GerenciadorEvento{
 
         for (Projeto projeto: projetos) {
             LocalDateTime dataEntregaProjeto = projeto.getDataEntrega();
-
             if (dataEntregaProjeto.minusDays(3).isBefore(dataHoje)) {
-                Evento evento = new Evento();
-                evento.setIdEvento(null);
-                evento.setDataInicio(projeto.getDataInicio());
-                evento.setDataTermino(projeto.getDataEntrega());
-                evento.setTipo(Tipo.PROJETO);
-                evento.setDescricao(projeto.getDescricao());
-                evento.setStatus(projeto.getStatus());
-                evento.setDataCriacao(dataHoje);
-                evento.setStatus(projeto.getStatus());
-                evento.setProjeto(projeto);
-                evento.setNegocio(projeto.getNegocio());
+                boolean eventoExistente = eventoRepository.findAll().stream()
+                        .anyMatch(evento -> evento.getProjeto().getIdProjeto().equals(projeto.getIdProjeto())
+                                && evento.getDataTermino().equals(dataEntregaProjeto));
 
-                eventoRepository.save(evento);
+                if (!eventoExistente) {
+                    Evento evento = new Evento();
+                    evento.setIdEvento(null);
+                    evento.setDataInicio(projeto.getDataInicio());
+                    evento.setDataTermino(projeto.getDataEntrega());
+                    evento.setTipo(Tipo.PROJETO);
+                    evento.setDescricao(projeto.getDescricao());
+                    evento.setStatus(projeto.getStatus());
+                    evento.setDataCriacao(dataHoje);
+                    evento.setStatus(projeto.getStatus());
+                    evento.setProjeto(projeto);
+                    evento.setNegocio(projeto.getNegocio());
+
+                    eventoRepository.save(evento);
+                }
             }
         }
     }

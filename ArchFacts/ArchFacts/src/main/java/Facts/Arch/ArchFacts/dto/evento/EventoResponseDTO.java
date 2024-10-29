@@ -3,6 +3,7 @@ package Facts.Arch.ArchFacts.dto.evento;
 import Facts.Arch.ArchFacts.enums.Prioridade;
 import Facts.Arch.ArchFacts.enums.Status;
 import Facts.Arch.ArchFacts.enums.Tipo;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
@@ -10,25 +11,22 @@ import java.time.LocalDateTime;
 public class EventoResponseDTO {
     private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
-    private Long diasRestantes;
+    private String tempoRestante;
     private Prioridade prioridade;
     @Enumerated
     private Tipo tipo;
     private String descricao;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     Status status;
 
     public EventoResponseDTO() {
     }
 
-    public EventoResponseDTO(LocalDateTime dataInicio, LocalDateTime dataTermino, Long diasRestantes,
-                             Prioridade prioridade,
-                             Tipo tipo,
-                             String descricao,
-                             Status status) {
+    public EventoResponseDTO(LocalDateTime dataInicio, LocalDateTime dataTermino, String tempoRestante,
+                             Prioridade prioridade, Tipo tipo, String descricao, Status status) {
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
-        this.diasRestantes = diasRestantes;
+        this.tempoRestante = tempoRestante;
         this.prioridade = prioridade;
         this.tipo = tipo;
         this.descricao = descricao;
@@ -51,12 +49,12 @@ public class EventoResponseDTO {
         this.dataTermino = dataTermino;
     }
 
-    public Long getDiasRestantes() {
-        return diasRestantes;
+    public String getTempoRestante() {
+        return tempoRestante;
     }
 
-    public void setDiasRestantes(Long diasRestantes) {
-        this.diasRestantes = diasRestantes;
+    public void setTempoRestante(String tempoRestante) {
+        this.tempoRestante = tempoRestante;
     }
 
     public Prioridade getPrioridade() {

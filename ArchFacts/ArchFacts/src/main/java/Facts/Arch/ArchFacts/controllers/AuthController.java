@@ -45,7 +45,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity login(@Valid @RequestBody LoginDTO body) {
-
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
                 body.getLogin(), body.getSenha());
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
@@ -62,7 +61,7 @@ public class AuthController {
         if (this.usuarioRepository.findByEmail(data.getEmail()).isPresent())
             return ResponseEntity.status(400).build();
 
-        String senhaCriptografada = new BCryptPasswordEncoder().encode(data.getSenha());
+        String senhaCriptografada = passwordEncoder.encode(data.getSenha());
         Usuario usuarioRegistrado = new Usuario(data.getNome(),
                 data.getEmail(),
                 data.getTelefone(),

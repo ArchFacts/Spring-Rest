@@ -19,7 +19,7 @@ public class EventoMapper {
         EventoResponseDTO dto = new EventoResponseDTO();
         dto.setDataInicio(evento.getDataInicio());
         dto.setDataTermino(evento.getDataTermino());
-        dto.setDiasRestantes(notificador.calcularDiasRestantes(evento));
+        dto.setTempoRestante(notificador.calcularTempoRestante(evento));
         dto.setPrioridade(notificador.calcularPrioridade(evento));
         dto.setTipo(evento.getTipo());
         dto.setDescricao(evento.getDescricao());

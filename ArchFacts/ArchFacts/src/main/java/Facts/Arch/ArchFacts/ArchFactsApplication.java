@@ -11,9 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class ArchFactsApplication {
-
-	private static final Logger log = LoggerFactory.getLogger(ArchFactsApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(ArchFactsApplication.class, args);
 	}

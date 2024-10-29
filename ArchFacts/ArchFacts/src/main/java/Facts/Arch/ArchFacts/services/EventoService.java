@@ -7,11 +7,7 @@ import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.observer.Notificador;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -52,9 +48,9 @@ public class EventoService {
 
         eventoRepository.save(eventoExistente);
 
-        Long diasRestantes = notificador.calcularDiasRestantes(eventoExistente);
+        String tempoRestante = notificador.calcularTempoRestante(eventoExistente);
         EventoResponseDTO eventoResponseDTO = eventoMapper.toDto(eventoExistente);
-        eventoResponseDTO.setDiasRestantes(diasRestantes);
+        eventoResponseDTO.setTempoRestante(tempoRestante);
         notificador.notificarObservers(eventoResponseDTO);
 
         return eventoResponseDTO;
