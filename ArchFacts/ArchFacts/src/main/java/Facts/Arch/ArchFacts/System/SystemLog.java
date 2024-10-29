@@ -1,15 +1,22 @@
 package Facts.Arch.ArchFacts.System;
 
 import Facts.Arch.ArchFacts.entities.Usuario;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
 public class SystemLog {
+    @Schema(description = "Campo que representa o usuário",example = "Júlia")
     private String usuario;
+    @Schema(description = "Campo que representa o método",example = "GET")
     private String metodo;
+    @Schema(description = "Campo que representa a URI",example = "/logs")
     private String uri;
+    @Schema(description = "Campo que representa o status do método",example = "404")
     private String statusCode;
+    @Schema(description = "Campo que representa o tempo de resposta",example = "1864ms")
     private String tempoResposta;
+    @Schema(description = "Campo que representa o horário e a data do LOG",example = "2023-10-02 09:40:00")
     private LocalDateTime horario;
 
     public SystemLog() {

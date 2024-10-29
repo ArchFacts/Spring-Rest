@@ -2,6 +2,7 @@ package Facts.Arch.ArchFacts.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -22,13 +23,21 @@ import java.util.UUID;
         @Column (name = "idNegocio", columnDefinition = "CHAR(36)")
         private UUID idNegocio;
         @NotBlank
+        @Schema(description = "Campo que representa o nome do negócio", example = "Data-RE")
         private String nome;
+        @Schema(description = "Campo que representa o código do negócio", example = "202020")
         private String codigo;
+        @Schema(description = "Campo que representa o CEP do negócio", example = "06315040")
         private String cep;
+        @Schema(description = "Campo que representa o CPF do negócio", example = "45840168681")
         private String cpf;
+        @Schema(description = "Campo que representa o CNPJ do negócio", example = "05720367/0001-01")
         private String cnpj;
+        @Schema(description = "Campo que representa a data de registro do negócio", example = "2020-10-10")
         private LocalDateTime dataRegistro;
+        @Schema(description = "Campo que representa a nota de avaliação do negócio", example = "4.5")
         private Double avaliacao;
+        @Schema(description = "Campo que representa se o negócio está ativado", example = "true")
         private Boolean ativado;
         @OneToOne(mappedBy = "negocio", cascade = CascadeType.ALL)
         @JsonManagedReference
