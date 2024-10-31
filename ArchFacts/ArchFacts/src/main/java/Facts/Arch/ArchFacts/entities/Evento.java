@@ -1,7 +1,7 @@
 package Facts.Arch.ArchFacts.entities;
 
-import Facts.Arch.ArchFacts.enums.Status;
-import Facts.Arch.ArchFacts.enums.Tipo;
+import Facts.Arch.ArchFacts.enumeration.Status;
+import Facts.Arch.ArchFacts.enumeration.Tipo;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

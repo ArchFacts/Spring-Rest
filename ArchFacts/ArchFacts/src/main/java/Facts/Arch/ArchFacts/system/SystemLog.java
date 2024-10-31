@@ -1,6 +1,5 @@
-package Facts.Arch.ArchFacts.System;
+package Facts.Arch.ArchFacts.system;
 
-import Facts.Arch.ArchFacts.entities.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;

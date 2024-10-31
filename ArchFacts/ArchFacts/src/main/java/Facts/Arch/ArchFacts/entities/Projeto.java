@@ -1,14 +1,12 @@
 package Facts.Arch.ArchFacts.entities;
 
-import Facts.Arch.ArchFacts.enums.Status;
+import Facts.Arch.ArchFacts.enumeration.Status;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DecimalStyle;
 import java.util.UUID;
 @Entity
 public class Projeto {

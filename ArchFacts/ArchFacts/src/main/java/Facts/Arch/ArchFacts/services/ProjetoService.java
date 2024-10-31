@@ -2,7 +2,6 @@ package Facts.Arch.ArchFacts.services;
 
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.entities.Usuario;
-import Facts.Arch.ArchFacts.observer.Agendador;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaProjeto;

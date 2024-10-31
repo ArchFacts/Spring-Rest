@@ -3,10 +3,14 @@ package Facts.Arch.ArchFacts.observer;
 import Facts.Arch.ArchFacts.dto.evento.EventoResponseDTO;
 import Facts.Arch.ArchFacts.dto.mapper.EventoMapper;
 import Facts.Arch.ArchFacts.entities.Evento;
-import Facts.Arch.ArchFacts.enums.Prioridade;
+import Facts.Arch.ArchFacts.entities.Projeto;
+import Facts.Arch.ArchFacts.enumeration.Prioridade;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
+import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
+import Facts.Arch.ArchFacts.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -17,16 +21,37 @@ import java.util.Optional;
 @Component
 public class Scheduler {
     @Autowired
+    private EventoService eventoService;
+    @Autowired
     private Notificador notificador;
     @Autowired
     private EventoRepository eventoRepository;
     @Autowired
     private EventoMapper eventoMapper;
+    @Autowired
+    private ProjetoRepository projetoRepository;
 
-//    @Scheduled(fixedRate = 100000)
-//    public void agendarVerificacaoEventos() {
-//        verificarEventos();
-//    }
+    @Scheduled(fixedRate = 60000) // 1min
+    public List<Projeto> verificarProjetos() {
+        List<Projeto> projetos = projetoRepository.findAll();
+        LocalDateTime dataHoje = LocalDateTime.now();
+
+        List<Projeto> projetosDataProxima = new ArrayList<>();
+
+        for (Projeto projeto : projetos) {
+            LocalDateTime dataEntregaProjeto = projeto.getDataEntrega();
+            if (dataEntregaProjeto.minusDays(3).isBefore(dataHoje)) {
+                Boolean eventoExistente = eventoRepository.findAll().stream()
+                        .anyMatch(evento -> evento.getProjeto().getIdProjeto().equals(projeto.getIdProjeto())
+                                && evento.getDataTermino().equals(dataEntregaProjeto));
+
+                if (eventoExistente) {
+                    projetosDataProxima.add(projeto);
+                }
+            }
+        }
+        return projetos;
+    }
 
     public void verificarEventos() {
         System.out.println("Iniciando verificação de eventos...");
@@ -38,8 +63,8 @@ public class Scheduler {
         LocalDateTime dataHoje = LocalDateTime.now(); // Obtém a data atual
 
         for (Evento evento : eventos) {
-            String diasRestantes = notificador.calcularTempoRestante(evento);
-            Prioridade prioridadeAtual = notificador.calcularPrioridade(evento);
+            String diasRestantes = eventoService.calcularTempoRestante(evento);
+            Prioridade prioridadeAtual = eventoService.calcularPrioridade(evento);
 
             EventoResponseDTO eventoResponseDTO = eventoMapper.toDto(evento);
 

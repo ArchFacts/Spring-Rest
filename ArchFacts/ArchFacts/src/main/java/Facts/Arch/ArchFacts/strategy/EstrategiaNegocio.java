@@ -3,9 +3,8 @@ package Facts.Arch.ArchFacts.strategy;
 import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.entities.Usuario;
-import Facts.Arch.ArchFacts.enums.Role;
+import Facts.Arch.ArchFacts.enumeration.Role;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

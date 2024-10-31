@@ -1,6 +1,5 @@
-package Facts.Arch.ArchFacts.System;
+package Facts.Arch.ArchFacts.system;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

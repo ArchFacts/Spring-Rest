@@ -1,4 +1,4 @@
-package Facts.Arch.ArchFacts.System;
+package Facts.Arch.ArchFacts.system;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

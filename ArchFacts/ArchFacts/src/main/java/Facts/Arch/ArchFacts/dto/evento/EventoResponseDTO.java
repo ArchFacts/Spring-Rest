@@ -1,8 +1,8 @@
 package Facts.Arch.ArchFacts.dto.evento;
 
-import Facts.Arch.ArchFacts.enums.Prioridade;
-import Facts.Arch.ArchFacts.enums.Status;
-import Facts.Arch.ArchFacts.enums.Tipo;
+import Facts.Arch.ArchFacts.enumeration.Prioridade;
+import Facts.Arch.ArchFacts.enumeration.Status;
+import Facts.Arch.ArchFacts.enumeration.Tipo;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 

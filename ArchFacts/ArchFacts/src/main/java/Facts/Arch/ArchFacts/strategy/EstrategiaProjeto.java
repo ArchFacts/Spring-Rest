@@ -3,10 +3,9 @@ package Facts.Arch.ArchFacts.strategy;
 import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.entities.Usuario;
-import Facts.Arch.ArchFacts.enums.Status;
+import Facts.Arch.ArchFacts.enumeration.Status;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class EstrategiaProjeto implements EstrategiaConfiguracao {
     private Usuario remetente;

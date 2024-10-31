@@ -1,9 +1,8 @@
 package Facts.Arch.ArchFacts.dto.usuario;
 
 import Facts.Arch.ArchFacts.entities.Negocio;
-import Facts.Arch.ArchFacts.enums.Role;
+import Facts.Arch.ArchFacts.enumeration.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
 

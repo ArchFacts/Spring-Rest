@@ -1,4 +1,4 @@
-package Facts.Arch.ArchFacts.enums;
+package Facts.Arch.ArchFacts.enumeration;
 
 public enum Status {
     ABERTO("aberto"),

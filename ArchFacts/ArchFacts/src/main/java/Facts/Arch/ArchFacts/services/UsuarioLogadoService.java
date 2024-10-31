@@ -2,19 +2,15 @@ package Facts.Arch.ArchFacts.services;
 
 import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Usuario;
-import Facts.Arch.ArchFacts.enums.Role;
+import Facts.Arch.ArchFacts.enumeration.Role;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
-import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
-import Facts.Arch.ArchFacts.strategy.FactoryCampos;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.security.Principal;
 import java.util.Optional;
 
 @Service

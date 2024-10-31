@@ -1,8 +1,8 @@
 package Facts.Arch.ArchFacts.controllers;
 
-import Facts.Arch.ArchFacts.System.FiltroLogs;
-import Facts.Arch.ArchFacts.System.ListaEstatica;
-import Facts.Arch.ArchFacts.System.SystemLog;
+import Facts.Arch.ArchFacts.system.FiltroLogs;
+import Facts.Arch.ArchFacts.system.ListaEstatica;
+import Facts.Arch.ArchFacts.system.SystemLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

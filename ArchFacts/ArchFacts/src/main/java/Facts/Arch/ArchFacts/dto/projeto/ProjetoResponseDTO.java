@@ -1,6 +1,6 @@
 package Facts.Arch.ArchFacts.dto.projeto;
 
-import Facts.Arch.ArchFacts.enums.Status;
+import Facts.Arch.ArchFacts.enumeration.Status;
 import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
