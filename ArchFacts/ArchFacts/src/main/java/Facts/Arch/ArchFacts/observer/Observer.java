@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class Notificador implements PublicadorEvento {
+public class Observer implements PublicadorEvento {
     @Autowired
     private EventoRepository eventoRepository;
 

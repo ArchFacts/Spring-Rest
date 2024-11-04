@@ -1,11 +1,13 @@
 package Facts.Arch.ArchFacts.system;
 
+import Facts.Arch.ArchFacts.services.EmailService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,6 +18,9 @@ import java.util.Formatter;
 public class FiltroLogs extends SystemLog implements Filter {
     @Autowired
     private ListaEstatica listaLogs;
+
+    @Autowired
+    EmailService emailService;
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
@@ -45,6 +50,11 @@ public class FiltroLogs extends SystemLog implements Filter {
 
             listaLogs.adiciona(systemLog);
             gravarArquivoCsv(systemLog, gerarNomeArquivo());
+            try {
+                emailService.enviarEmail();
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

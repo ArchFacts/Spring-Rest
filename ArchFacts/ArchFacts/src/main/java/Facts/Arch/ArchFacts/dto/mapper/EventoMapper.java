@@ -2,14 +2,14 @@ package Facts.Arch.ArchFacts.dto.mapper;
 
 import Facts.Arch.ArchFacts.dto.evento.EventoResponseDTO;
 import Facts.Arch.ArchFacts.entities.Evento;
-import Facts.Arch.ArchFacts.observer.Notificador;
+import Facts.Arch.ArchFacts.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EventoMapper {
     @Autowired
-    private Notificador notificador;
+    private EventoService eventoService;
 
     public EventoResponseDTO toDto(Evento evento){
         if (evento == null) {
@@ -19,8 +19,8 @@ public class EventoMapper {
         EventoResponseDTO dto = new EventoResponseDTO();
         dto.setDataInicio(evento.getDataInicio());
         dto.setDataTermino(evento.getDataTermino());
-        dto.setTempoRestante(notificador.calcularTempoRestante(evento));
-        dto.setPrioridade(notificador.calcularPrioridade(evento));
+        dto.setTempoRestante(this.eventoService.calcularTempoRestante(evento));
+        dto.setPrioridade(this.eventoService.calcularPrioridade(evento));
         dto.setTipo(evento.getTipo());
         dto.setDescricao(evento.getDescricao());
 

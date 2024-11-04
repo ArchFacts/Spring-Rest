@@ -3,7 +3,6 @@ package Facts.Arch.ArchFacts.controllers;
 import Facts.Arch.ArchFacts.dto.evento.EventoResponseDTO;
 import Facts.Arch.ArchFacts.dto.mapper.EventoMapper;
 import Facts.Arch.ArchFacts.entities.Evento;
-import Facts.Arch.ArchFacts.observer.Notificador;
 import Facts.Arch.ArchFacts.observer.Scheduler;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
 import Facts.Arch.ArchFacts.services.EventoService;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/eventos")
@@ -55,10 +53,10 @@ public class EventoController {
         return ResponseEntity.status(200).body(dtos);
     }
 
-    @PutMapping("/{idEvento}")
-    public ResponseEntity<EventoResponseDTO> atualizarEvento(@PathVariable UUID idEvento
-            , @RequestBody Evento eventoSolicitado) {
-        EventoResponseDTO eventoAtualizado = eventoService.atualizarEvento(idEvento, eventoSolicitado);
-        return ResponseEntity.status(200).body(eventoAtualizado);
-    }
+//    @PutMapping("/{idEvento}")
+//    public ResponseEntity<EventoResponseDTO> atualizarEvento(@PathVariable UUID idEvento
+//            , @RequestBody Evento eventoSolicitado) {
+//        EventoResponseDTO eventoAtualizado = eventoService.atualizarEvento(idEvento, eventoSolicitado);
+//        return ResponseEntity.status(200).body(eventoAtualizado);
+//    }
 }

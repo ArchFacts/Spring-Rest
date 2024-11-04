@@ -10,7 +10,6 @@ import Facts.Arch.ArchFacts.repositories.EventoRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ public class Scheduler {
     @Autowired
     private EventoService eventoService;
     @Autowired
-    private Notificador notificador;
+    private Observer observer;
     @Autowired
     private EventoRepository eventoRepository;
     @Autowired
@@ -31,7 +30,7 @@ public class Scheduler {
     @Autowired
     private ProjetoRepository projetoRepository;
 
-    @Scheduled(fixedRate = 60000) // 1min
+    // @Scheduled(fixedRate = 60000) // 1min
     public List<Projeto> verificarProjetos() {
         List<Projeto> projetos = projetoRepository.findAll();
         LocalDateTime dataHoje = LocalDateTime.now();
@@ -70,6 +69,8 @@ public class Scheduler {
 
             boolean precisaNotificar = false;
 
+
+            // IMPLEMENTAR AQUI O ENVIO DE EMAIL
             if (!eventoResponseDTO.getTempoRestante().equals(diasRestantes)) {
                 precisaNotificar = true;
 
@@ -82,7 +83,7 @@ public class Scheduler {
             }
 
             if (precisaNotificar) {
-                notificador.notificarObservers(eventoResponseDTO);
+                observer.notificarObservers(eventoResponseDTO);
             }
         }
     }

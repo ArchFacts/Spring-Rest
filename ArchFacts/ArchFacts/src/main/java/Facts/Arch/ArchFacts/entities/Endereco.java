@@ -8,9 +8,6 @@ import java.util.UUID;
 
 @Entity
 public class Endereco {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     @Schema(description = "Campo que representa o CEP do endereço",example = "06315040")
     private String cep;
     @Schema(description = "Campo que representa o estado do endereço",example = "São Paulo")
@@ -24,31 +21,16 @@ public class Endereco {
     @Schema(description = "Campo que representa o número do endereço",example = "10")
     private Integer numero;
 
-    @OneToOne
-    @JoinColumn(name = "fkNegocio")
-    @JsonBackReference
-    private Negocio negocio;
     public Endereco() {
     }
 
-    public Endereco(UUID id, String cep, String estado, String bairro,
-                    String cidade, String rua, Integer numero, Negocio negocio) {
-        this.id = id;
+    public Endereco(String cep, String estado, String bairro, String cidade, String rua, Integer numero) {
         this.cep = cep;
         this.estado = estado;
         this.bairro = bairro;
         this.cidade = cidade;
         this.rua = rua;
         this.numero = numero;
-        this.negocio = negocio;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getCep() {
@@ -75,22 +57,6 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public Negocio getNegocio() {
-        return negocio;
-    }
-
-    public void setNegocio(Negocio negocio) {
-        this.negocio = negocio;
-    }
-
     public String getCidade() {
         return cidade;
     }
@@ -99,25 +65,19 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
     public Integer getNumero() {
         return numero;
     }
 
     public void setNumero(Integer numero) {
         this.numero = numero;
-    }
-
-    @Override
-    public String toString() {
-        return "Endereco{" +
-                "id=" + id +
-                ", cep='" + cep + '\'' +
-                ", estado='" + estado + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", rua='" + rua + '\'' +
-                ", numero=" + numero +
-                ", negocio=" + negocio +
-                '}';
     }
 }
