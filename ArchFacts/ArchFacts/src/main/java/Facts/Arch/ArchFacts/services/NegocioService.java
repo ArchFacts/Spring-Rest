@@ -4,7 +4,6 @@ import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.exceptions.DocumentoInvalidoException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeAtivadaException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;
-import Facts.Arch.ArchFacts.repositories.EnderecoRepository;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
@@ -22,8 +21,6 @@ public class NegocioService {
     private NegocioRepository negocioRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
-    @Autowired
-    private EnderecoRepository enderecoRepository;
 
     @Autowired
     private UsuarioLogadoService usuarioLogadoService;

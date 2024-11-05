@@ -130,6 +130,12 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>3.0.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>

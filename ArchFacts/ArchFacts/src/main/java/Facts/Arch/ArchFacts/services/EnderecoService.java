@@ -3,18 +3,14 @@ package Facts.Arch.ArchFacts.services;
 import Facts.Arch.ArchFacts.entities.Endereco;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;
 import Facts.Arch.ArchFacts.exceptions.FalhaComunicacaoCepException;
-import Facts.Arch.ArchFacts.repositories.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-@Feign
 @Service
 public class EnderecoService {
-    @Autowired
-    EnderecoRepository enderecoRepository;
 
     public Endereco consultarEndereco(String cep) {
         String url = "https://viacep.com.br/ws/" + cep + "/json/";

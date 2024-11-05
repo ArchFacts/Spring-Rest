@@ -5,8 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.UUID;
-
-@Entity
 public class Endereco {
     @Schema(description = "Campo que representa o CEP do endereço",example = "06315040")
     private String cep;

@@ -39,9 +39,9 @@ import java.util.UUID;
         private Double avaliacao;
         @Schema(description = "Campo que representa se o negócio está ativado", example = "true")
         private Boolean ativado;
-        @OneToOne(mappedBy = "negocio", cascade = CascadeType.ALL)
-        @JsonManagedReference
-        private Endereco endereco;
+//        @OneToOne(mappedBy = "negocio", cascade = CascadeType.ALL)
+//        @JsonManagedReference
+//        private Endereco endereco;
 
 
         public Negocio() {
@@ -50,8 +50,7 @@ import java.util.UUID;
         public Negocio(UUID idNegocio, String nome, String codigo, String cep, String cpf, String cnpj,
                        LocalDateTime dataRegistro,
                        Double avaliacao,
-                       Boolean ativado,
-                       Endereco endereco) {
+                       Boolean ativado) {
             this.idNegocio = idNegocio;
             this.nome = nome;
             this.codigo = codigo;
@@ -61,7 +60,6 @@ import java.util.UUID;
             this.dataRegistro = dataRegistro;
             this.avaliacao = avaliacao;
             this.ativado = ativado;
-            this.endereco = endereco;
         }
 
         public UUID getIdNegocio() {
@@ -136,14 +134,6 @@ import java.util.UUID;
             this.ativado = ativado;
         }
 
-        public Endereco getEndereco() {
-            return endereco;
-        }
-
-        public void setEndereco(Endereco endereco) {
-            this.endereco = endereco;
-        }
-
         @Override
         public String toString() {
             return "Negocio{" +
@@ -156,7 +146,6 @@ import java.util.UUID;
                     ", dataRegistro=" + dataRegistro +
                     ", avaliacao=" + avaliacao +
                     ", ativado=" + ativado +
-                    ", endereco=" + endereco +
                     '}';
         }
     }
