@@ -3,6 +3,7 @@ package Facts.Arch.ArchFacts.dto.mapper;
 import Facts.Arch.ArchFacts.dto.proposta.PropostaRequestDTO;
 import Facts.Arch.ArchFacts.dto.proposta.PropostaResponseDTO;
 import Facts.Arch.ArchFacts.entities.Proposta;
+import Facts.Arch.ArchFacts.services.NegocioService;
 import Facts.Arch.ArchFacts.services.PropostaService;
 import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PropostaMapper {
     @Autowired
     UsuarioLogadoService usuarioLogadoService;
+    @Autowired
+    NegocioService negocioService;
 
     @Autowired
     PropostaService propostaService;
@@ -34,7 +37,7 @@ public class PropostaMapper {
 
         PropostaResponseDTO dto = new PropostaResponseDTO();
 
-//        dto.set
+        dto.setEmpresa(propostaService.buscarEmpresa());
         return null;
     }
 }

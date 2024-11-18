@@ -39,9 +39,6 @@ import java.util.UUID;
         private Double avaliacao;
         @Schema(description = "Campo que representa se o negócio está ativado", example = "true")
         private Boolean ativado;
-//        @OneToOne(mappedBy = "negocio", cascade = CascadeType.ALL)
-//        @JsonManagedReference
-//        private Endereco endereco;
 
 
         public Negocio() {

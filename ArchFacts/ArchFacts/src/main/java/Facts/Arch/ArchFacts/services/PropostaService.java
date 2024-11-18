@@ -13,7 +13,7 @@ import java.util.UUID;
 public class PropostaService {
     @Autowired
     private NegocioRepository negocioRepository;
-    public Negocio buscarSolicitante(UUID id) {
+    public Negocio buscarEmpresa(UUID id) {
         Optional<Negocio> possivelNegocio = this.negocioRepository.findById(id);
         if (possivelNegocio.isEmpty()) {
             throw new EntidadeInexistenteException("Não foi possível encontrar um negócio com esse ID %s");

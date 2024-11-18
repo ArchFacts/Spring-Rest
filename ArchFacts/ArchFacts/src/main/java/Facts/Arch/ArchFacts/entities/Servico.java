@@ -15,6 +15,7 @@ public class Servico {
     private String nome;
     private String descricao;
     @ManyToOne
+    @JoinColumn (name = "fkNegocio")
     Negocio negocio;
 
     public Servico() {
