@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: ArchFacts
+
+  logging:
+    level:
+      org.springframework.security: DEBUG
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ArchFacts
+    username: ArchFacts
+    password: SociaLight@ArchFacts
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+api:
+  security:
+    token:
+      secret: secret-test

@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: ArchFacts
+
+  logging:
+    level:
+      org.springframework.security: DEBUG
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: create
+        format_sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+  datasource:
+    url: jdbc:sqlserver://svr-archfacts.database.windows.net:1433;databaseName=bd-archfacts
+    username: admin-archfacts
+    password: arch2024Grupo7
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+api:
+  security:
+    token:
+      secret: secret-test
