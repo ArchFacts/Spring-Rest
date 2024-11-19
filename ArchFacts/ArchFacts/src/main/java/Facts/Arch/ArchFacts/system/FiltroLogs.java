@@ -1,6 +1,6 @@
 package Facts.Arch.ArchFacts.system;
 
-import Facts.Arch.ArchFacts.services.EmailService;
+//import Facts.Arch.ArchFacts.services.EmailService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,8 +19,8 @@ public class FiltroLogs extends SystemLog implements Filter {
     @Autowired
     private ListaEstatica listaLogs;
 
-    @Autowired
-    EmailService emailService;
+//    @Autowired
+//    EmailService emailService;
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
@@ -50,11 +50,11 @@ public class FiltroLogs extends SystemLog implements Filter {
 
             listaLogs.adiciona(systemLog);
             gravarArquivoCsv(systemLog, gerarNomeArquivo());
-            try {
-                emailService.enviarEmail();
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
+//            try {
+//                emailService.enviarEmail();
+//            } catch (MessagingException e) {
+//                throw new RuntimeException(e);
+//            }
         }
     }
 

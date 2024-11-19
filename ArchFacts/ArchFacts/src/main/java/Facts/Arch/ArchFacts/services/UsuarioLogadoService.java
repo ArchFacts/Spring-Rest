@@ -39,6 +39,10 @@ public class UsuarioLogadoService {
     public void adicionarNegocioAoUsuario(Negocio negocio) {
         Usuario usuario = obterSessao();
 
+        if (usuario == null) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar um usuário");
+        }
+
         usuario.setNegocio(negocio);
         usuario.setRole(Role.ADM);
     }

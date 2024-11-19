@@ -13,7 +13,7 @@ public class EmpresasParceirasMapper {
         dto.setNomeEmpresa(negocio.getNome());
         dto.setDataRegistro(negocio.getDataRegistro());
         dto.setAvaliacao(negocio.getAvaliacao());
-        
+
         return dto;
     }
 }

@@ -18,6 +18,4 @@ public interface NegocioRepository extends JpaRepository<Negocio, UUID> {
     @Query("SELECT AVG (n.avaliacao) FROM Negocio n WHERE n.idNegocio = :idNegocio")
     Optional<Double> encontrarMediaAvaliacaoEquals(@Param("idNegocio") UUID id);
 
-    @Query("SELECT * FROM Negocio")
-    List<Negocio> listaEmpresasParceiras();
 }

@@ -30,10 +30,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/registro").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/negocios").permitAll()
                         .requestMatchers(HttpMethod.GET,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.PUT,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.DELETE,"/usuarios").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/negocios").authenticated()
                         .requestMatchers(HttpMethod.POST, "/projetos").authenticated()
                         .requestMatchers(HttpMethod.GET, "/logs").permitAll()
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()

@@ -47,6 +47,7 @@ public class NegocioController {
         return ResponseEntity.status(200).body(resposta);
     }
 
+
 //    @PutMapping("/{id}")
 //    public ResponseEntity<Negocio> atualizarNegocio(@PathVariable UUID id, @RequestBody Negocio negocioSolicitado){
 //

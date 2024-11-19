@@ -30,14 +30,14 @@ public class PropostaMapper {
         return proposta;
     }
 
-    public PropostaResponseDTO toDto (Proposta proposta) {
-        if (proposta == null) {
-            return null;
-        }
-
-        PropostaResponseDTO dto = new PropostaResponseDTO();
-
-        dto.setEmpresa(propostaService.buscarEmpresa());
-        return null;
-    }
+//    public PropostaResponseDTO toDto (Proposta proposta) {
+//        if (proposta == null) {
+//            return null;
+//        }
+//
+//        PropostaResponseDTO dto = new PropostaResponseDTO();
+//
+//        dto.setEmpresa(propostaService.buscarEmpresa());
+//        return null;
+//    }
 }
