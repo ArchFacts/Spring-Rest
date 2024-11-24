@@ -17,19 +17,21 @@ public class Proposta {
     private String conteudo;
     private LocalDateTime dataEnvio;
     @ManyToOne
-    Usuario usuario;
+    @JoinColumn(name = "fkRemetente")
+    private Usuario remetente;
     @ManyToOne
-    Negocio negocio;
+    @JoinColumn(name = "fkDestinatario")
+    private Negocio destinatario;
 
     public Proposta() {
     }
 
-    public Proposta(UUID idProposta, String conteudo, LocalDateTime dataEnvio, Usuario usuario, Negocio negocio) {
+    public Proposta(UUID idProposta, String conteudo, LocalDateTime dataEnvio, Usuario remetente, Negocio destinatario) {
         this.idProposta = idProposta;
         this.conteudo = conteudo;
         this.dataEnvio = dataEnvio;
-        this.usuario = usuario;
-        this.negocio = negocio;
+        this.remetente = remetente;
+        this.destinatario = destinatario;
     }
 
     public UUID getIdProposta() {
@@ -56,20 +58,20 @@ public class Proposta {
         this.dataEnvio = dataEnvio;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getRemetente() {
+        return remetente;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setRemetente(Usuario remetente) {
+        this.remetente = remetente;
     }
 
-    public Negocio getNegocio() {
-        return negocio;
+    public Negocio getDestinatario() {
+        return destinatario;
     }
 
-    public void setNegocio(Negocio negocio) {
-        this.negocio = negocio;
+    public void setDestinatario(Negocio destinatario) {
+        this.destinatario = destinatario;
     }
 
     @Override
@@ -78,8 +80,8 @@ public class Proposta {
                 "idProposta=" + idProposta +
                 ", conteudo='" + conteudo + '\'' +
                 ", dataEnvio=" + dataEnvio +
-                ", usuario=" + usuario +
-                ", negocio=" + negocio +
+                ", remetente=" + remetente +
+                ", destinatario=" + destinatario +
                 '}';
     }
 }

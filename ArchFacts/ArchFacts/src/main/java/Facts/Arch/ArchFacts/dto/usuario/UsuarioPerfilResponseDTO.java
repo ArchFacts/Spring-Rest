@@ -90,9 +90,7 @@ public class UsuarioPerfilResponseDTO {
     public void setNegocio(Negocio negocio) {
         this.negocio = negocio;
     }
-    public void setNegocio(String s) {
-    }
-
+    
     @Override
     public String toString() {
         return "UsuarioPerfilResponseDTO{" +
@@ -105,4 +103,6 @@ public class UsuarioPerfilResponseDTO {
                 ", negocio='" + negocio + '\'' +
                 '}';
     }
+
+
 }

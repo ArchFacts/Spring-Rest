@@ -24,7 +24,7 @@ public class PropostaMapper {
         Proposta proposta = new Proposta();
         proposta.setConteudo(dtoRequest.getDescricao());
         proposta.setDataEnvio((dtoRequest.getData()));
-        proposta.setUsuario(usuarioLogadoService.obterSessao());
+        proposta.setRemetente(usuarioLogadoService.obterSessao());
 //        proposta.setNegocio(propostaService.buscarSolicitante());
 
         return proposta;

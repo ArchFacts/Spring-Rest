@@ -31,6 +31,12 @@ public class FiltroSeguranca extends OncePerRequestFilter { // Filtro só aconte
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        String path = request.getRequestURI();
+        if (path.equals("/auth/registro") || path.equals("/auth/login")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = this.recuperarToken(request);
         String login = tokenService.validarToken(token);
         if (login != null) {

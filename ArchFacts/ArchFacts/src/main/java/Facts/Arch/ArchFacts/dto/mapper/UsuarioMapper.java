@@ -2,8 +2,13 @@ package Facts.Arch.ArchFacts.dto.mapper;
 
 import Facts.Arch.ArchFacts.dto.usuario.UsuarioPerfilResponseDTO;
 import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UsuarioMapper {
+    @Autowired
+    private UsuarioLogadoService usuarioLogadoService;
+
     public static UsuarioPerfilResponseDTO toDto(Usuario usuario) {
         if (usuario == null) {
             return null;
@@ -16,7 +21,7 @@ public class UsuarioMapper {
         dto.setDataRegistro(usuario.getDataRegistro());
         dto.setAtivado(usuario.getAtivado());
         dto.setRole(usuario.getRole());
-        dto.setNegocio(usuario.getNegocio() != null ? usuario.getNegocio().getNome() : "Sem negócio");
+        dto.setNegocio(usuario.getNegocio());
 
         return dto;
     }
