@@ -16,6 +16,7 @@ public class Proposta {
     private UUID idProposta;
     private String conteudo;
     private LocalDateTime dataEnvio;
+    private String servicosEscolhidos;
     @ManyToOne
     @JoinColumn(name = "fkRemetente")
     private Usuario remetente;
@@ -26,10 +27,15 @@ public class Proposta {
     public Proposta() {
     }
 
-    public Proposta(UUID idProposta, String conteudo, LocalDateTime dataEnvio, Usuario remetente, Negocio destinatario) {
+    public Proposta(UUID idProposta,
+                    String conteudo,
+                    LocalDateTime dataEnvio,
+                    String servicosEscolhidos,
+                    Usuario remetente, Negocio destinatario) {
         this.idProposta = idProposta;
         this.conteudo = conteudo;
         this.dataEnvio = dataEnvio;
+        this.servicosEscolhidos = servicosEscolhidos;
         this.remetente = remetente;
         this.destinatario = destinatario;
     }
@@ -58,6 +64,14 @@ public class Proposta {
         this.dataEnvio = dataEnvio;
     }
 
+    public String getServicosEscolhidos() {
+        return servicosEscolhidos;
+    }
+
+    public void setServicosEscolhidos(String servicosEscolhidos) {
+        this.servicosEscolhidos = servicosEscolhidos;
+    }
+
     public Usuario getRemetente() {
         return remetente;
     }
@@ -80,6 +94,7 @@ public class Proposta {
                 "idProposta=" + idProposta +
                 ", conteudo='" + conteudo + '\'' +
                 ", dataEnvio=" + dataEnvio +
+                ", servicosEscolhidos='" + servicosEscolhidos + '\'' +
                 ", remetente=" + remetente +
                 ", destinatario=" + destinatario +
                 '}';
