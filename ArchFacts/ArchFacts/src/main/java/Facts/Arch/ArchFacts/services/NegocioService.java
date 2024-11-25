@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -81,5 +82,14 @@ public class NegocioService {
                 -> new EntidadeInexistenteException("Negócio não encontrado"));
 
         this.negocioRepository.deleteById(id);
+    }
+
+    public Negocio buscarEmpresa(UUID id) {
+        Optional<Negocio> possivelNegocio = this.negocioRepository.findById(id);
+        if (possivelNegocio.isEmpty()) {
+            throw new EntidadeInexistenteException("Não foi possível encontrar um negócio com esse ID %s");
+        }
+        Negocio negocio = possivelNegocio.get();
+        return negocio;
     }
 }

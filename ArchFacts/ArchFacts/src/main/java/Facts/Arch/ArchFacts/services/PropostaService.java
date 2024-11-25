@@ -24,14 +24,7 @@ public class PropostaService {
     @Autowired
     UsuarioLogadoService usuarioLogadoService;
 
-    public Negocio buscarEmpresa(UUID id) {
-        Optional<Negocio> possivelNegocio = this.negocioRepository.findById(id);
-        if (possivelNegocio.isEmpty()) {
-            throw new EntidadeInexistenteException("Não foi possível encontrar um negócio com esse ID %s");
-        }
-        Negocio negocio = possivelNegocio.get();
-        return negocio;
-    }
+
 
     public List<Proposta> buscarPropostas(UUID empresaId) {
         List<Proposta> listaPropostas = this.propostaRepository.findByDestinatario_IdNegocio(empresaId);
@@ -42,4 +35,5 @@ public class PropostaService {
 
         return listaPropostas;
     }
+
 }
