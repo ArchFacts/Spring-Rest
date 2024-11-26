@@ -3,25 +3,27 @@ package Facts.Arch.ArchFacts.dto.proposta;
 import java.time.LocalDateTime;
 
 public class PropostaRequestDTO {
-    String titulo;
-    String cep;
-    String endereco;
-    String numero;
-    String complemento;
-    LocalDateTime data;
-    String descricao;
+    private String titulo;
+    private String cep;
+    private String endereco;
+    private Integer numero;
+    private String complemento;
+    private String descricao;
 
     public PropostaRequestDTO() {
     }
 
-    public PropostaRequestDTO(String titulo, String cep, String endereco, String numero, String complemento,
-                              LocalDateTime data, String descricao) {
+    public PropostaRequestDTO(String titulo,
+                              String cep,
+                              String endereco,
+                              Integer numero,
+                              String complemento,
+                              String descricao) {
         this.titulo = titulo;
         this.cep = cep;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
-        this.data = data;
         this.descricao = descricao;
     }
 
@@ -49,11 +51,11 @@ public class PropostaRequestDTO {
         this.endereco = endereco;
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -65,19 +67,23 @@ public class PropostaRequestDTO {
         this.complemento = complemento;
     }
 
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "PropostaRequestDTO{" +
+                "titulo='" + titulo + '\'' +
+                ", cep='" + cep + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", numero=" + numero +
+                ", complemento='" + complemento + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
 }

@@ -14,8 +14,14 @@ public class Proposta {
     @GeneratedValue(strategy = GenerationType.UUID)
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idProposta;
-    private String conteudo;
+    private String titulo;
+    private String cep;
+    private LocalDateTime dataEntrega;
     private LocalDateTime dataEnvio;
+    private String endereco;
+    private Integer numero;
+    private String complemento;
+    private String descricao;
     @ManyToOne
     @JoinColumn(name = "fkRemetente")
     private Usuario remetente;
@@ -27,13 +33,25 @@ public class Proposta {
     }
 
     public Proposta(UUID idProposta,
-                    String conteudo,
+                    String titulo,
+                    String cep,
+                    LocalDateTime dataEntrega,
                     LocalDateTime dataEnvio,
-                    String servicosEscolhidos,
-                    Usuario remetente, Negocio destinatario) {
+                    String endereco,
+                    Integer numero,
+                    String complemento,
+                    String descricao,
+                    Usuario remetente,
+                    Negocio destinatario) {
         this.idProposta = idProposta;
-        this.conteudo = conteudo;
+        this.titulo = titulo;
+        this.cep = cep;
+        this.dataEntrega = dataEntrega;
         this.dataEnvio = dataEnvio;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.descricao = descricao;
         this.remetente = remetente;
         this.destinatario = destinatario;
     }
@@ -46,12 +64,28 @@ public class Proposta {
         this.idProposta = idProposta;
     }
 
-    public String getConteudo() {
-        return conteudo;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 
     public LocalDateTime getDataEnvio() {
@@ -60,6 +94,38 @@ public class Proposta {
 
     public void setDataEnvio(LocalDateTime dataEnvio) {
         this.dataEnvio = dataEnvio;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Usuario getRemetente() {
@@ -82,8 +148,14 @@ public class Proposta {
     public String toString() {
         return "Proposta{" +
                 "idProposta=" + idProposta +
-                ", conteudo='" + conteudo + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", cep='" + cep + '\'' +
+                ", dataEntrega=" + dataEntrega +
                 ", dataEnvio=" + dataEnvio +
+                ", endereco='" + endereco + '\'' +
+                ", numero=" + numero +
+                ", complemento='" + complemento + '\'' +
+                ", descricao='" + descricao + '\'' +
                 ", remetente=" + remetente +
                 ", destinatario=" + destinatario +
                 '}';

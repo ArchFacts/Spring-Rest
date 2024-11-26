@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,5 +19,6 @@ public interface NegocioRepository extends JpaRepository<Negocio, UUID> {
     Negocio findByNome(String nome);
     @Query("SELECT AVG (n.avaliacao) FROM Negocio n WHERE n.idNegocio = :idNegocio")
     Optional<Double> encontrarMediaAvaliacaoEquals(@Param("idNegocio") UUID id);
+    Optional<Negocio> findByCodigo(String codigo);
 
 }

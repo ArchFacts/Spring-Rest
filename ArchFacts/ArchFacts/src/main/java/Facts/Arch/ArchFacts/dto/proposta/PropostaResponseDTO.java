@@ -1,24 +1,27 @@
 package Facts.Arch.ArchFacts.dto.proposta;
 
+import Facts.Arch.ArchFacts.entities.Negocio;
+import Facts.Arch.ArchFacts.entities.Usuario;
+
 import java.time.LocalDateTime;
 
 public class PropostaResponseDTO {
-    String empresa;
-    String solicitante;
+    Negocio empresa;
+    Usuario solicitante;
     String emailEmpresa;
     String emailSolicitante;
     String cep;
     String endereco;
     String bairro;
-    String numero;
+    Integer numero;
     String complemento;
     LocalDateTime data;
 
     public PropostaResponseDTO() {
     }
 
-    public PropostaResponseDTO(String empresa, String solicitante, String emailEmpresa, String emailSolicitante,
-                               String cep, String endereco, String bairro, String numero, String complemento, LocalDateTime data) {
+    public PropostaResponseDTO(Negocio empresa, Usuario solicitante, String emailEmpresa, String emailSolicitante,
+                               String cep, String endereco, String bairro, Integer numero, String complemento, LocalDateTime data) {
         this.empresa = empresa;
         this.solicitante = solicitante;
         this.emailEmpresa = emailEmpresa;
@@ -31,19 +34,19 @@ public class PropostaResponseDTO {
         this.data = data;
     }
 
-    public String getEmpresa() {
+    public Negocio getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
+    public void setEmpresa(Negocio empresa) {
         this.empresa = empresa;
     }
 
-    public String getSolicitante() {
+    public Usuario getSolicitante() {
         return solicitante;
     }
 
-    public void setSolicitante(String solicitante) {
+    public void setSolicitante(Usuario solicitante) {
         this.solicitante = solicitante;
     }
 
@@ -87,11 +90,11 @@ public class PropostaResponseDTO {
         this.bairro = bairro;
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 

@@ -23,7 +23,7 @@ public class PropostaServico {
     private Servico servico;
 
     @ManyToOne
-    @JoinColumn(name = "fkRemetente", referencedColumnName = "idNegocio")
+    @JoinColumn(name = "fkRemetente", referencedColumnName = "idUsuario")
     private Usuario remetente;
 
     @ManyToOne

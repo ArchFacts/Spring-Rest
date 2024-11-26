@@ -1,9 +1,11 @@
 package Facts.Arch.ArchFacts.services;
 
 import Facts.Arch.ArchFacts.entities.Negocio;
+import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.exceptions.DocumentoInvalidoException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeAtivadaException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;
+import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
@@ -91,5 +93,14 @@ public class NegocioService {
         }
         Negocio negocio = possivelNegocio.get();
         return negocio;
+    }
+
+    public Usuario encontrarDonoNegocio(UUID idNegocio) {
+        Optional<Usuario> possivelUsuario = this.usuarioRepository.findByNegocio(idNegocio); {
+            if (possivelUsuario.isEmpty()) {
+                throw new EntidadeNaoEncontradaException("Não foi possível encontrar um dono para este negócio");
+            }
+            return  possivelUsuario.get();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.services;
 
+import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.exceptions.EntidadeAtivadaException;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;

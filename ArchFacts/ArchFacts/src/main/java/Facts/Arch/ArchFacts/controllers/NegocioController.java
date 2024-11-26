@@ -40,6 +40,7 @@ public class NegocioController {
 
         return ResponseEntity.status(200).body(negociosEncontrados);
     }
+
     @PostMapping
     public ResponseEntity<NegocioResponseDTO> cadastrar (@Valid @RequestBody NegocioRequestDTO dto) {
         Negocio negocio = negocioMapper.toEntity(dto);
