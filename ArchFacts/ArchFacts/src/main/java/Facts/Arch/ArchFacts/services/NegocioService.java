@@ -96,7 +96,7 @@ public class NegocioService {
     }
 
     public Usuario encontrarDonoNegocio(UUID idNegocio) {
-        Optional<Usuario> possivelUsuario = this.usuarioRepository.findByNegocio(idNegocio); {
+        Optional<Usuario> possivelUsuario = this.usuarioRepository.encontrarDonoNegocio(idNegocio); {
             if (possivelUsuario.isEmpty()) {
                 throw new EntidadeNaoEncontradaException("Não foi possível encontrar um dono para este negócio");
             }

@@ -1,8 +1,6 @@
 package Facts.Arch.ArchFacts.strategy;
 
-import Facts.Arch.ArchFacts.entities.Negocio;
-import Facts.Arch.ArchFacts.entities.Projeto;
-import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.entities.*;
 import Facts.Arch.ArchFacts.enumeration.Status;
 
 import java.time.LocalDateTime;
@@ -41,6 +39,16 @@ public class EstrategiaProjeto implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Usuario usuario) {
+
+    }
+
+    @Override
+    public void configurarCampos(Proposta proposta) {
+
+    }
+
+    @Override
+    public void configurarCampos(Servico servico) {
 
     }
 }

@@ -1,16 +1,12 @@
 package Facts.Arch.ArchFacts.strategy;
 
-import Facts.Arch.ArchFacts.entities.Negocio;
-import Facts.Arch.ArchFacts.entities.Projeto;
-import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.entities.*;
 import Facts.Arch.ArchFacts.enumeration.Role;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class EstrategiaNegocio implements EstrategiaConfiguracao {
-
-
     @Override
     public void configurarCampos(Negocio negocioSolicitado) {
         negocioSolicitado.setIdNegocio(null);
@@ -33,6 +29,16 @@ public class EstrategiaNegocio implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Usuario usuarioSolicitado) {
+
+    }
+
+    @Override
+    public void configurarCampos(Proposta proposta) {
+
+    }
+
+    @Override
+    public void configurarCampos(Servico servico) {
 
     }
 }

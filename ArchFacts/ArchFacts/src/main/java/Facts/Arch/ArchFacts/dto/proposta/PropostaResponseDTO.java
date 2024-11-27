@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 
 public class PropostaResponseDTO {
     Negocio empresa;
-    Usuario solicitante;
-    String emailEmpresa;
-    String emailSolicitante;
-    String cep;
-    String endereco;
-    String bairro;
-    Integer numero;
-    String complemento;
-    LocalDateTime data;
+    private Usuario solicitante;
+    private String emailEmpresa;
+    private String emailSolicitante;
+    private String cep;
+    private String endereco;
+    private String bairro;
+    private Integer numero;
+    private String complemento;
+    private LocalDateTime data;
 
     public PropostaResponseDTO() {
     }

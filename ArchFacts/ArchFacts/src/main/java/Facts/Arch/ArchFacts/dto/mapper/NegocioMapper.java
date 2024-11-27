@@ -43,7 +43,7 @@ public class NegocioMapper {
         }
 
         NegocioResponseDTO dto = new NegocioResponseDTO();
-        dto.setNome(negocio.getNome());
+        dto.setNomeEmpresa(negocio.getNome());
         dto.setCodigo(negocio.getCodigo());
 
         if (negocio.getCnpj() == null) {

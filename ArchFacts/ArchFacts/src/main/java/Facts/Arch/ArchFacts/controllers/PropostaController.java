@@ -23,10 +23,8 @@ public class PropostaController {
     private PropostaService propostaService;
     @Autowired
     private UsuarioLogadoService usuarioLogadoService;
-
     @Autowired
     private PropostaMapper propostaMapper;
-
 
     @GetMapping
     ResponseEntity<List<Proposta>> buscarPropostas() {

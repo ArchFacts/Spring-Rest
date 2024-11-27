@@ -5,6 +5,7 @@ import Facts.Arch.ArchFacts.dto.negocio.NegocioRequestDTO;
 import Facts.Arch.ArchFacts.dto.negocio.NegocioResponseDTO;
 import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.exceptions.ListaVaziaException;
 import Facts.Arch.ArchFacts.services.EnderecoService;
 import Facts.Arch.ArchFacts.services.NegocioService;
 import Facts.Arch.ArchFacts.services.UsuarioService;
@@ -35,7 +36,7 @@ public class NegocioController {
         List<Negocio> negociosEncontrados = this.negocioService.listar();
 
         if (negociosEncontrados.isEmpty()) {
-            return ResponseEntity.status(204).body(negociosEncontrados);
+            throw new ListaVaziaException("Não foi possível encontrar nenhum negócio");
         }
 
         return ResponseEntity.status(200).body(negociosEncontrados);

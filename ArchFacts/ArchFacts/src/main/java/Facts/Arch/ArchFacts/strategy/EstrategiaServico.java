@@ -1,11 +1,8 @@
 package Facts.Arch.ArchFacts.strategy;
 
 import Facts.Arch.ArchFacts.entities.*;
-import Facts.Arch.ArchFacts.enumeration.Role;
 
-import java.time.LocalDateTime;
-
-public class EstrategiaUsuario implements EstrategiaConfiguracao {
+public class EstrategiaServico implements EstrategiaConfiguracao{
     @Override
     public void configurarCampos(Negocio negocio) {
 
@@ -23,10 +20,7 @@ public class EstrategiaUsuario implements EstrategiaConfiguracao {
 
     @Override
     public void configurarCampos(Usuario usuarioSolicitado) {
-        usuarioSolicitado.setIdUsuario(null);
-        usuarioSolicitado.setRole(Role.USER);
-        usuarioSolicitado.setAtivado(Boolean.TRUE);
-        usuarioSolicitado.setDataRegistro(LocalDateTime.now());
+
     }
 
     @Override

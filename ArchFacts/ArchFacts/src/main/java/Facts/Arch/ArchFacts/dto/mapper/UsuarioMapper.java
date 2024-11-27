@@ -4,7 +4,9 @@ import Facts.Arch.ArchFacts.dto.usuario.UsuarioPerfilResponseDTO;
 import Facts.Arch.ArchFacts.entities.Usuario;
 import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UsuarioMapper {
     @Autowired
     private UsuarioLogadoService usuarioLogadoService;

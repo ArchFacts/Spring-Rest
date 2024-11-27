@@ -9,7 +9,9 @@ import Facts.Arch.ArchFacts.services.NegocioService;
 import Facts.Arch.ArchFacts.services.PropostaService;
 import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PropostaMapper {
     @Autowired
     UsuarioLogadoService usuarioLogadoService;

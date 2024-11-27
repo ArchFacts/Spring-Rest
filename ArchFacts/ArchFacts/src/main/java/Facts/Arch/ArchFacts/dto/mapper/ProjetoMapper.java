@@ -3,7 +3,9 @@ package Facts.Arch.ArchFacts.dto.mapper;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoRequestDTO;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoResponseDTO;
 import Facts.Arch.ArchFacts.entities.Projeto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjetoMapper {
     public static ProjetoResponseDTO toDto(Projeto projeto) {
         if (projeto == null) {

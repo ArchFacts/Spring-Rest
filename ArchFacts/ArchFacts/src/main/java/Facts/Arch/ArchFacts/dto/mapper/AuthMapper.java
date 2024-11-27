@@ -3,7 +3,9 @@ package Facts.Arch.ArchFacts.dto.mapper;
 import Facts.Arch.ArchFacts.dto.auth.RegistroDTO;
 import Facts.Arch.ArchFacts.dto.auth.RespostaRegistroDTO;
 import Facts.Arch.ArchFacts.entities.Usuario;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthMapper {
     public static RespostaRegistroDTO toDto(Usuario usuario){
         if (usuario == null) {

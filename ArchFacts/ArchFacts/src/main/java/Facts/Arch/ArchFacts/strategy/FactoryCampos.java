@@ -1,9 +1,7 @@
     package Facts.Arch.ArchFacts.strategy;
     
-    import Facts.Arch.ArchFacts.entities.Negocio;
-    import Facts.Arch.ArchFacts.entities.Projeto;
-    import Facts.Arch.ArchFacts.entities.Usuario;
-    
+    import Facts.Arch.ArchFacts.entities.*;
+
     public class FactoryCampos {
         private EstrategiaConfiguracao estrategiaConfiguracao;
     
@@ -21,6 +19,10 @@
                 estrategiaConfiguracao.configurarCampos((Projeto) objetoGenerico);
             } else if (objetoGenerico instanceof Usuario) {
                 estrategiaConfiguracao.configurarCampos((Usuario) objetoGenerico);
+            } else if (objetoGenerico instanceof Proposta) {
+                estrategiaConfiguracao.configurarCampos((Proposta) objetoGenerico);
+            } else if (objetoGenerico instanceof Servico) {
+                estrategiaConfiguracao.configurarCampos((Servico) objetoGenerico);
             } else {
                 System.out.println("Não há uma estratégia definida");
             }

@@ -22,4 +22,5 @@ public class UsuarioLogadoController {
         UsuarioPerfilResponseDTO dto = UsuarioMapper.toDto(usuarioPerfil);
         return ResponseEntity.status(200).body(dto);
     }
+
 }

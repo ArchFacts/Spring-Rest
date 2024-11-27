@@ -20,7 +20,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
 
     void deleteByEmail(String email);
 
-    Optional<Usuario> findByNegocio(UUID id);
+    @Query ("SELECT u from Usuario u WHERE u.negocio.id = :idNegocio")
+    Optional<Usuario> encontrarDonoNegocio(UUID idNegocio);
 
 
 //    @Query("SELECT new Facts.Arch.ArchFacts.dto.usuario.UsuarioPerfilResponseDTO(u.nome, u.email, u.telefone, u.dataRegistro, u.ativado, u.role, COALESCE(u.negocio.nome, 'Sem Negócio')) FROM Usuario u LEFT JOIN u.negocio WHERE u.email = :email")

@@ -8,22 +8,20 @@ public class PropostaRequestDTO {
     private String endereco;
     private Integer numero;
     private String complemento;
+    private String dataEntrega;
     private String descricao;
 
     public PropostaRequestDTO() {
     }
 
-    public PropostaRequestDTO(String titulo,
-                              String cep,
-                              String endereco,
-                              Integer numero,
-                              String complemento,
-                              String descricao) {
+    public PropostaRequestDTO(String titulo, String cep, String endereco, Integer numero,
+                              String complemento, String dataEntrega, String descricao) {
         this.titulo = titulo;
         this.cep = cep;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
+        this.dataEntrega = dataEntrega;
         this.descricao = descricao;
     }
 
@@ -67,6 +65,14 @@ public class PropostaRequestDTO {
         this.complemento = complemento;
     }
 
+    public String getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(String dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -83,6 +89,7 @@ public class PropostaRequestDTO {
                 ", endereco='" + endereco + '\'' +
                 ", numero=" + numero +
                 ", complemento='" + complemento + '\'' +
+                ", dataEntrega='" + dataEntrega + '\'' +
                 ", descricao='" + descricao + '\'' +
                 '}';
     }
