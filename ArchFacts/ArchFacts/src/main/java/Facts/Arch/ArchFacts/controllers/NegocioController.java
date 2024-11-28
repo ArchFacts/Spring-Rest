@@ -49,6 +49,12 @@ public class NegocioController {
         return ResponseEntity.status(200).body(resposta);
     }
 
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Usuario> encontrarDonoNegocio(@Valid @PathVariable String codigo) {
+        Usuario usuario = negocioService.encontrarDonoNegocioCodigo(codigo);
+        return ResponseEntity.status(200).body(usuario);
+    }
+
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<Negocio> atualizarNegocio(@PathVariable UUID id, @RequestBody Negocio negocioSolicitado){

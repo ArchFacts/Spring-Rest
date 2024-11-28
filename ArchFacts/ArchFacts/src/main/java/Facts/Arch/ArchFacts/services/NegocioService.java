@@ -10,7 +10,6 @@ import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaNegocio;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -95,12 +94,20 @@ public class NegocioService {
         return negocio;
     }
 
-    public Usuario encontrarDonoNegocio(UUID idNegocio) {
-        Optional<Usuario> possivelUsuario = this.usuarioRepository.encontrarDonoNegocio(idNegocio); {
+    public Usuario encontrarDonoNegocioId(UUID idNegocio) {
+        Optional<Usuario> possivelUsuario = this.usuarioRepository.encontrarDonoNegocioId(idNegocio); {
             if (possivelUsuario.isEmpty()) {
                 throw new EntidadeNaoEncontradaException("Não foi possível encontrar um dono para este negócio");
             }
-            return  possivelUsuario.get();
+            return possivelUsuario.get();
         }
+    }
+
+    public Usuario encontrarDonoNegocioCodigo(String codigo) {
+        Optional<Usuario> possivelUsuario = this.usuarioRepository.encontrarDonoNegocioCodigo(codigo);
+        if (possivelUsuario.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar um dono para este negócio");
+        }
+        return possivelUsuario.get();
     }
 }

@@ -27,20 +27,20 @@ public class PropostaController {
     private PropostaMapper propostaMapper;
 
     @GetMapping
-    ResponseEntity<List<Proposta>> buscarPropostas() {
+    public  ResponseEntity<List<Proposta>> buscarPropostas() {
         List<Proposta> listaPropostas = propostaService.buscarPropostas
                 (usuarioLogadoService.obterNegocio().getIdNegocio());
         return ResponseEntity.status(200).body(listaPropostas);
     }
 
     @GetMapping("/buscarNegocioProposta/{codigo}")
-    ResponseEntity<Negocio> buscarNegocio (@PathVariable String codNegocio) {
+    public ResponseEntity<Negocio> buscarNegocio (@PathVariable String codNegocio) {
         Negocio negocio = propostaService.solicitacaoEnvioPropostaNegocio(codNegocio);
         return ResponseEntity.status(200).body(negocio);
     }
 
     @PostMapping("/{codigoNegocio}/{nomeNegocio}")
-    ResponseEntity<PropostaResponseDTO> cadastrarProposta(@RequestBody PropostaRequestDTO dto,
+    public ResponseEntity<PropostaResponseDTO> cadastrarProposta(@RequestBody PropostaRequestDTO dto,
                                                @PathVariable String codigoNegocio) {
         Proposta proposta = propostaMapper.toEntity(dto);
         PropostaResponseDTO resposta = propostaMapper.toDto(propostaService.criarProposta(proposta, codigoNegocio));

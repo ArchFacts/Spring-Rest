@@ -45,7 +45,7 @@ public class PropostaMapper {
         PropostaResponseDTO dto = new PropostaResponseDTO();
         dto.setEmpresa(proposta.getDestinatario());
         dto.setSolicitante(proposta.getRemetente());
-        dto.setEmailEmpresa(negocioService.encontrarDonoNegocio(proposta.getDestinatario().getIdNegocio()).getEmail());
+        dto.setEmailEmpresa(negocioService.encontrarDonoNegocioId(proposta.getDestinatario().getIdNegocio()).getEmail());
         dto.setEmailSolicitante(proposta.getRemetente().getEmail());
         dto.setCep(proposta.getCep());
         dto.setEndereco(proposta.getEndereco());

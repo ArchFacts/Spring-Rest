@@ -94,4 +94,14 @@ public class UsuarioService {
 
         this.usuarioRepository.deleteByEmail(usuarioExistente.getEmail());
     }
+
+    public Usuario buscarPeloEmail(String email) {
+        Optional<Usuario> possivelUsuario = this.usuarioRepository.findPerfilByEmail(email);
+
+        if (possivelUsuario.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar um usuário com esse email");
+        }
+
+        return possivelUsuario.get();
+    }
 }
