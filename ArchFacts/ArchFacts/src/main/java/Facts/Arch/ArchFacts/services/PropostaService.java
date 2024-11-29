@@ -92,4 +92,19 @@ public class PropostaService {
 
         propostaRepository.deleteById(idProposta);
     }
+
+    public Usuario encontrarSolicitanteProposta(UUID idProposta) {
+        Optional<Proposta> possivelProposta =  propostaRepository.findById(idProposta);
+
+        if (possivelProposta.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar uma proposta associada");
+        }
+
+        Usuario usuario = possivelProposta.get().getRemetente();
+
+        return usuario;
+    }
+
+//    public Negocio encontrarDestinatarioProposta() {} (SE PRECISAR)
+
 }

@@ -2,6 +2,8 @@ package Facts.Arch.ArchFacts.strategy;
 
 import Facts.Arch.ArchFacts.entities.*;
 import Facts.Arch.ArchFacts.enumeration.Status;
+import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
@@ -27,9 +29,7 @@ public class EstrategiaProjeto implements EstrategiaConfiguracao {
         projetoSolicitado.setIdProjeto(null);
         projetoSolicitado.setCusto(0.0);
         projetoSolicitado.setDataInicio(LocalDateTime.now());
-        projetoSolicitado.setStatus(Status.PENDENTE);
-        projetoSolicitado.setDestinatario(remetente);
-        projetoSolicitado.setNegocio(destinatario);
+        projetoSolicitado.setStatus(Status.ABERTO);
     }
 
     @Override

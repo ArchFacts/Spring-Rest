@@ -30,10 +30,10 @@ public class Projeto {
     private Status status;
     @ManyToOne
     @JoinColumn (name = "fkNegocio")
-    Negocio negocio;
+    private Negocio negocio;
     @OneToOne
-    @JoinColumn (name = "fkBeneficiario")
-    Usuario destinatario;
+    @JoinColumn (name = "fkBeneficiario", referencedColumnName = "idUsuario")
+    private Usuario destinatario;
 
     public Projeto() {
     }

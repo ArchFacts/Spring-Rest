@@ -31,6 +31,7 @@ public class PropostaMapper {
         proposta.setCep(dtoRequest.getCep());
         proposta.setEndereco(dtoRequest.getEndereco());
         proposta.setNumero(dtoRequest.getNumero());
+        proposta.setDataEntrega(dtoRequest.getDataEntrega());
         proposta.setComplemento(dtoRequest.getComplemento());
         proposta.setDescricao(dtoRequest.getDescricao());
 

@@ -1,15 +1,18 @@
 package Facts.Arch.ArchFacts.services;
 
-import Facts.Arch.ArchFacts.entities.Projeto;
-import Facts.Arch.ArchFacts.entities.Usuario;
+import Facts.Arch.ArchFacts.entities.*;
+import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
+import Facts.Arch.ArchFacts.repositories.PropostaRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaProjeto;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProjetoService {
@@ -19,19 +22,37 @@ public class ProjetoService {
     private NegocioRepository negocioRepository;
     @Autowired
     private ProjetoRepository projetoRepository;
+    @Autowired
+    private PropostaRepository propostaRepository;
+    @Autowired
+    private PropostaService propostaService;
 
-    public Projeto criarProjeto (Projeto projeto) {
-        Projeto projetoCadastro = projeto;
+    public Projeto criarProjeto (UUID idProposta) {
+        Optional<Proposta> possivelProposta =  propostaRepository.findById(idProposta);
+
+        if (possivelProposta.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar uma proposta associada");
+        }
+        Proposta dadosProjeto = possivelProposta.get();
+        Projeto projetoCadastro = new Projeto();
 
         EstrategiaProjeto estrategiaProjeto = new EstrategiaProjeto();
         FactoryCampos factoryCampos = new FactoryCampos(estrategiaProjeto);
         factoryCampos.configurarCampos(projetoCadastro);
 
-        Usuario usuarioSolicitante = usuarioLogadoService.obterSessao();
-        projeto.setDestinatario(usuarioSolicitante);
-        projeto.setNegocio(negocioRepository.findByNome("Negócio Exemplo"));
+        projetoCadastro.setNome(dadosProjeto.getTitulo());
+        projetoCadastro.setDescricao(dadosProjeto.getDescricao());
+        projetoCadastro.setDataEntrega(dadosProjeto.getDataEntrega());
+        factoryCampos.configurarCampos(projetoCadastro);
 
-        List<Projeto> projetos = projetoRepository.findAll();
-        return projetoRepository.save(projeto);
+        Usuario usuarioSolicitante = propostaService.encontrarSolicitanteProposta(idProposta);
+        Negocio negocioDestinado = usuarioLogadoService.obterNegocio();
+
+        projetoCadastro.setDestinatario(usuarioSolicitante);
+        projetoCadastro.setNegocio(negocioDestinado);
+
+        propostaService.recusarProposta(idProposta);
+
+        return projetoRepository.save(projetoCadastro);
     }
 }

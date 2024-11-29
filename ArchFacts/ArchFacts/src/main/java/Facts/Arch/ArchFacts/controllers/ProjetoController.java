@@ -3,11 +3,13 @@ package Facts.Arch.ArchFacts.controllers;
 import Facts.Arch.ArchFacts.dto.mapper.ProjetoMapper;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoRequestDTO;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoResponseDTO;
+import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
 import Facts.Arch.ArchFacts.services.ProjetoService;
+import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +29,20 @@ public class ProjetoController {
     private ProjetoRepository projetoRepository;
     @Autowired
     private ProjetoService projetoService;
+    @Autowired
+    private UsuarioLogadoService usuarioLogadoService;
 
-    @PostMapping
-    public ResponseEntity<ProjetoResponseDTO> cadastrar (@RequestBody ProjetoRequestDTO dto) {
-        Projeto projeto = ProjetoMapper.toEntity(dto);
-        ProjetoResponseDTO resposta = ProjetoMapper.toDto(projetoService.criarProjeto(projeto));
-//        agendador.listaProjetosVerificacao(projeto);
+    @PostMapping("/aceitar")
+    public ResponseEntity<ProjetoResponseDTO> criarProjeto (@RequestBody UUID idProposta) {
+        ProjetoResponseDTO resposta = ProjetoMapper.toDto(projetoService.criarProjeto(idProposta));
         return ResponseEntity.status(201).body(resposta);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Projeto>> listarDadosNegocio() {
+        UUID idNegocio = usuarioLogadoService.obterNegocio().getIdNegocio();
+        List<Projeto> listaProjetos = projetoRepository.findByNegocio_IdNegocio(idNegocio);
+        return ResponseEntity.status(200).body(listaProjetos);
     }
 
 //    @PostMapping ("")

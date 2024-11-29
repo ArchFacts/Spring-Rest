@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.dto.proposta;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PropostaRequestDTO {
@@ -8,14 +9,14 @@ public class PropostaRequestDTO {
     private String endereco;
     private Integer numero;
     private String complemento;
-    private String dataEntrega;
+    private LocalDateTime dataEntrega;
     private String descricao;
 
     public PropostaRequestDTO() {
     }
 
     public PropostaRequestDTO(String titulo, String cep, String endereco, Integer numero,
-                              String complemento, String dataEntrega, String descricao) {
+                              String complemento, LocalDateTime dataEntrega, String descricao) {
         this.titulo = titulo;
         this.cep = cep;
         this.endereco = endereco;
@@ -65,11 +66,11 @@ public class PropostaRequestDTO {
         this.complemento = complemento;
     }
 
-    public String getDataEntrega() {
+    public LocalDateTime getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(String dataEntrega) {
+    public void setDataEntrega(LocalDateTime dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 

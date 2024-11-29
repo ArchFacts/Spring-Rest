@@ -54,8 +54,4 @@ public class PropostaController {
         propostaService.recusarProposta(idProposta);
         return ResponseEntity.status(204).build();
     }
-
-//    @PostMapping("/aceitar")
-    
-
 }

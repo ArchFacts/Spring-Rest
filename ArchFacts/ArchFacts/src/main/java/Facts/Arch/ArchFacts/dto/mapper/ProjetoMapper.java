@@ -15,14 +15,13 @@ public class ProjetoMapper {
         ProjetoResponseDTO dto = new ProjetoResponseDTO();
         dto.setNome(projeto.getNome());
         dto.setDescricao(projeto.getDescricao());
-        dto.setCusto(projeto.getCusto());
         dto.setDataEntrega(projeto.getDataEntrega());
         dto.setStatus(projeto.getStatus());
 
         return dto;
     }
 
-    public static Projeto toEntity (ProjetoRequestDTO dto) {
+    public static Projeto toEntity(ProjetoRequestDTO dto) {
         if (dto == null) {
             return null;
         }
