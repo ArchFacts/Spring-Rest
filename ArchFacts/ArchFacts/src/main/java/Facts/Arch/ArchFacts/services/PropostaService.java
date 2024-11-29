@@ -10,6 +10,7 @@ import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.PropostaRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaProposta;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,5 +78,18 @@ public class PropostaService {
         propostaCadastro.setDestinatario(destinatario);
 
         return propostaRepository.save(propostaCadastro);
+    }
+
+    @Transactional
+    public void recusarProposta(UUID idProposta) {
+        Optional<Proposta> possivelProposta =  propostaRepository.findById(idProposta);
+
+        if (possivelProposta.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar uma proposta associada");
+        }
+
+        Proposta propostaParaDeletar = possivelProposta.get();
+
+        propostaRepository.deleteById(idProposta);
     }
 }

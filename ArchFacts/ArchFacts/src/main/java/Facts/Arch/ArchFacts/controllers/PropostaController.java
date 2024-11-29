@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/propostas")
@@ -48,12 +49,13 @@ public class PropostaController {
         return ResponseEntity.status(200).body(resposta);
     }
 
-//    @GetMapping("/enviar-proposta1/{codigo}/{nome}")
-//    ResponseEntity<PropostaRequestDTO> buscarProposta(@PathVariable String codNegocio,
-//                                                      @PathVariable String nomeNegocio) {
-//        Negocio negocio = propostaService.solicitacaoEnvioPropostaNegocio(codNegocio);
-//        PropostaRequestDTO resposta = PropostaMapper
-//
-//    }
+    @PostMapping("/recusar")
+    ResponseEntity<Void> recusarProposta(@RequestBody UUID idProposta) {
+        propostaService.recusarProposta(idProposta);
+        return ResponseEntity.status(204).build();
+    }
+
+//    @PostMapping("/aceitar")
+    
 
 }

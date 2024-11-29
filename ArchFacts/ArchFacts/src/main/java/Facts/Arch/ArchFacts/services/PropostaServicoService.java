@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.services;
 
 import Facts.Arch.ArchFacts.dto.propostaServico.PropostaServicoRequestDTO;
+import Facts.Arch.ArchFacts.dto.propostaServico.PropostasAbertasResumoRespostaDTO;
 import Facts.Arch.ArchFacts.entities.*;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.*;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,17 +31,6 @@ public class PropostaServicoService {
 
 
     public PropostaServico cadastrarPropostaServico(PropostaServico propostaServico) {
-
-//        Servico servico = this.servicoRepository.encontrarServicoPeloId(idServico);
-//
-//        Optional<Usuario> possivelUsuario = this.usuarioRepository.findById(propostaServico.getRemetente().getIdUsuario());
-//
-//        if (possivelUsuario.isEmpty()) {
-//            throw new EntidadeNaoEncontradaException("Não foi possível encontrar um user");
-//        }
-//
-//        Usuario usuario = possivelUsuario.get();
-
         Usuario usuario = propostaServico.getRemetente();
 
         Negocio destinatario = propostaServico.getDestinatario();
@@ -65,4 +56,9 @@ public class PropostaServicoService {
 
         return propostaServicoRepository.save(propostaServicoEnvio);
     }
+
+//    public List<> propostasAbertas() {
+//        PropostasAbertasResumoRespostaDTO dto = new PropostasAbertasResumoRespostaDTO();
+//        return null;
+//    }
 }

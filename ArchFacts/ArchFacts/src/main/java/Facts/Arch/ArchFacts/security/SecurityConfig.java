@@ -39,6 +39,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE,"/usuarios").authenticated()
                         .requestMatchers(HttpMethod.POST, "/projetos").authenticated()
                         .requestMatchers(HttpMethod.POST, "/propostas/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/propostas").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/propostas").authenticated()
                         .requestMatchers(HttpMethod.POST, "/propostaServicos").authenticated()
                         .requestMatchers(HttpMethod.POST, "/propostaServicos/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/propostaServicos").authenticated()
