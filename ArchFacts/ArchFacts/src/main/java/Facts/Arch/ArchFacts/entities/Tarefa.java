@@ -26,6 +26,7 @@ public class Tarefa {
     @Enumerated
     private Status status;
     @ManyToOne
+    @JoinColumn(name = "fkProjeto")
     Projeto projeto;
 
     public Tarefa() {

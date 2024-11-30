@@ -19,8 +19,10 @@ public class Parcela {
     private LocalDateTime dataTermino;
     @Enumerated
     private Status status;
+    @JoinColumn (name = "fkChamado", referencedColumnName = "idChamado")
     @OneToOne
     private Chamado chamado;
+    @JoinColumn (name = "fkProjeto", referencedColumnName = "idProjeto")
     @OneToOne
     private Projeto projeto;
 
@@ -35,6 +37,62 @@ public class Parcela {
         this.dataTermino = dataTermino;
         this.status = status;
         this.chamado = chamado;
+        this.projeto = projeto;
+    }
+
+    public UUID getIdParcela() {
+        return idParcela;
+    }
+
+    public void setIdParcela(UUID idParcela) {
+        this.idParcela = idParcela;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public LocalDateTime getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(LocalDateTime dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public LocalDateTime getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(LocalDateTime dataTermino) {
+        this.dataTermino = dataTermino;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Chamado getChamado() {
+        return chamado;
+    }
+
+    public void setChamado(Chamado chamado) {
+        this.chamado = chamado;
+    }
+
+    public Projeto getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
 

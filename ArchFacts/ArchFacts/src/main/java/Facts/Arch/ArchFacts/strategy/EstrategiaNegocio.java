@@ -41,4 +41,9 @@ public class EstrategiaNegocio implements EstrategiaConfiguracao {
     public void configurarCampos(Servico servico) {
 
     }
+
+    @Override
+    public void configurarCampos(Tarefa tarefa) {
+
+    }
 }

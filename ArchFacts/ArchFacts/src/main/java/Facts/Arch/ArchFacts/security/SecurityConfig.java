@@ -47,6 +47,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/propostaServicos").authenticated()
                         .requestMatchers(HttpMethod.GET, "/tarefas").authenticated()
                         .requestMatchers(HttpMethod.POST, "/tarefas").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/tarefas/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/tarefas/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/logs").permitAll()
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
                         .anyRequest().permitAll())

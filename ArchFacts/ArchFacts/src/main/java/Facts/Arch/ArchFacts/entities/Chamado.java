@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Chamado {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "idUsuario", columnDefinition = "varchar(36)")
+    @Column(name = "idChamado", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idChamado;
     private String titulo;
@@ -22,6 +22,7 @@ public class Chamado {
     @Enumerated
     private Status status;
     private Double lucro;
+    @JoinColumn (name = "fkProjeto", referencedColumnName = "idProjeto")
     @ManyToOne
     Projeto projeto;
 
@@ -102,5 +103,19 @@ public class Chamado {
 
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
+    }
+
+    @Override
+    public String toString() {
+        return "Chamado{" +
+                "idChamado=" + idChamado +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", abertura=" + abertura +
+                ", fechamento=" + fechamento +
+                ", status=" + status +
+                ", lucro=" + lucro +
+                ", projeto=" + projeto +
+                '}';
     }
 }

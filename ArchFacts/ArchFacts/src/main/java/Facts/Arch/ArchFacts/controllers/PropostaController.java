@@ -28,9 +28,10 @@ public class PropostaController {
     private PropostaMapper propostaMapper;
 
     @GetMapping
-    public  ResponseEntity<List<Proposta>> buscarPropostas() {
+    public ResponseEntity<List<Proposta>> buscarPropostas() {
         List<Proposta> listaPropostas = propostaService.buscarPropostas
                 (usuarioLogadoService.obterNegocio().getIdNegocio());
+
         return ResponseEntity.status(200).body(listaPropostas);
     }
 

@@ -23,6 +23,8 @@
                 estrategiaConfiguracao.configurarCampos((Proposta) objetoGenerico);
             } else if (objetoGenerico instanceof Servico) {
                 estrategiaConfiguracao.configurarCampos((Servico) objetoGenerico);
+            } else if (objetoGenerico instanceof  Tarefa) {
+                estrategiaConfiguracao.configurarCampos((Tarefa) objetoGenerico);
             } else {
                 System.out.println("Não há uma estratégia definida");
             }

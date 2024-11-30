@@ -4,7 +4,7 @@ import Facts.Arch.ArchFacts.entities.*;
 
 import java.time.LocalDateTime;
 
-public class EstrategiaProposta implements EstrategiaConfiguracao{
+public class EstrategiaTarefa implements EstrategiaConfiguracao{
     @Override
     public void configurarCampos(Negocio negocio) {
 
@@ -27,8 +27,7 @@ public class EstrategiaProposta implements EstrategiaConfiguracao{
 
     @Override
     public void configurarCampos(Proposta proposta) {
-        proposta.setIdProposta(null);
-        proposta.setDataEnvio(LocalDateTime.now());
+
     }
 
     @Override
@@ -38,6 +37,7 @@ public class EstrategiaProposta implements EstrategiaConfiguracao{
 
     @Override
     public void configurarCampos(Tarefa tarefa) {
-
+        tarefa.setIdTarefa(null);
+        tarefa.setDataInicio(LocalDateTime.now());
     }
 }

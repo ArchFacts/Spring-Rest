@@ -9,5 +9,6 @@ public interface EstrategiaConfiguracao {
     void configurarCampos(Usuario usuarioSolicitado);
     void configurarCampos(Proposta proposta);
     void configurarCampos(Servico servico);
+    void configurarCampos(Tarefa tarefa);
 
 }

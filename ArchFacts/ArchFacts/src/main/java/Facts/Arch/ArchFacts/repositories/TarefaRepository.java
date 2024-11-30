@@ -9,5 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface TarefaRepository extends JpaRepository <Tarefa, UUID> {
-    List<Tarefa> findTarefasByNegocioId(@Param("idNegocio") UUID idNegocio);
+//    List<Tarefa> findTarefasByNegocioId(@Param("idNegocio") UUID idNegocio);
+    List<Tarefa> findTarefasByProjetoIdProjeto(@Param("idProjeto") UUID idProjeto);
+
 }
