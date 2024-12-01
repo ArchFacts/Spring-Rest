@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "idUsuario", columnDefinition = "varchar(36)")
+    @Column(name = "idTarefa", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idTarefa;
     private String titulo;
@@ -21,9 +21,9 @@ public class Tarefa {
     private Double despesa;
     private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Prioridade prioridade;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne
     @JoinColumn(name = "fkProjeto")

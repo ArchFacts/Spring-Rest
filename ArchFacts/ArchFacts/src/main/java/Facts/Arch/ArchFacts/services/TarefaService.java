@@ -23,7 +23,7 @@ public class TarefaService {
     private ProjetoRepository projetoRepository;
 
     public List<Tarefa> buscarTarefas(UUID idProjeto) {
-        List<Tarefa> listaTarefas = this.tarefaRepository.findTarefasByProjetoIdProjeto(idProjeto);
+        List<Tarefa> listaTarefas = this.tarefaRepository.findByProjetoIdProjeto(idProjeto);
 
         if (listaTarefas.isEmpty()) {
             throw new ListaVaziaException("Não foi possível identificar a sua lista");

@@ -39,7 +39,13 @@ public class TarefaController {
     public ResponseEntity<TarefaResponseDTO> cadastrar(@Valid @RequestBody TarefaRequestDTO dto,
                                                        @PathVariable UUID idProjeto) {
         Tarefa tarefa = tarefaMapper.toEntity(dto);
+
         TarefaResponseDTO resposta = tarefaMapper.toDto(tarefaService.criarTarefa(idProjeto, tarefa));
         return ResponseEntity.status(200).body(resposta);
     }
+
+//    @DeleteMapping("/{idProjeto}")
+//    public ResponseEntity<Void> deletar(@PathVariable UUID idProjeto) {
+//
+//    }
 }
