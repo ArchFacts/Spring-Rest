@@ -19,7 +19,7 @@ public class Chamado {
     private String descricao;
     private LocalDateTime abertura;
     private LocalDateTime fechamento;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
     private Double lucro;
     @JoinColumn (name = "fkProjeto", referencedColumnName = "idProjeto")

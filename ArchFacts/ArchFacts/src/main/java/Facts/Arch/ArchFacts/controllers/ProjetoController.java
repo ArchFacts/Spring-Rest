@@ -1,9 +1,7 @@
 package Facts.Arch.ArchFacts.controllers;
 
 import Facts.Arch.ArchFacts.dto.mapper.ProjetoMapper;
-import Facts.Arch.ArchFacts.dto.projeto.ProjetoRequestDTO;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoResponseDTO;
-import Facts.Arch.ArchFacts.entities.Negocio;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -39,9 +36,17 @@ public class ProjetoController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Projeto>> listarDadosNegocio() {
+    public ResponseEntity<List<Projeto>> listarProjetosNegocio() {
         UUID idNegocio = usuarioLogadoService.obterNegocio().getIdNegocio();
         List<Projeto> listaProjetos = projetoRepository.findByNegocio_IdNegocio(idNegocio);
+        return ResponseEntity.status(200).body(listaProjetos);
+    }
+
+    @GetMapping("/beneficiario/{nomeEmpresa}")
+    public ResponseEntity<List<Projeto>> listarProjetosBeneficiario(@PathVariable String nomeEmpresa){
+        String email = usuarioLogadoService.obterSessao().getEmail();
+        List<Projeto> listaProjetos =
+                projetoRepository.findByDestinatario_EmailAndNegocio_NomeContainingIgnoreCase(email, nomeEmpresa);
         return ResponseEntity.status(200).body(listaProjetos);
     }
 

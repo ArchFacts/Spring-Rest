@@ -12,4 +12,6 @@ import java.util.UUID;
 @Repository
 public interface ProjetoRepository extends JpaRepository<Projeto, UUID> {
     List<Projeto> findByNegocio_IdNegocio(UUID idNegocio);
+
+    List<Projeto> findByDestinatario_EmailAndNegocio_NomeContainingIgnoreCase(String email, String nomeNegocio);
 }
