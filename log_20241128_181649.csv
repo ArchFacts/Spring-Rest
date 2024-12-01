@@ -1,6 +1,0 @@
-Usuário: juu - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 17ms - Horário: 2024-11-28T18:16:49.530379300
-Usuário: juu - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 17ms - Horário: 2024-11-28T18:16:49.530379300
-Usuário: Não logado - Método: OPTIONS - URI: /negocios/e5315257-3f90-42a8-a4de-290fd29e8a1a - Status: 200 - Tempo de Resposta: 2ms - Horário: 2024-11-28T18:16:49.601920800
-Usuário: Não logado - Método: OPTIONS - URI: /negocios/e5315257-3f90-42a8-a4de-290fd29e8a1a - Status: 200 - Tempo de Resposta: 0ms - Horário: 2024-11-28T18:16:49.603939300
-Usuário: juu - Método: GET - URI: /negocios/e5315257-3f90-42a8-a4de-290fd29e8a1a - Status: 404 - Tempo de Resposta: 63ms - Horário: 2024-11-28T18:16:49.619766
-Usuário: juu - Método: GET - URI: /negocios/e5315257-3f90-42a8-a4de-290fd29e8a1a - Status: 404 - Tempo de Resposta: 48ms - Horário: 2024-11-28T18:16:49.635417400
