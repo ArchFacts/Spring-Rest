@@ -1,0 +1,3 @@
+Usuário: juu - Método: POST - URI: /propostas/e5315257-3f90-42a8-a4de-290fd29e8a1a/Arch - Status: 200 - Tempo de Resposta: 2144ms - Horário: 2024-11-28T18:17:06.596777300
+Usuário: Não logado - Método: OPTIONS - URI: /propostaServicos - Status: 200 - Tempo de Resposta: 0ms - Horário: 2024-11-28T18:17:08.757749400
+Usuário: juu - Método: POST - URI: /propostaServicos - Status: 404 - Tempo de Resposta: 0ms - Horário: 2024-11-28T18:17:08.772775500

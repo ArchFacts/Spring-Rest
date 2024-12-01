@@ -1,0 +1,3 @@
+Usuário: Não logado - Método: POST - URI: /auth/login - Status: 200 - Tempo de Resposta: 886ms - Horário: 2024-11-30T21:04:07.119235600
+Usuário: Não logado - Método: OPTIONS - URI: /perfis - Status: 200 - Tempo de Resposta: 4ms - Horário: 2024-11-30T21:04:08.033350300
+Usuário: juliacampioto@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 41ms - Horário: 2024-11-30T21:04:08.145897700

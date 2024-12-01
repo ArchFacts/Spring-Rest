@@ -1,0 +1,6 @@
+Usuário: Não logado - Método: POST - URI: /auth/login - Status: 200 - Tempo de Resposta: 4359ms - Horário: 2024-11-28T18:21:34.918407200
+Usuário: luis@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 65ms - Horário: 2024-11-28T18:21:39.460552900
+Usuário: luis@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 13ms - Horário: 2024-11-28T18:21:39.598881500
+Usuário: luis@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 31ms - Horário: 2024-11-28T18:21:39.580626200
+Usuário: luis@gmail.com - Método: GET - URI: /propostas - Status: 200 - Tempo de Resposta: 78ms - Horário: 2024-11-28T18:21:39.611698900
+Usuário: luis@gmail.com - Método: GET - URI: /propostas - Status: 200 - Tempo de Resposta: 91ms - Horário: 2024-11-28T18:21:39.598881500

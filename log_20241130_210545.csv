@@ -1,0 +1,7 @@
+Usuário: julia@gmail.com - Método: POST - URI: /negocios - Status: 200 - Tempo de Resposta: 74ms - Horário: 2024-11-30T21:05:44.957214200
+Usuário: Não logado - Método: OPTIONS - URI: /propostas - Status: 200 - Tempo de Resposta: 0ms - Horário: 2024-11-30T21:05:45.087920300
+Usuário: Não logado - Método: OPTIONS - URI: /propostas - Status: 200 - Tempo de Resposta: 8ms - Horário: 2024-11-30T21:05:45.159115900
+Usuário: julia@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 52ms - Horário: 2024-11-30T21:05:45.154550200
+Usuário: julia@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 174ms - Horário: 2024-11-30T21:05:45.143310600
+Usuário: julia@gmail.com - Método: GET - URI: /propostas - Status: 204 - Tempo de Resposta: 86ms - Horário: 2024-11-30T21:05:45.231685500
+Usuário: julia@gmail.com - Método: GET - URI: /propostas - Status: 204 - Tempo de Resposta: 140ms - Horário: 2024-11-30T21:05:45.236814

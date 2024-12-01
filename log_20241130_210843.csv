@@ -1,0 +1,4 @@
+Usuário: Não logado - Método: POST - URI: /auth/login - Status: 200 - Tempo de Resposta: 154ms - Horário: 2024-11-30T21:08:43.164887
+Usuário: ju@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 16ms - Horário: 2024-11-30T21:08:43.336140200
+Usuário: ju@gmail.com - Método: GET - URI: /negocios - Status: 200 - Tempo de Resposta: 57ms - Horário: 2024-11-30T21:08:43.428065500
+Usuário: ju@gmail.com - Método: GET - URI: /negocios - Status: 200 - Tempo de Resposta: 71ms - Horário: 2024-11-30T21:08:43.422386400

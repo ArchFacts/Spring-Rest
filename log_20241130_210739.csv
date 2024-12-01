@@ -1,0 +1,8 @@
+Usuário: Não logado - Método: POST - URI: /auth/login - Status: 200 - Tempo de Resposta: 184ms - Horário: 2024-11-30T21:07:38.912775800
+Usuário: julia@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 16ms - Horário: 2024-11-30T21:07:39.121111400
+Usuário: Não logado - Método: OPTIONS - URI: /propostas - Status: 200 - Tempo de Resposta: 2ms - Horário: 2024-11-30T21:07:39.199534100
+Usuário: Não logado - Método: OPTIONS - URI: /propostas - Status: 200 - Tempo de Resposta: 2ms - Horário: 2024-11-30T21:07:39.199534100
+Usuário: julia@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 14ms - Horário: 2024-11-30T21:07:39.206979800
+Usuário: julia@gmail.com - Método: GET - URI: /propostas - Status: 204 - Tempo de Resposta: 23ms - Horário: 2024-11-30T21:07:39.218974600
+Usuário: julia@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 2ms - Horário: 2024-11-30T21:07:39.239807900
+Usuário: julia@gmail.com - Método: GET - URI: /propostas - Status: 204 - Tempo de Resposta: 28ms - Horário: 2024-11-30T21:07:39.253109400

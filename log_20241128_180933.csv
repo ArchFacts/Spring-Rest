@@ -1,0 +1,4 @@
+Usuário: Não logado - Método: OPTIONS - URI: /auth/login - Status: 200 - Tempo de Resposta: 0ms - Horário: 2024-11-28T18:09:33.130159700
+Usuário: Não logado - Método: POST - URI: /auth/login - Status: 200 - Tempo de Resposta: 599ms - Horário: 2024-11-28T18:09:33.145907300
+Usuário: Não logado - Método: OPTIONS - URI: /perfis - Status: 200 - Tempo de Resposta: 0ms - Horário: 2024-11-28T18:09:33.781129900
+Usuário: luis@gmail.com - Método: GET - URI: /perfis - Status: 200 - Tempo de Resposta: 57ms - Horário: 2024-11-28T18:09:33.922368800
