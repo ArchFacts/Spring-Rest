@@ -7,13 +7,14 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 public class PropostaServico {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @JdbcTypeCode(SqlTypes.CHAR)
-    private String idPropostaServico;
+    private UUID idPropostaServico;
     @ManyToOne
     @JoinColumn(name = "idProposta", referencedColumnName = "idProposta")
     private Proposta proposta;
@@ -35,7 +36,7 @@ public class PropostaServico {
     public PropostaServico() {
     }
 
-    public PropostaServico(String idPropostaServico, Proposta proposta, Servico servico,
+    public PropostaServico(UUID idPropostaServico, Proposta proposta, Servico servico,
                            Usuario remetente, Negocio destinatario, LocalDateTime dataCriacao) {
         this.idPropostaServico = idPropostaServico;
         this.proposta = proposta;
@@ -45,11 +46,11 @@ public class PropostaServico {
         this.dataCriacao = dataCriacao;
     }
 
-    public String getIdPropostaServico() {
+    public UUID getIdPropostaServico() {
         return idPropostaServico;
     }
 
-    public void setIdPropostaServico(String idPropostaServico) {
+    public void setIdPropostaServico(UUID idPropostaServico) {
         this.idPropostaServico = idPropostaServico;
     }
 

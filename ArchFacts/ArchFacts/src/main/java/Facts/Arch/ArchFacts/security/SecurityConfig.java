@@ -45,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/propostaServicos").authenticated()
                         .requestMatchers(HttpMethod.POST, "/propostaServicos/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/propostaServicos").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/propostaServicos/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/tarefas").authenticated()
                         .requestMatchers(HttpMethod.POST, "/tarefas").authenticated()
                         .requestMatchers(HttpMethod.GET, "/tarefas/**").authenticated()
