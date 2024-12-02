@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 public class ChamadoRequestDTO {
     private String titulo;
     private Double lucro;
-    private LocalDateTime dataFechamento;
+    private LocalDateTime fechamento;
+
     @Enumerated
     private Status status;
     private String descricao;
@@ -16,10 +17,10 @@ public class ChamadoRequestDTO {
     public ChamadoRequestDTO() {
     }
 
-    public ChamadoRequestDTO(String titulo, Double lucro, LocalDateTime dataFechamento, Status status, String descricao) {
+    public ChamadoRequestDTO(String titulo, Double lucro, LocalDateTime fechamento, Status status, String descricao) {
         this.titulo = titulo;
         this.lucro = lucro;
-        this.dataFechamento = dataFechamento;
+        this.fechamento = fechamento;
         this.status = status;
         this.descricao = descricao;
     }
@@ -40,12 +41,12 @@ public class ChamadoRequestDTO {
         this.lucro = lucro;
     }
 
-    public LocalDateTime getDataFechamento() {
-        return dataFechamento;
+    public LocalDateTime getFechamento() {
+        return fechamento;
     }
 
-    public void setDataFechamento(LocalDateTime dataFechamento) {
-        this.dataFechamento = dataFechamento;
+    public void setFechamento(LocalDateTime fechamento) {
+        this.fechamento = fechamento;
     }
 
     public Status getStatus() {
@@ -62,16 +63,5 @@ public class ChamadoRequestDTO {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    @Override
-    public String toString() {
-        return "ChamadoRequestDTO{" +
-                "titulo='" + titulo + '\'' +
-                ", lucro=" + lucro +
-                ", dataFechamento=" + dataFechamento +
-                ", status=" + status +
-                ", descricao='" + descricao + '\'' +
-                '}';
     }
 }

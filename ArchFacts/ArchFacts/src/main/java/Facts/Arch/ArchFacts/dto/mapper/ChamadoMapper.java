@@ -15,7 +15,7 @@ public class ChamadoMapper {
 
         Chamado chamado = new Chamado();
         chamado.setDescricao(dto.getDescricao());
-        chamado.setFechamento(dto.getDataFechamento());
+        chamado.setFechamento(dto.getFechamento());
         chamado.setStatus(dto.getStatus());
         chamado.setLucro(dto.getLucro());
         chamado.setAbertura(LocalDateTime.now());

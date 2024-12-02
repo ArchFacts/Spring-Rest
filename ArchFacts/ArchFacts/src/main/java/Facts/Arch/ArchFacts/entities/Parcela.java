@@ -11,13 +11,13 @@ import java.util.UUID;
 public class Parcela {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "idUsuario", columnDefinition = "varchar(36)")
+    @Column(name = "idParcela", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idParcela;
     private Double valor;
     private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
     @JoinColumn (name = "fkChamado", referencedColumnName = "idChamado")
     @OneToOne
