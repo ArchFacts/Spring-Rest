@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.controllers;
 
+import Facts.Arch.ArchFacts.dto.chamado.ChamadoLucroResponseDTO;
 import Facts.Arch.ArchFacts.dto.chamado.ChamadoRequestDTO;
 import Facts.Arch.ArchFacts.dto.chamado.ChamadoResponseDTO;
 import Facts.Arch.ArchFacts.dto.mapper.ChamadoMapper;
@@ -38,6 +39,11 @@ public class ChamadoController {
         return ResponseEntity.status(200).body(listaChamados);
     }
 
-//    @PutMapping()
-//    public ResponseEntity<>
+    @PutMapping()
+    public ResponseEntity<ChamadoLucroResponseDTO> atualizarChamado(@RequestBody ChamadoLucroResponseDTO dto) {
+        Chamado chamadoAtualizado = chamadoService.atualizarChamado(dto);
+        ChamadoLucroResponseDTO responseDTO =
+                new ChamadoLucroResponseDTO(chamadoAtualizado.getIdChamado(), chamadoAtualizado.getLucro());
+        return ResponseEntity.status(200).body(responseDTO);
+    }
 }

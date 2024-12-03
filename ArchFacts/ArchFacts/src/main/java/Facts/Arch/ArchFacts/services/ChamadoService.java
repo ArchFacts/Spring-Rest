@@ -1,4 +1,5 @@
 package Facts.Arch.ArchFacts.services;
+import Facts.Arch.ArchFacts.dto.chamado.ChamadoLucroResponseDTO;
 import Facts.Arch.ArchFacts.dto.mapper.ChamadoMapper;
 import Facts.Arch.ArchFacts.entities.Chamado;
 import Facts.Arch.ArchFacts.entities.Projeto;
@@ -44,5 +45,18 @@ public class ChamadoService {
             throw new ListaVaziaException("Não foi possível identificar a sua lista");
         }
         return listaChamados;
+    }
+
+    public Chamado atualizarChamado(ChamadoLucroResponseDTO chamadoNovo) {
+        Optional<Chamado> optionalChamado = chamadoRepository.findById(chamadoNovo.getIdChamado());
+
+        if (optionalChamado.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Chamado não encontrado");
+        }
+
+        Chamado chamado = optionalChamado.get();
+        chamado.setLucro(chamadoNovo.getLucro());
+
+        return chamadoRepository.save(chamado);
     }
 }

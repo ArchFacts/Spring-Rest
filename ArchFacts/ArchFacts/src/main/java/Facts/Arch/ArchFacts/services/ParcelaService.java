@@ -24,7 +24,7 @@ public class ParcelaService {
     @Autowired
     private UsuarioLogadoService usuarioLogadoService;
     @Autowired
-    private ChamadoRepository chamadoRepository
+    private ChamadoRepository chamadoRepository;
     @Autowired
     private ProjetoRepository projetoRepository;
     public List<Parcela> definirParcelas(ParcelaRequestDTO dto) {

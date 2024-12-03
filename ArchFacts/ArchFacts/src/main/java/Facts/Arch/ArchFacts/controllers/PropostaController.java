@@ -29,6 +29,7 @@ public class PropostaController {
 
     @GetMapping
     public ResponseEntity<List<Proposta>> buscarPropostas() {
+
         List<Proposta> listaPropostas = propostaService.buscarPropostas
                 (usuarioLogadoService.obterNegocio().getIdNegocio());
 
