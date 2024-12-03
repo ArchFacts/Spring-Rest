@@ -16,19 +16,17 @@ public class ParcelaRequestDTO {
     private Status status;
     private Integer qtdParcelas;
     private UUID idChamado;
-    private UUID idProjeto;
 
     public ParcelaRequestDTO() {
     }
 
     public ParcelaRequestDTO(Double valor, LocalDateTime dataInicio, Status status, Integer qtdParcelas,
-                             UUID idChamado, UUID idProjeto) {
+                             UUID idChamado) {
         this.valor = valor;
         this.dataInicio = dataInicio;
         this.status = status;
         this.qtdParcelas = qtdParcelas;
         this.idChamado = idChamado;
-        this.idProjeto = idProjeto;
     }
 
     public Double getValor() {
@@ -71,14 +69,6 @@ public class ParcelaRequestDTO {
         this.idChamado = idChamado;
     }
 
-    public UUID getIdProjeto() {
-        return idProjeto;
-    }
-
-    public void setIdProjeto(UUID idProjeto) {
-        this.idProjeto = idProjeto;
-    }
-
     @Override
     public String toString() {
         return "ParcelaRequestDTO{" +
@@ -87,7 +77,6 @@ public class ParcelaRequestDTO {
                 ", status=" + status +
                 ", qtdParcelas=" + qtdParcelas +
                 ", idChamado=" + idChamado +
-                ", idProjeto=" + idProjeto +
                 '}';
     }
 }

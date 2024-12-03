@@ -1,9 +1,11 @@
 package Facts.Arch.ArchFacts.services;
 
+import Facts.Arch.ArchFacts.entities.Financeiro;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.entities.Tarefa;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.exceptions.ListaVaziaException;
+import Facts.Arch.ArchFacts.repositories.FinanceiroRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.repositories.TarefaRepository;
 import Facts.Arch.ArchFacts.strategy.EstrategiaTarefa;
@@ -21,6 +23,8 @@ public class TarefaService {
     private TarefaRepository tarefaRepository;
     @Autowired
     private ProjetoRepository projetoRepository;
+    @Autowired
+    private FinanceiroRepository financeiroRepository;
 
     public List<Tarefa> buscarTarefas(UUID idProjeto) {
         List<Tarefa> listaTarefas = this.tarefaRepository.findByProjetoIdProjeto(idProjeto);
@@ -32,7 +36,7 @@ public class TarefaService {
         return listaTarefas;
     }
 
-    public Tarefa criarTarefa (UUID idProjeto, Tarefa tarefaCadastro) {
+    public Tarefa criarTarefa(UUID idProjeto, Tarefa tarefaCadastro) {
         Optional<Projeto> possivelProjeto = projetoRepository.findById(idProjeto);
 
         if (possivelProjeto.isEmpty()) {
@@ -41,12 +45,25 @@ public class TarefaService {
 
         Projeto projeto = possivelProjeto.get();
 
+        Financeiro financeiro = financeiroRepository.findByProjeto_IdProjeto(projeto.getIdProjeto())
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Financeiro do projeto não encontrado"));
+
         EstrategiaTarefa estrategiaTarefa = new EstrategiaTarefa();
         FactoryCampos factoryCampos = new FactoryCampos(estrategiaTarefa);
         factoryCampos.configurarCampos(tarefaCadastro);
 
         tarefaCadastro.setProjeto(projeto);
 
-        return tarefaRepository.save(tarefaCadastro);
+        Tarefa tarefaSalva = tarefaRepository.save(tarefaCadastro);
+
+        if (tarefaCadastro.getDespesa() != null && tarefaCadastro.getDespesa() > 0) {
+            financeiro.setDespesaTotal(financeiro.getDespesaTotal() + tarefaCadastro.getDespesa());
+
+            double receita = financeiro.getLucroTotal() - financeiro.getDespesaTotal();
+            financeiro.setReceita(receita);
+
+            financeiroRepository.save(financeiro);
+        }
+        return tarefaSalva;
     }
 }

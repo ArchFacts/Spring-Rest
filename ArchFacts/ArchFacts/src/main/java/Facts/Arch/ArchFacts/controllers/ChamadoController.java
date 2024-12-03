@@ -26,6 +26,7 @@ public class ChamadoController {
     @Autowired
     private ChamadoRepository chamadoRepository;
 
+
     @PostMapping("/{idProjeto}")
     public ResponseEntity<ChamadoResponseDTO> cadastrar(@Valid @RequestBody ChamadoRequestDTO dto, @PathVariable UUID idProjeto) {
         Chamado chamado = chamadoMapper.toEntity(dto);
@@ -35,7 +36,7 @@ public class ChamadoController {
 
     @GetMapping("/{idProjeto}")
     public ResponseEntity<List<Chamado>> listarChamados(@PathVariable UUID idProjeto) {
-        List<Chamado> listaChamados = this.chamadoService.buscarChamados(idProjeto);
+                List<Chamado> listaChamados = this.chamadoService.buscarChamados(idProjeto);
         return ResponseEntity.status(200).body(listaChamados);
     }
 
@@ -44,6 +45,13 @@ public class ChamadoController {
         Chamado chamadoAtualizado = chamadoService.atualizarChamado(dto);
         ChamadoLucroResponseDTO responseDTO =
                 new ChamadoLucroResponseDTO(chamadoAtualizado.getIdChamado(), chamadoAtualizado.getLucro());
-        return ResponseEntity.status(200).body(responseDTO);
+        return ResponseEntity.status(200).build();
     }
+
+//    @GetMapping("/dashboard/{idNegocio}")
+//    public ResponseEntity<GastosGeraisLucroDTO> buscarLucros(@PathVariable UUID idNegocio) {
+//        GastosGeraisLucroDTO lucros = chamadoService.calcularLucrosPorNegocio(idNegocio);
+//        return ResponseEntity.status(200).body(lucros);
+//    }
+
 }

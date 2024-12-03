@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ParcelaService {
@@ -27,12 +28,12 @@ public class ParcelaService {
     private ChamadoRepository chamadoRepository;
     @Autowired
     private ProjetoRepository projetoRepository;
-    public List<Parcela> definirParcelas(ParcelaRequestDTO dto) {
+    public List<Parcela> definirParcelas(ParcelaRequestDTO dto, UUID idProjeto) {
         List<Parcela> parcelasCriadas = new ArrayList<>();
         LocalDateTime dataInicio = dto.getDataInicio();
 
         Optional<Chamado> possivelChamado = chamadoRepository.findById(dto.getIdChamado());
-        Optional<Projeto> possivelProjeto = projetoRepository.findById(dto.getIdProjeto());
+        Optional<Projeto> possivelProjeto = projetoRepository.findById(idProjeto);
 
         if (possivelProjeto.isEmpty()) {
             throw new EntidadeNaoEncontradaException("Não foi possível encontrar um projeto");
@@ -45,11 +46,13 @@ public class ParcelaService {
         Chamado chamado = possivelChamado.get();
         Projeto projeto = possivelProjeto.get();
 
+        Double valorParcelas = dto.getValor() / dto.getQtdParcelas();
+
         for (int i = 1; i < dto.getQtdParcelas(); i++) {
             Parcela parcela = new Parcela();
 
             parcela.setIdParcela(null);
-            parcela.setValor(dto.getValor());
+            parcela.setValor(valorParcelas);
             parcela.setDataInicio(dataInicio);
             parcela.setDataTermino(dataInicio.plusMonths(1));
             parcela.setStatus(dto.getStatus());

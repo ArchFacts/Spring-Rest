@@ -2,10 +2,12 @@ package Facts.Arch.ArchFacts.services;
 import Facts.Arch.ArchFacts.dto.chamado.ChamadoLucroResponseDTO;
 import Facts.Arch.ArchFacts.dto.mapper.ChamadoMapper;
 import Facts.Arch.ArchFacts.entities.Chamado;
+import Facts.Arch.ArchFacts.entities.Financeiro;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.exceptions.ListaVaziaException;
 import Facts.Arch.ArchFacts.repositories.ChamadoRepository;
+import Facts.Arch.ArchFacts.repositories.FinanceiroRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,10 @@ public class ChamadoService {
     private ProjetoRepository projetoRepository;
     @Autowired
     private ChamadoMapper chamadoMapper;
-
+    @Autowired
+    private FinanceiroRepository financeiroRepository;
+    @Autowired
+    private FinanceiroService financeiroService;
     public Chamado criarChamado (UUID idProjeto, Chamado chamado) {
         Optional<Projeto> possivelProjeto = projetoRepository.findById(idProjeto);
 
@@ -32,6 +37,7 @@ public class ChamadoService {
         }
 
         Projeto projeto = possivelProjeto.get();
+
         chamado.setProjeto(projeto);
         chamado.setAbertura(LocalDateTime.now());
 
@@ -47,16 +53,31 @@ public class ChamadoService {
         return listaChamados;
     }
 
-    public Chamado atualizarChamado(ChamadoLucroResponseDTO chamadoNovo) {
-        Optional<Chamado> optionalChamado = chamadoRepository.findById(chamadoNovo.getIdChamado());
+        public Chamado atualizarChamado(ChamadoLucroResponseDTO chamadoNovo) {
+            Optional<Chamado> optionalChamado = chamadoRepository.findById(chamadoNovo.getIdChamado());
 
-        if (optionalChamado.isEmpty()) {
-            throw new EntidadeNaoEncontradaException("Chamado não encontrado");
+            if (optionalChamado.isEmpty()) {
+                throw new EntidadeNaoEncontradaException("Chamado não encontrado");
+            }
+
+            Chamado chamado = optionalChamado.get();
+            chamado.setLucro(chamadoNovo.getLucro());
+
+            Optional<Financeiro> possivelFinanceiro =
+                    financeiroRepository.findByProjeto_IdProjeto(chamado.getProjeto().getIdProjeto());
+
+            if (possivelFinanceiro.isEmpty()) {
+                throw new EntidadeNaoEncontradaException("Não foi possível encontrar o financeiro do projeto");
+            }
+
+            Financeiro financeiro = possivelFinanceiro.get();
+            financeiro.setLucroTotal(financeiro.getLucroTotal() + chamadoNovo.getLucro());
+
+            double receita = financeiro.getLucroTotal() - financeiro.getDespesaTotal();
+            financeiro.setReceita(receita);
+
+            financeiroRepository.save(financeiro);
+
+            return chamadoRepository.save(chamado);
         }
-
-        Chamado chamado = optionalChamado.get();
-        chamado.setLucro(chamadoNovo.getLucro());
-
-        return chamadoRepository.save(chamado);
-    }
 }

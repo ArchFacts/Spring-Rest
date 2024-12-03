@@ -26,6 +26,8 @@ public class ProjetoService {
     private PropostaRepository propostaRepository;
     @Autowired
     private PropostaService propostaService;
+    @Autowired
+    private FinanceiroService financeiroService;
 
     public Projeto criarProjeto (UUID idProposta) {
         Optional<Proposta> possivelProposta =  propostaRepository.findById(idProposta);
@@ -51,8 +53,9 @@ public class ProjetoService {
         projetoCadastro.setDestinatario(usuarioSolicitante);
         projetoCadastro.setNegocio(negocioDestinado);
 
+        Projeto projetoCadastrado = projetoRepository.save(projetoCadastro);
         propostaService.recusarProposta(idProposta);
-
-        return projetoRepository.save(projetoCadastro);
+        financeiroService.criarFinanceiro(projetoCadastrado.getIdProjeto());
+        return projetoCadastrado;
     }
 }
