@@ -27,7 +27,7 @@ public class NegocioMapper {
         } else {
             String documento = possivelDocumento.get();
 
-            if (documento.equals("CPF")) {
+            if (documento.length() == 11) {
                 negocio.setCpf(documento);
             } else {
                 negocio.setCnpj(documento);

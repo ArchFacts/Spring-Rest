@@ -2,6 +2,7 @@ package Facts.Arch.ArchFacts.services;
 
 import Facts.Arch.ArchFacts.entities.*;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
+import Facts.Arch.ArchFacts.exceptions.ProjetoExistenteException;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.repositories.PropostaRepository;
@@ -35,6 +36,11 @@ public class ProjetoService {
         if (possivelProposta.isEmpty()) {
             throw new EntidadeNaoEncontradaException("Não foi possível encontrar uma proposta associada");
         }
+
+        if (possivelProposta.get().getIdProposta().equals(propostaRepository.findById(idProposta))) {
+            throw new ProjetoExistenteException("Esse projeto já foi criado");
+        }
+
         Proposta dadosProjeto = possivelProposta.get();
         Projeto projetoCadastro = new Projeto();
 

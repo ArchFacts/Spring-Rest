@@ -18,8 +18,7 @@ public class ParcelaController {
     @PostMapping("/{idProjeto}")
     public ResponseEntity<List<Parcela>> criarParcelas(
             @PathVariable UUID idProjeto,
-            @RequestBody ParcelaRequestDTO dto
-                                                       ){
+            @RequestBody ParcelaRequestDTO dto){
         List<Parcela> listaParcelas = parcelaService.definirParcelas(dto, idProjeto);
         return ResponseEntity.status(200).build();
     }

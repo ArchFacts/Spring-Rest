@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,6 +35,7 @@ public class FinanceiroService {
         financeiro.setLucroTotal(0.0);
         financeiro.setDespesaTotal(0.0);
         financeiro.setReceita(0.0);
+        financeiro.setDataCriacao(LocalDateTime.now());
         financeiro.setProjeto(projeto);
 
         return financeiroRepository.save(financeiro);

@@ -49,9 +49,9 @@ public class NegocioService {
 
     public String identificarTipoDocumento (String documento) {
         if (documento.length() == 11) {
-            return "CPF";
+            return documento;
         } else if (documento.length() == 14) {
-            return "CNPJ";
+            return documento;
         } else {
             throw new DocumentoInvalidoException("Seu documento não tem uma quantidade de caractéres válida");
         }
