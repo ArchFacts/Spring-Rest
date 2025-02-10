@@ -29,6 +29,8 @@ public class ChamadoService {
     private FinanceiroRepository financeiroRepository;
     @Autowired
     private FinanceiroService financeiroService;
+    @Autowired
+    private UsuarioLogadoService usuarioLogadoService;
     public Chamado criarChamado (UUID idProjeto, Chamado chamado) {
         Optional<Projeto> possivelProjeto = projetoRepository.findById(idProjeto);
 
@@ -79,5 +81,17 @@ public class ChamadoService {
             financeiroRepository.save(financeiro);
 
             return chamadoRepository.save(chamado);
+        }
+
+        public List<Chamado> encontrarTodosChamados() {
+            UUID idNegocio = usuarioLogadoService.obterNegocio().getIdNegocio();
+
+            List<Chamado> listaChamados = chamadoRepository.findByProjeto_Negocio_IdNegocio(idNegocio);
+
+            if (listaChamados.isEmpty()) {
+                throw new EntidadeNaoEncontradaException("Não foi possível encontrar nenhum chamado");
+            }
+
+            return listaChamados;
         }
 }

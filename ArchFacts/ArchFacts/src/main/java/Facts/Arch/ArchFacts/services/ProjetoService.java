@@ -64,4 +64,26 @@ public class ProjetoService {
         financeiroService.criarFinanceiro(projetoCadastrado.getIdProjeto());
         return projetoCadastrado;
     }
+
+    public Projeto encontrarProjetoPeloId (UUID id) {
+        Optional<Projeto> possivelProjeto = projetoRepository.findById(id);
+
+        if (possivelProjeto.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar um projeto");
+        }
+        Projeto projeto = possivelProjeto.get();
+        return projeto;
+    }
+
+    public List<Projeto> encontrarTodosProjetosNegocio() {
+        UUID idNegocio = usuarioLogadoService.obterNegocio().getIdNegocio();
+
+        List<Projeto> listaProjetos = projetoRepository.findByNegocio_IdNegocio(idNegocio);
+
+        if (listaProjetos.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar nenhum projeto");
+        }
+
+        return listaProjetos;
+    }
 }

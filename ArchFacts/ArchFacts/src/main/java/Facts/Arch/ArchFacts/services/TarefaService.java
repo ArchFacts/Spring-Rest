@@ -25,6 +25,8 @@ public class TarefaService {
     private ProjetoRepository projetoRepository;
     @Autowired
     private FinanceiroRepository financeiroRepository;
+    @Autowired
+    private UsuarioLogadoService usuarioLogadoService;
 
     public List<Tarefa> buscarTarefas(UUID idProjeto) {
         List<Tarefa> listaTarefas = this.tarefaRepository.findByProjetoIdProjeto(idProjeto);
@@ -65,5 +67,17 @@ public class TarefaService {
             financeiroRepository.save(financeiro);
         }
         return tarefaSalva;
+    }
+
+    public List<Tarefa> encontrarTodasTarefas() {
+        UUID idNegocio = usuarioLogadoService.obterNegocio().getIdNegocio();
+
+        List<Tarefa> listaTarefas = tarefaRepository.findByProjeto_Negocio_IdNegocio(idNegocio);
+
+        if (listaTarefas.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possivél encontrar nenhuma tarefa");
+        }
+
+        return listaTarefas;
     }
 }

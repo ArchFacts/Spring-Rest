@@ -44,6 +44,15 @@ public class TarefaController {
         return ResponseEntity.status(200).body(resposta);
     }
 
+    @GetMapping("/todos")
+    public ResponseEntity<List<Tarefa>> buscarTodasTarefas() {
+        List<Tarefa> listaTarefas = this.tarefaService.encontrarTodasTarefas();
+
+        return ResponseEntity.status(200).body(listaTarefas);
+    }
+
+
+
 //    @DeleteMapping("/{idProjeto}")
 //    public ResponseEntity<Void> deletar(@PathVariable UUID idProjeto) {
 //

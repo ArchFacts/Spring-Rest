@@ -1,6 +1,7 @@
 package Facts.Arch.ArchFacts.repositories;
 
 import Facts.Arch.ArchFacts.entities.Chamado;
+import Facts.Arch.ArchFacts.entities.Tarefa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -33,4 +34,6 @@ public interface ChamadoRepository extends JpaRepository<Chamado, UUID> {
     Optional<Chamado> findChamadoMaiorLucroPorProjeto(@Param("projetoId") UUID projetoId);
 
     Optional<Chamado> findTopByProjeto_IdProjetoOrderByLucroDesc(UUID projetoId);
+
+    List<Chamado> findByProjeto_Negocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
 }

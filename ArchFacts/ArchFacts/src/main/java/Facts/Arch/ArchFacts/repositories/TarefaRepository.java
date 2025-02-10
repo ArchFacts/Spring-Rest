@@ -25,6 +25,9 @@ public interface TarefaRepository extends JpaRepository <Tarefa, UUID> {
 
     @Query("SELECT t FROM Tarefa t WHERE t.projeto.id = :projetoId ORDER BY t.despesa DESC LIMIT 1")
     Optional<Tarefa> findTarefaMaiorDespesaPorProjeto(@Param("projetoId") UUID projetoId);
-
     Optional<Tarefa> findTopByProjeto_IdProjetoOrderByDespesaDesc(UUID projetoId);
+
+
+    List<Tarefa> findByProjeto_Negocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
+
 }

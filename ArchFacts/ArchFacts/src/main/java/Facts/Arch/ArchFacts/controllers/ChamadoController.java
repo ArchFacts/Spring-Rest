@@ -48,6 +48,12 @@ public class ChamadoController {
         return ResponseEntity.status(200).build();
     }
 
+    @GetMapping("/todos")
+    public ResponseEntity<List<Chamado>> buscarTodosChamados() {
+        List<Chamado> listaChamados = this.chamadoService.encontrarTodosChamados();
+        return ResponseEntity.status(200).body(listaChamados);
+    }
+
 //    @GetMapping("/dashboard/{idNegocio}")
 //    public ResponseEntity<GastosGeraisLucroDTO> buscarLucros(@PathVariable UUID idNegocio) {
 //        GastosGeraisLucroDTO lucros = chamadoService.calcularLucrosPorNegocio(idNegocio);
