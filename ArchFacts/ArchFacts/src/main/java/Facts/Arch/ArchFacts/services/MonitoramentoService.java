@@ -23,7 +23,7 @@ public class MonitoramentoService {
     @Autowired
     private Subject subject;
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 60000) // 60 segundos
     public void monitoramentoEntidades() {
         List<Tarefa> listaTarefas = tarefaRepository.findAll();
         System.out.println("VERIFICANDO ENTIDADES");

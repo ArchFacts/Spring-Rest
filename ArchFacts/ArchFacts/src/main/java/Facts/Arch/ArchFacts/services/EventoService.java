@@ -7,6 +7,7 @@ import Facts.Arch.ArchFacts.enumeration.Status;
 import Facts.Arch.ArchFacts.enumeration.Tipo;
 import Facts.Arch.ArchFacts.exceptions.EntidadeInexistenteException;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,14 @@ public class EventoService {
         }
 
         return eventoRepository.existsByIdEntidade(idEntidade);
+    }
+
+    @Transactional
+    public void removerEvento(UUID idEntidade) {
+        if (idEntidade == null) {
+            throw new EntidadeInexistenteException("Não foi possível encontrar algo relacionado a esse evento");
+        }
+
+        eventoRepository.deleteByIdEntidade(idEntidade);
     }
 }
