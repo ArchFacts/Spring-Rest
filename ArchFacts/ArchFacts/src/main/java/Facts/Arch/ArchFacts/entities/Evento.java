@@ -17,6 +17,9 @@ public class Evento {
     @Column(name = "idEvento", columnDefinition = "varchar(36)")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID idEvento;
+    @Column(name = "idEntidade", columnDefinition = "varchar(36)")
+    @JdbcTypeCode(SqlTypes.CHAR)
+    private UUID idEntidade;
     private LocalDateTime dataInicio;
     private LocalDateTime dataTermino;
     private LocalDateTime dataCriacao;
@@ -38,6 +41,7 @@ public class Evento {
     }
 
     public Evento(UUID idEvento,
+                  UUID idEntidade,
                   LocalDateTime dataInicio,
                   LocalDateTime dataTermino,
                   LocalDateTime dataCriacao,
@@ -48,6 +52,7 @@ public class Evento {
                   Projeto projeto,
                   Negocio negocio) {
         this.idEvento = idEvento;
+        this.idEntidade = idEntidade;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.dataCriacao = dataCriacao;
@@ -65,6 +70,14 @@ public class Evento {
 
     public void setIdEvento(UUID idEvento) {
         this.idEvento = idEvento;
+    }
+
+    public UUID getIdEntidade() {
+        return idEntidade;
+    }
+
+    public void setIdEntidade(UUID idEntidade) {
+        this.idEntidade = idEntidade;
     }
 
     public LocalDateTime getDataInicio() {
@@ -99,6 +112,14 @@ public class Evento {
         this.tipo = tipo;
     }
 
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -113,14 +134,6 @@ public class Evento {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Prioridade getPrioridade() {
-        return prioridade;
-    }
-
-    public void setPrioridade(Prioridade prioridade) {
-        this.prioridade = prioridade;
     }
 
     public Projeto getProjeto() {
@@ -143,6 +156,7 @@ public class Evento {
     public String toString() {
         return "Evento{" +
                 "idEvento=" + idEvento +
+                ", idEntidade=" + idEntidade +
                 ", dataInicio=" + dataInicio +
                 ", dataTermino=" + dataTermino +
                 ", dataCriacao=" + dataCriacao +
