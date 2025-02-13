@@ -1,5 +1,6 @@
 package Facts.Arch.ArchFacts.entities;
 
+import Facts.Arch.ArchFacts.enumeration.Prioridade;
 import Facts.Arch.ArchFacts.enumeration.Status;
 import Facts.Arch.ArchFacts.enumeration.Tipo;
 import jakarta.persistence.*;
@@ -21,6 +22,8 @@ public class Evento {
     private LocalDateTime dataCriacao;
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
+    @Enumerated(EnumType.STRING)
+    private Prioridade prioridade;
     private String descricao;
     @Enumerated(EnumType.STRING)
     Status status;
@@ -34,13 +37,22 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(UUID idEvento, LocalDateTime dataInicio, LocalDateTime dataTermino, LocalDateTime dataCriacao,
-                  Tipo tipo, String descricao, Status status, Projeto projeto, Negocio negocio) {
+    public Evento(UUID idEvento,
+                  LocalDateTime dataInicio,
+                  LocalDateTime dataTermino,
+                  LocalDateTime dataCriacao,
+                  Tipo tipo,
+                  Prioridade prioridade,
+                  String descricao,
+                  Status status,
+                  Projeto projeto,
+                  Negocio negocio) {
         this.idEvento = idEvento;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.dataCriacao = dataCriacao;
         this.tipo = tipo;
+        this.prioridade = prioridade;
         this.descricao = descricao;
         this.status = status;
         this.projeto = projeto;
@@ -103,6 +115,14 @@ public class Evento {
         this.status = status;
     }
 
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
+
     public Projeto getProjeto() {
         return projeto;
     }
@@ -127,6 +147,7 @@ public class Evento {
                 ", dataTermino=" + dataTermino +
                 ", dataCriacao=" + dataCriacao +
                 ", tipo=" + tipo +
+                ", prioridade=" + prioridade +
                 ", descricao='" + descricao + '\'' +
                 ", status=" + status +
                 ", projeto=" + projeto +

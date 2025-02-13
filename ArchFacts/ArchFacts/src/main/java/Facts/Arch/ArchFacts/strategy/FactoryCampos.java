@@ -1,6 +1,9 @@
     package Facts.Arch.ArchFacts.strategy;
     
+    import Facts.Arch.ArchFacts.dto.observer.DadosEntidadeDTO;
     import Facts.Arch.ArchFacts.entities.*;
+
+    import java.time.LocalDateTime;
 
     public class FactoryCampos {
         private EstrategiaConfiguracao estrategiaConfiguracao;
