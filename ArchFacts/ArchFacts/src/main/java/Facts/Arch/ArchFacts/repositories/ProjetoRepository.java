@@ -20,5 +20,6 @@ public interface ProjetoRepository extends JpaRepository<Projeto, UUID> {
     String encontrarNomePeloId(@Param("id") UUID id);
 
     List<Projeto> findByNegocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
-
+    @Query("SELECT p FROM Projeto p WHERE p.destinatario.idUsuario = :idUsuario")
+    List<Projeto> findProjetosByUsuario(@Param("idUsuario") UUID idUsuario);
 }

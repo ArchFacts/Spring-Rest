@@ -36,4 +36,7 @@ public interface ChamadoRepository extends JpaRepository<Chamado, UUID> {
     Optional<Chamado> findTopByProjeto_IdProjetoOrderByLucroDesc(UUID projetoId);
 
     List<Chamado> findByProjeto_Negocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
+
+    
+
 }

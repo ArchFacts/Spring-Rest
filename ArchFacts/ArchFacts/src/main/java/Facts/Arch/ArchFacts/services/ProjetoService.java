@@ -76,9 +76,23 @@ public class ProjetoService {
     }
 
     public List<Projeto> encontrarTodosProjetosNegocio() {
-        UUID idNegocio = usuarioLogadoService.obterNegocio().getIdNegocio();
+
+        UUID idNegocio = usuarioLogadoService.obterSessao().getNegocio().getIdNegocio();
 
         List<Projeto> listaProjetos = projetoRepository.findByNegocio_IdNegocio(idNegocio);
+
+        if (listaProjetos.isEmpty()) {
+            throw new EntidadeNaoEncontradaException("Não foi possível encontrar nenhum projeto");
+        }
+
+        return listaProjetos;
+    }
+
+    public List<Projeto> encontrarTodosProjetosUsuario() {
+        UUID idUsuario = usuarioLogadoService.obterSessao().getIdUsuario();
+
+
+        List<Projeto> listaProjetos = projetoRepository.findProjetosByUsuario(idUsuario);
 
         if (listaProjetos.isEmpty()) {
             throw new EntidadeNaoEncontradaException("Não foi possível encontrar nenhum projeto");

@@ -3,7 +3,6 @@ package Facts.Arch.ArchFacts.controllers;
 import Facts.Arch.ArchFacts.dto.mapper.ProjetoMapper;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoResponseDTO;
 import Facts.Arch.ArchFacts.entities.Projeto;
-import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -59,9 +57,16 @@ public class ProjetoController {
         return ResponseEntity.status(200).body(projeto.getNome());
     }
 
-    @GetMapping("/todos")
-    public ResponseEntity<List<Projeto>> encontrarTodosProjetos() {
+    @GetMapping("/todos/negocio")
+    public ResponseEntity<List<Projeto>> encontrarTodosProjetosNegocio() {
         List<Projeto> listaProjetos = projetoService.encontrarTodosProjetosNegocio();
+
+        return ResponseEntity.status(200).body(listaProjetos);
+    }
+
+    @GetMapping("/todos/usuario")
+    public ResponseEntity<List<Projeto>> encontrarTodosProjetosUsuario() {
+        List<Projeto> listaProjetos = projetoService.encontrarTodosProjetosUsuario();
 
         return ResponseEntity.status(200).body(listaProjetos);
     }
