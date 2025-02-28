@@ -3,9 +3,7 @@ package Facts.Arch.ArchFacts.services;
 import Facts.Arch.ArchFacts.entities.*;
 import Facts.Arch.ArchFacts.exceptions.EntidadeNaoEncontradaException;
 import Facts.Arch.ArchFacts.exceptions.ProjetoExistenteException;
-import Facts.Arch.ArchFacts.repositories.NegocioRepository;
-import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
-import Facts.Arch.ArchFacts.repositories.PropostaRepository;
+import Facts.Arch.ArchFacts.repositories.*;
 import Facts.Arch.ArchFacts.strategy.EstrategiaProjeto;
 import Facts.Arch.ArchFacts.strategy.FactoryCampos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,10 @@ public class ProjetoService {
     private PropostaService propostaService;
     @Autowired
     private FinanceiroService financeiroService;
+    @Autowired
+    private ChamadoRepository chamadoRepository;
+    @Autowired
+    private TarefaRepository tarefaRepository;
 
     public Projeto criarProjeto (UUID idProposta) {
         Optional<Proposta> possivelProposta =  propostaRepository.findById(idProposta);
@@ -99,5 +101,10 @@ public class ProjetoService {
         }
 
         return listaProjetos;
+    }
+
+    public Long contarChamados(UUID idProjeto) {
+        Projeto projeto = projetoRepository.findById(idProjeto).
+                orElseThrow(() -> EntidadeNaoEncontradaException("Proejto não encontrado"))
     }
 }

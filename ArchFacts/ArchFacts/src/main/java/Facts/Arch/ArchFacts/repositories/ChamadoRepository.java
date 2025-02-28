@@ -19,23 +19,10 @@ public interface ChamadoRepository extends JpaRepository<Chamado, UUID> {
     @Modifying
     @Query("UPDATE Chamado c SET c.lucro = :lucro WHERE c.idChamado = :idChamado")
     void atualizarLucro(@Param("idChamado") UUID idChamado, @Param("lucro") Double lucro);
-
-//    @Query(value = "SELECT " +
-//            "COALESCE(SUM(c.lucro), 0) AS lucroUltimos7Dias, " +
-//            "COALESCE(SUM(CASE WHEN c.abertura BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE() THEN c.lucro ELSE 0 END), 0) AS lucroUltimos30Dias, " +
-//            "COALESCE(SUM(CASE WHEN c.abertura BETWEEN CURDATE() - INTERVAL 3 MONTH AND CURDATE() THEN c.lucro ELSE 0 END), 0) AS lucroUltimos3Meses, " +
-//            "COALESCE(SUM(CASE WHEN c.abertura BETWEEN CURDATE() - INTERVAL 12 MONTH AND CURDATE() THEN c.lucro ELSE 0 END), 0) AS lucroUltimos12Meses " +
-//            "FROM Chamado c " +
-//            "JOIN Projeto p ON c.fkProjeto = p.idProjeto " +
-//            "WHERE p.fkNegocio = :idNegocio " +
-//            "AND c.lucro IS NOT NULL", nativeQuery = true)
-//    Object[] calcularLucrosPorNegocio(@Param("idNegocio") UUID idNegocio);
-
     @Query("SELECT c FROM Chamado c WHERE c.projeto.id = :projetoId ORDER BY c.lucro DESC LIMIT 1")
     Optional<Chamado> findChamadoMaiorLucroPorProjeto(@Param("projetoId") UUID projetoId);
-
     Optional<Chamado> findTopByProjeto_IdProjetoOrderByLucroDesc(UUID projetoId);
-
     List<Chamado> findByProjeto_Negocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
+    long countByProjeto_IdProjeto(UUID projetoId);
 
 }
