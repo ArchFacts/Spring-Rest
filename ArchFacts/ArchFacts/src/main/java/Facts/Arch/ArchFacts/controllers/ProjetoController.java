@@ -2,10 +2,12 @@ package Facts.Arch.ArchFacts.controllers;
 
 import Facts.Arch.ArchFacts.dto.mapper.ProjetoMapper;
 import Facts.Arch.ArchFacts.dto.projeto.ProjetoResponseDTO;
+import Facts.Arch.ArchFacts.entities.Chamado;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.repositories.NegocioRepository;
 import Facts.Arch.ArchFacts.repositories.ProjetoRepository;
 import Facts.Arch.ArchFacts.repositories.UsuarioRepository;
+import Facts.Arch.ArchFacts.services.FinalizacaoService;
 import Facts.Arch.ArchFacts.services.ProjetoService;
 import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class ProjetoController {
     private ProjetoService projetoService;
     @Autowired
     private UsuarioLogadoService usuarioLogadoService;
+    @Autowired
+    private FinalizacaoService finalizacaoService;
 
     @PostMapping("/aceitar")
     public ResponseEntity<ProjetoResponseDTO> criarProjeto (@RequestBody UUID idProposta) {
@@ -69,5 +73,11 @@ public class ProjetoController {
         List<Projeto> listaProjetos = projetoService.encontrarTodosProjetosUsuario();
 
         return ResponseEntity.status(200).body(listaProjetos);
+    }
+
+    @PutMapping("/finalizacao/{idProjeto}")
+    public ResponseEntity<Projeto> finalizarProjeto(@PathVariable UUID idProjeto) {
+        finalizacaoService.finalizarProjeto(idProjeto);
+        return ResponseEntity.status(204).build();
     }
 }

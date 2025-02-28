@@ -7,6 +7,7 @@ import Facts.Arch.ArchFacts.dto.mapper.ChamadoMapper;
 import Facts.Arch.ArchFacts.entities.Chamado;
 import Facts.Arch.ArchFacts.repositories.ChamadoRepository;
 import Facts.Arch.ArchFacts.services.ChamadoService;
+import Facts.Arch.ArchFacts.services.FinalizacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,8 @@ public class ChamadoController {
     @Autowired
     private ChamadoRepository chamadoRepository;
 
+    @Autowired
+    private FinalizacaoService finalizacaoService;
 
     @PostMapping("/{idProjeto}")
     public ResponseEntity<ChamadoResponseDTO> cadastrar(@Valid @RequestBody ChamadoRequestDTO dto, @PathVariable UUID idProjeto) {
@@ -54,10 +57,10 @@ public class ChamadoController {
         return ResponseEntity.status(200).body(listaChamados);
     }
 
-//    @GetMapping("/dashboard/{idNegocio}")
-//    public ResponseEntity<GastosGeraisLucroDTO> buscarLucros(@PathVariable UUID idNegocio) {
-//        GastosGeraisLucroDTO lucros = chamadoService.calcularLucrosPorNegocio(idNegocio);
-//        return ResponseEntity.status(200).body(lucros);
-//    }
+    @PutMapping("/finalizacao/{idChamado}")
+    public ResponseEntity<Chamado> finalizarChamado(@PathVariable UUID idChamado) {
+        finalizacaoService.finalizarChamado(idChamado);
+        return ResponseEntity.status(204).build();
+    }
 
 }

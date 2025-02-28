@@ -8,8 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EventoMapper {
-    @Autowired
-    private EventoService eventoService;
+
+    public EventoMapper() {
+    }
 
     public EventoResponseDTO toDto(Evento evento){
         if (evento == null) {

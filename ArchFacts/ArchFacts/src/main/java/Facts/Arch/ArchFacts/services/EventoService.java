@@ -63,12 +63,13 @@ public class EventoService {
     }
 
     @Transactional
-    public void removerEvento(UUID idEntidade) {
+    public Boolean removerEvento(UUID idEntidade) {
         if (idEntidade == null) {
             throw new EntidadeInexistenteException("Não foi possível encontrar algo relacionado a esse evento");
         }
 
         eventoRepository.deleteByIdEntidade(idEntidade);
+        return true;
     }
 
     public List<EventoResponseDTO> encontrarEventosNegocio() {

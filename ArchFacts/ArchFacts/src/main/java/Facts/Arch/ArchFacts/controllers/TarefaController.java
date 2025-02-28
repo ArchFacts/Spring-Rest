@@ -3,7 +3,9 @@ package Facts.Arch.ArchFacts.controllers;
 import Facts.Arch.ArchFacts.dto.mapper.TarefaMapper;
 import Facts.Arch.ArchFacts.dto.tarefa.TarefaRequestDTO;
 import Facts.Arch.ArchFacts.dto.tarefa.TarefaResponseDTO;
+import Facts.Arch.ArchFacts.entities.Chamado;
 import Facts.Arch.ArchFacts.entities.Tarefa;
+import Facts.Arch.ArchFacts.services.FinalizacaoService;
 import Facts.Arch.ArchFacts.services.ProjetoService;
 import Facts.Arch.ArchFacts.services.TarefaService;
 import Facts.Arch.ArchFacts.services.UsuarioLogadoService;
@@ -22,9 +24,10 @@ public class TarefaController {
     private TarefaService tarefaService;
     @Autowired
     UsuarioLogadoService usuarioLogadoService;
-
     @Autowired
     private TarefaMapper tarefaMapper;
+    @Autowired
+    private FinalizacaoService finalizacaoService;
 
     @Autowired
     private ProjetoService projetoService;
@@ -51,10 +54,10 @@ public class TarefaController {
         return ResponseEntity.status(200).body(listaTarefas);
     }
 
+    @PutMapping("/finalizacao/{idTarefa}")
+    public ResponseEntity<Tarefa> finalizarTarefa(@PathVariable UUID idTarefa) {
+        finalizacaoService.finalizarTarefa(idTarefa);
+        return ResponseEntity.status(204).build();
+    }
 
-
-//    @DeleteMapping("/{idProjeto}")
-//    public ResponseEntity<Void> deletar(@PathVariable UUID idProjeto) {
-//
-//    }
 }

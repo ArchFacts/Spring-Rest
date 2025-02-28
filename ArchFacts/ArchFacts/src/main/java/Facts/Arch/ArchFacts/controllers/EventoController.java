@@ -1,9 +1,6 @@
 package Facts.Arch.ArchFacts.controllers;
 
 import Facts.Arch.ArchFacts.dto.evento.EventoResponseDTO;
-import Facts.Arch.ArchFacts.dto.mapper.EventoMapper;
-import Facts.Arch.ArchFacts.entities.Evento;
-import Facts.Arch.ArchFacts.observer.Scheduler;
 import Facts.Arch.ArchFacts.repositories.EventoRepository;
 import Facts.Arch.ArchFacts.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;

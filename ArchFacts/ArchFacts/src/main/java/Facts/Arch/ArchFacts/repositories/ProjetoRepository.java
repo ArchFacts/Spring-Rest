@@ -3,7 +3,9 @@ package Facts.Arch.ArchFacts.repositories;
 import Facts.Arch.ArchFacts.entities.Chamado;
 import Facts.Arch.ArchFacts.entities.Projeto;
 import Facts.Arch.ArchFacts.entities.Proposta;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,5 @@ public interface ProjetoRepository extends JpaRepository<Projeto, UUID> {
     List<Projeto> findByNegocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
     @Query("SELECT p FROM Projeto p WHERE p.destinatario.idUsuario = :idUsuario")
     List<Projeto> findProjetosByUsuario(@Param("idUsuario") UUID idUsuario);
+
 }

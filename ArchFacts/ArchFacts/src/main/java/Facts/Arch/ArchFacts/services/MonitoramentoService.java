@@ -25,8 +25,6 @@ public class MonitoramentoService {
 
     @Scheduled(fixedRate = 60000) // 60 segundos
     public void monitoramentoEntidades() {
-        List<Tarefa> listaTarefas = tarefaRepository.findAll();
-        System.out.println("VERIFICANDO ENTIDADES");
         tarefaRepository.findAll().forEach(subject::notificar);
         chamadoRepository.findAll().forEach(subject::notificar);
         projetoRepository.findAll().forEach(subject::notificar);
