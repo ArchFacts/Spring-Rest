@@ -105,6 +105,13 @@ public class ProjetoService {
 
     public Long contarChamados(UUID idProjeto) {
         Projeto projeto = projetoRepository.findById(idProjeto).
-                orElseThrow(() -> EntidadeNaoEncontradaException("Proejto não encontrado"))
+                orElseThrow(() -> new EntidadeNaoEncontradaException("Projeto não encontrado"));
+        return chamadoRepository.countByProjeto_IdProjeto(idProjeto);
+    }
+
+    public Long contarTarefas(UUID idProjeto) {
+        Projeto projeto = projetoRepository.findById(idProjeto).
+                orElseThrow(() -> new EntidadeNaoEncontradaException("Projeto não encontrado"));
+        return tarefaRepository.countByProjeto_IdProjeto(idProjeto);
     }
 }

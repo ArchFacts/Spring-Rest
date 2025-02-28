@@ -80,4 +80,13 @@ public class ProjetoController {
         finalizacaoService.finalizarProjeto(idProjeto);
         return ResponseEntity.status(204).build();
     }
+    @GetMapping("/contagem/chamados/{idProjeto}")
+    public ResponseEntity<Long> contarChamados(@PathVariable UUID idProjeto) {
+        return ResponseEntity.status(200).body(projetoService.contarChamados(idProjeto));
+    }
+
+    @GetMapping("/contagem/tarefas/{idProjeto}")
+    public ResponseEntity<Long> contarTarefas(@PathVariable UUID idProjeto) {
+        return ResponseEntity.status(200).body(projetoService.contarTarefas(idProjeto));
+    }
 }
