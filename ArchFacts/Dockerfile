@@ -20,6 +20,16 @@ FROM openjdk:17-jdk-slim
 WORKDIR /ArchFacts
 COPY --from=builder /ArchFacts/build/ArchFacts.jar .
 
+RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists*
+
+COPY config_banco.sh /usr/local/bin
+
+COPY Dump20250422.sql /app/schema.sql
+
+RUN chmod +x /usr/local/bin/config_banco.sh
+
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-jar", "ArchFacts.jar" ]
+ENTRYPOINT [ "/usr/local/bin/config_banco.sh" ]
+
+CMD ["java", "-jar", "ArchFacts.jar"]
