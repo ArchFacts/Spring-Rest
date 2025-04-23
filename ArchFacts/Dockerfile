@@ -1,10 +1,10 @@
-FROM maven:3.8.6-openjdk-17-slim as builder
+FROM maven:3.8-openjdk-17-slim as builder
 
 LABEL maintainer="ArchFacts Team"
 
 WORKDIR /ArchFacts
 
-# Instalação das dependências do projeto no pom e cache para acelerar builds
+# Instalacao das dependencias do projeto no pom e cache para acelerar builds
 COPY pom.xml .
 RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline -B
 
@@ -16,7 +16,7 @@ RUN mvn clean package -DskipTests
 RUN mkdir -p /ArchFacts/build && find target/ -name '*.jar' -exec mv {} /ArchFacts/build/ArchFacts.jar \;
 
 #Utilizando JDK slim para fazer o build da imagem mais leve
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 WORKDIR /ArchFacts
 COPY --from=builder /ArchFacts/build/ArchFacts.jar .
 
