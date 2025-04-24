@@ -20,7 +20,11 @@ FROM openjdk:17-jre-slim
 WORKDIR /ArchFacts
 COPY --from=builder /ArchFacts/build/ArchFacts.jar .
 
-RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists*
+#RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists*
+
+RUN apt-get update
+RUN apt-get install -y default-mysql-client
+RUN rm -rf /var/lib/apt/lists*
 
 COPY config_banco.sh /usr/local/bin
 
