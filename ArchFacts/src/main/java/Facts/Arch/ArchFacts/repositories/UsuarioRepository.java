@@ -14,15 +14,15 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     Boolean existsByEmail(String email);
     Optional<Usuario> findByEmail(String email);
 
-    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    @Query("SELECT u FROM usuario u WHERE u.email = :email")
     Optional<Usuario> findPerfilByEmail(@Param("email") String email);
 
     void deleteByEmail(String email);
 
-    @Query ("SELECT u from Usuario u WHERE u.negocio.id = :idNegocio")
+    @Query ("SELECT u from usuario u WHERE u.negocio.id = :idNegocio")
     Optional<Usuario> encontrarDonoNegocioId(UUID idNegocio);
 
-    @Query ("SELECT u from Usuario u WHERE u.negocio.codigo = :codigo")
+    @Query ("SELECT u from usuario u WHERE u.negocio.codigo = :codigo")
     Optional<Usuario> encontrarDonoNegocioCodigo(String codigo);
 
 

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "tarefa")
 public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

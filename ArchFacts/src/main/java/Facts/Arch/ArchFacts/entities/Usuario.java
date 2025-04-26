@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 @Entity
+@Table(name = "usuario")
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
