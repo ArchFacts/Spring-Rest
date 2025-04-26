@@ -7,6 +7,7 @@ import org.hibernate.type.SqlTypes;
 import java.util.UUID;
 
 @Entity
+@Table(name = "servico")
 public class Servico {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

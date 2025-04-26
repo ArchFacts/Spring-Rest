@@ -11,10 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface ServicoRepository extends JpaRepository <Servico, UUID> {
-    @Query("SELECT s FROM Servico s WHERE s.negocio.idNegocio = :idNegocio")
+    @Query("SELECT s FROM servico s WHERE s.negocio.idNegocio = :idNegocio")
     List<Servico> findServicosByNegocioId(@Param("idNegocio") UUID idNegocio);
 
-    @Query("SELECT s FROM Servico s WHERE s.idServico = :idServico")
+    @Query("SELECT s FROM servico s WHERE s.idServico = :idServico")
     Servico encontrarServicoPeloId(@Param("idServico") UUID idServico);
 
 }

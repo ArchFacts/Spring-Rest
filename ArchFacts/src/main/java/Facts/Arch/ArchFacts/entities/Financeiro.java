@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "financeiro")
 public class Financeiro {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

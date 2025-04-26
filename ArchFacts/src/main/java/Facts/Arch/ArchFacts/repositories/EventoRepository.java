@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface EventoRepository extends JpaRepository<Evento, UUID> {
     Boolean existsByIdEntidade(UUID idEntidade);
     @Modifying
-    @Query("DELETE FROM Evento e WHERE e.idEntidade = :idEntidade")
+    @Query("DELETE FROM evento e WHERE e.idEntidade = :idEntidade")
     void deleteByIdEntidade(UUID idEntidade);
 
     List<Evento> findByNegocio_IdNegocio(@Param("idNegocio") UUID idNegocio);

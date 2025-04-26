@@ -8,6 +8,7 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 import java.util.UUID;
 @Entity
+@Table(name = "parcela")
 public class Parcela {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

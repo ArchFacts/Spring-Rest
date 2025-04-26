@@ -17,7 +17,7 @@ public interface NegocioRepository extends JpaRepository<Negocio, UUID> {
     Boolean existsByCpfOrCnpj(String cpf, String cnpj);
     Negocio findByCpfOrCnpj(String cpf, String cnpj);
     Negocio findByNome(String nome);
-    @Query("SELECT AVG (n.avaliacao) FROM Negocio n WHERE n.idNegocio = :idNegocio")
+    @Query("SELECT AVG (n.avaliacao) FROM negocio n WHERE n.idNegocio = :idNegocio")
     Optional<Double> encontrarMediaAvaliacaoEquals(@Param("idNegocio") UUID id);
     Optional<Negocio> findByCodigo(String codigo);
 

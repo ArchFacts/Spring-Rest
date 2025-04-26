@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
     @Entity
+    @Table(name = "negocio")
     public class Negocio {
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)

@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface TarefaRepository extends JpaRepository <Tarefa, UUID> {
 //    List<Tarefa> findTarefasByNegocioId(@Param("idNegocio") UUID idNegocio);
     List<Tarefa> findByProjetoIdProjeto(@Param("idProjeto") UUID idProjeto);
-    @Query("SELECT t FROM Tarefa t WHERE t.projeto.id = :projetoId ORDER BY t.despesa DESC LIMIT 1")
+    @Query("SELECT t FROM tarefa t WHERE t.projeto.id = :projetoId ORDER BY t.despesa DESC LIMIT 1")
     Optional<Tarefa> findTarefaMaiorDespesaPorProjeto(@Param("projetoId") UUID projetoId);
     Optional<Tarefa> findTopByProjeto_IdProjetoOrderByDespesaDesc(UUID projetoId);
     List<Tarefa> findByProjeto_Negocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
