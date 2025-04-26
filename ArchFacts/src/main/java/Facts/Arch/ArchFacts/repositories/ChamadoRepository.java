@@ -17,9 +17,9 @@ import java.util.UUID;
 public interface ChamadoRepository extends JpaRepository<Chamado, UUID> {
     List<Chamado> findByProjetoIdProjeto(UUID idProjeto);
     @Modifying
-    @Query("UPDATE chamado c SET c.lucro = :lucro WHERE c.idChamado = :idChamado")
+    @Query("UPDATE Chamado c SET c.lucro = :lucro WHERE c.idChamado = :idChamado")
     void atualizarLucro(@Param("idChamado") UUID idChamado, @Param("lucro") Double lucro);
-    @Query("SELECT c FROM chamado c WHERE c.projeto.id = :projetoId ORDER BY c.lucro DESC LIMIT 1")
+    @Query("SELECT c FROM Chamado c WHERE c.projeto.id = :projetoId ORDER BY c.lucro DESC LIMIT 1")
     Optional<Chamado> findChamadoMaiorLucroPorProjeto(@Param("projetoId") UUID projetoId);
     Optional<Chamado> findTopByProjeto_IdProjetoOrderByLucroDesc(UUID projetoId);
     List<Chamado> findByProjeto_Negocio_IdNegocio(@Param("idNegocio") UUID idNegocio);
