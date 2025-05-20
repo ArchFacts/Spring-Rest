@@ -17,7 +17,7 @@ public interface PropostaRepository extends JpaRepository <Proposta, UUID> {
     List<Proposta> findByDestinatario_IdNegocio(UUID idNegocio);
     Optional<Proposta> findTopByRemetente_IdUsuarioOrderByDataEnvioDesc(UUID idUsuario);
 //    void deleteByIdProposta(@Param("idProposta") UUID idProposta);
-    @Query("DELETE FROM proposta p WHERE p.id = :idProposta")
+    @Query("DELETE FROM Proposta p WHERE p.id = :idProposta")
     void deleteByIdStringVersion(@Param("idProposta") String idProposta);
 
 }
