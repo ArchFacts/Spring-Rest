@@ -51,7 +51,7 @@ jobs:
         id: push
         uses: docker/build-push-action@v5
         with:
-          context: ./archfacts
-          file: ./archfacts/Dockerfile
+          context: ./ArchFacts
+          file: ./ArchFacts/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/archfacts-backend:latest
