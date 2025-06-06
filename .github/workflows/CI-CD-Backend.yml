@@ -24,7 +24,6 @@ jobs:
 
       - name: Build and Test with Maven
         run: mvn clean verify
-        working-directory: ./Archfacts
 
   docker:
     runs-on: ubuntu-latest
