@@ -54,4 +54,4 @@ jobs:
           context: ./archfacts
           file: ./archfacts/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/archfacts-frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USER }}/archfacts-backend:latest
