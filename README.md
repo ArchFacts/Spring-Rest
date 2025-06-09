@@ -1,6 +1,6 @@
 ![Logo da ArchFacts](/archfacts/src/utils/assets/logo.svg)
 # App-Web
-## ArchFacts - Frontend 
+## ArchFacts - Backend
 
 ## Introdução
 ### ArchFacts é uma aplicação Web que proporciona uma interface intuitiva de um sistema de ERP para prestadores de serviço se organizarem com seus clientes e pessoalmente
